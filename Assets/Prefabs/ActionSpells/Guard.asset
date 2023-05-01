@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98cdb3eb60d5cd34fb175107d97f1514, type: 3}
+  m_Name: Guard
+  m_EditorClassIdentifier: 
+  m_type: 2
+  m_cooldown: 1
+  m_buttonPrefab: {fileID: 5620750856206099137, guid: eb46221e3940fc84081e6184f5b78459, type: 3}

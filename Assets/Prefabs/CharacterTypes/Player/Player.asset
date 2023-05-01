@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  m_className: Player
+  m_spritePrefab: {fileID: 1600728368570027554, guid: 71d40886a24424e48b228e533d8e280d, type: 3}
+  m_life: 10
+  m_strength: 1
+  m_magica: 0
+  m_resistance: 0
+  m_magicaResistance: 0
+  m_hitStunProba: 0.2
+  m_actionDatas:
+  - actionType: 1
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: a25254dc0d43099438688cc9fa117527, type: 3}
+  - actionType: 2
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: 39d32d9b95cb7ad4197a81f3ce215c19, type: 3}
+  m_hitAction:
+    actionType: 4
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: 4ccd16200cfd94145ba60f2988c987ad, type: 3}
