@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 
 public class ControlsManager : MonoBehaviour
 {
-    [SerializeField] private ActionType currentActionType = ActionType.NULL;
+    private static ActionType m_currentActionType = ActionType.NULL;
+    public static ActionType currentActionType => m_currentActionType;
     
-    public delegate void ClickEvent(ActionType actionType);
+    public delegate void ClickEvent();
     public static event ClickEvent OnClick;
     public static event ClickEvent OnRelease;
     
@@ -39,22 +40,22 @@ public class ControlsManager : MonoBehaviour
 
     private void OnActionSpellClick(ActionType _type)
     {
-        currentActionType = _type;
+        m_currentActionType = _type;
     }
 
     private void ResetActionType()
     {
-        currentActionType = ActionType.NULL;
+        m_currentActionType = ActionType.NULL;
     }
 
     public void ReadClickInput(InputAction.CallbackContext _context)
     {
         if (_context.performed)
-            OnClick?.Invoke(ActionType.NULL);
+            OnClick?.Invoke();
         else if (_context.canceled)
         {
-            OnRelease?.Invoke(currentActionType);
-            currentActionType = ActionType.NULL;
+            OnRelease?.Invoke();
+            m_currentActionType = ActionType.NULL;
         }
     }
     public void ReadRightClickInput(InputAction.CallbackContext _context)

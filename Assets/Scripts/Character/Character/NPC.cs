@@ -23,9 +23,9 @@ using UnityEngine.InputSystem;
         base.OnDestroy();
     }
     
-    private void OnRelease(ActionType actionType)
+    private void OnRelease()
     {
-        GameObject actionPrefab = m_data.GetActionData(actionType).timeLineBarPrefab;
+        GameObject actionPrefab = m_data.GetActionData(ControlsManager.currentActionType).timeLineBarPrefab;
         if(actionPrefab && !isDead) m_timeline.Click(actionPrefab, Mouse.current.position.ReadValue());
     }
 

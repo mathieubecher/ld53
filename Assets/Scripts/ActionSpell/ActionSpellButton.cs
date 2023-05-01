@@ -59,7 +59,7 @@ public class ActionSpellButton : MonoBehaviour
         }
     }
 
-    public void OnClick(ActionType actionType)
+    public void OnClick()
     {
         if (m_cooldown > 0.0f) return;
 
@@ -85,7 +85,7 @@ public class ActionSpellButton : MonoBehaviour
         m_itemColor.color = Color.gray;
     }
 
-    private void OnRelease(ActionType _type)
+    private void OnRelease()
     {
         Reset();
     }
