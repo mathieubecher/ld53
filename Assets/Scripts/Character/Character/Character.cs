@@ -101,7 +101,7 @@ using Random = UnityEngine.Random;
         if (m_life.isDead) Dead();
         else if(!m_isGuarding && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
-            m_timeline.AddAction(m_data.GetActionData(ActionType.HIT).timeLineBarPrefab, m_timeline.elapsedTime, false);
+            m_timeline.AddAction(m_data.GetActionData(ActionType.HIT).timeLineBarPrefab, m_timeline.elapsedTime);
         }
     }
 

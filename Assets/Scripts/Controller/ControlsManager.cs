@@ -6,8 +6,16 @@ using UnityEngine.InputSystem;
 
 public class ControlsManager : MonoBehaviour
 {
-    private static ActionType m_currentActionType = ActionType.NULL;
-    public static ActionType currentActionType => m_currentActionType;
+    private static ActionSpellButton m_selectedActionSpellButton;
+    public static ActionSpellButton selectedActionSpellButton => m_selectedActionSpellButton;
+    public static void SetCurrentActionSpellButton(ActionSpellButton _actionSpellButton)
+    {
+        m_selectedActionSpellButton = _actionSpellButton;
+    }
+    private void ResetActionType()
+    {
+        m_selectedActionSpellButton = null;
+    }
     
     public delegate void ClickEvent();
     public static event ClickEvent OnClick;
@@ -21,33 +29,12 @@ public class ControlsManager : MonoBehaviour
 
     public static event SimpleEvent OnAccelTime;
     public static event SimpleEvent OnDecelTime;
-    void Awake()
-    {
-        ResetActionType();
-        TimeLine.OnNPCAddAction += OnNpcAddAction;
-        ActionSpellButton.OnActionSpellClick += OnActionSpellClick;
-    }
-    private void OnDestroy()
-    {
-        TimeLine.OnNPCAddAction -= OnNpcAddAction;
-        ActionSpellButton.OnActionSpellClick -= OnActionSpellClick;
-    }
-
-    private void OnNpcAddAction()
+    
+    void OnEnable()
     {
         ResetActionType();
     }
-
-    private void OnActionSpellClick(ActionType _type)
-    {
-        m_currentActionType = _type;
-    }
-
-    private void ResetActionType()
-    {
-        m_currentActionType = ActionType.NULL;
-    }
-
+    
     public void ReadClickInput(InputAction.CallbackContext _context)
     {
         if (_context.performed)
@@ -55,15 +42,15 @@ public class ControlsManager : MonoBehaviour
         else if (_context.canceled)
         {
             OnRelease?.Invoke();
-            m_currentActionType = ActionType.NULL;
+            ResetActionType();
         }
     }
     public void ReadRightClickInput(InputAction.CallbackContext _context)
     {
         if (_context.performed)
         {
-            ResetActionType();
             OnRightClick?.Invoke();
+            ResetActionType();
         }
         else if(_context.canceled)
             OnRightRelease?.Invoke();

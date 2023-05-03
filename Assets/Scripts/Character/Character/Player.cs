@@ -122,7 +122,7 @@ using Random = UnityEngine.Random;
                 maxWeightAction = action;
             }
         }
-        m_timeline.AddAction(maxWeightAction.timeLineBarPrefab, _timePos + 0.1f, false);
+        m_timeline.AddAction(maxWeightAction.timeLineBarPrefab, _timePos + 0.1f);
     }
 
     private float GetWeight(CharacterData.ActionData _action)

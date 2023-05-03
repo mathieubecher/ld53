@@ -70,7 +70,6 @@ public class TimeLine : MonoBehaviour
     
     private void Update()
     {
-        float elapsedTime = m_timer.elapsedTime;
         float dt = m_timer.timeScale * Time.deltaTime;
         Rect parentRect = ((RectTransform)transform).rect;
         Vector2 zeroPos = Vector2.up * ((parentRect.height) / 2.0f + m_barSize);
@@ -132,14 +131,27 @@ public class TimeLine : MonoBehaviour
             {
                 float desiredTimePos = GetTimePosForPoint(localPoint);
                 float timePos;
-                if(TryAddAction(_actionPrefab, desiredTimePos, out timePos))
-                {
-                    AddAction(_actionPrefab, timePos, true);
-                }
             }
         }
     }
 
+    public bool IsPointOnTimeLine(Vector2 _mousePos, out float _timePos)
+    {
+        _timePos = 0.0f;
+        Vector2 localPoint;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                transform as RectTransform, _mousePos, FindObjectOfType<Canvas>().worldCamera, out localPoint))
+        {
+            if (((RectTransform)transform).rect.Contains(localPoint))
+            {
+                _timePos = GetTimePosForPoint(localPoint);
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     private float GetTimePosForPoint(Vector2 _localPoint)
     {
         float cursorPos = -(_localPoint.y  - m_cursor.localPosition.y) / m_barSize + m_timer.elapsedTime;
@@ -193,7 +205,7 @@ public class TimeLine : MonoBehaviour
         return true;
     }
 
-    public void AddAction(GameObject _actionPrefab, float _timePos, bool _isNPC)
+    public void AddAction(GameObject _actionPrefab, float _timePos)
     {
         GameObject actionObject = Instantiate(_actionPrefab, m_actionsParent);
         TimeLineAction action = actionObject.GetComponent<TimeLineAction>();
@@ -205,7 +217,6 @@ public class TimeLine : MonoBehaviour
             ClearAllActions();
         }
         m_actions.Add(action);
-        if (_isNPC) OnNPCAddAction?.Invoke();
     }
 
     private void ClearAllActions()

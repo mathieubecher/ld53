@@ -25,8 +25,23 @@ using UnityEngine.InputSystem;
     
     private void OnRelease()
     {
-        GameObject actionPrefab = m_data.GetActionData(ControlsManager.currentActionType).timeLineBarPrefab;
-        if(actionPrefab && !isDead) m_timeline.Click(actionPrefab, Mouse.current.position.ReadValue());
+        ActionSpellButton actionSpell = ControlsManager.selectedActionSpellButton;
+        if (!actionSpell) return;
+        
+        GameObject actionPrefab = m_data.GetActionData(actionSpell.actionSpell.type).timeLineBarPrefab;
+        if (actionPrefab && !isDead)
+        {
+            float desiredTimePos;
+            if (m_timeline.IsPointOnTimeLine(Mouse.current.position.ReadValue(), out desiredTimePos))
+            {
+                float timePos;
+                if(m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
+                {
+                    m_timeline.AddAction(actionPrefab, timePos);
+                    actionSpell.Activate();
+                }
+            }
+        }
     }
 
     public override void StartFight()
