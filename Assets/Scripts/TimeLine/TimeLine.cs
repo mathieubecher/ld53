@@ -5,6 +5,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TimeLine : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class TimeLine : MonoBehaviour
     [SerializeField] private RectTransform m_parent;
     [SerializeField] private RectTransform m_barrier;
     [SerializeField] private RectTransform m_actionsParent;
+    [SerializeField] private RectTransform m_overlayParent;
     [Header("Cursor")]
     [SerializeField] private RectTransform m_cursor;
     [SerializeField, Range(0,10)] private float m_cursorTimeOffset = 0.0f;
@@ -121,20 +123,6 @@ public class TimeLine : MonoBehaviour
         }
     }
 
-    public void Click(GameObject _actionPrefab, Vector2 _mousePos)
-    {
-        Vector2 localPoint;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                transform as RectTransform, _mousePos, FindObjectOfType<Canvas>().worldCamera, out localPoint))
-        {
-            if (((RectTransform)transform).rect.Contains(localPoint))
-            {
-                float desiredTimePos = GetTimePosForPoint(localPoint);
-                float timePos;
-            }
-        }
-    }
-
     public bool IsPointOnTimeLine(Vector2 _mousePos, out float _timePos)
     {
         _timePos = 0.0f;
@@ -156,6 +144,19 @@ public class TimeLine : MonoBehaviour
     {
         float cursorPos = -(_localPoint.y  - m_cursor.localPosition.y) / m_barSize + m_timer.elapsedTime;
         return cursorPos;
+    }
+    
+    public void DrawActionOverlay(GameObject _actionPrefab, RectTransform _overlay, float _timePos)
+    {
+        _overlay.SetParent(m_overlayParent);
+        _overlay.sizeDelta = ((RectTransform)_actionPrefab.transform).sizeDelta;
+        
+        Rect parentRect = ((RectTransform)transform).rect;
+        Vector2 zeroPos = Vector2.up * ((parentRect.height) / 2.0f + m_barSize);
+        float actionTime = _timePos - m_timer.elapsedTime + 1.0f + m_cursorTimeOffset;
+        Vector2 barRelativePos = Vector2.down * (actionTime * m_barSize);
+        _overlay.localPosition = zeroPos + barRelativePos;
+        
     }
 
     public bool TryAddAction(GameObject _actionPrefab, float _desiredTimePos, out float _timePos)
@@ -183,7 +184,6 @@ public class TimeLine : MonoBehaviour
                 {
                     if (testTimePos <= otherTest.timePosition && testTimePos + duration >= otherTest.timePosition) return false;
                 }
-                Debug.Log("Attach");
                 _timePos = testTimePos;
                 return true;
             }

@@ -24,21 +24,51 @@ using UnityEngine.InputSystem;
     {
         ActionSpellButton actionSpell = ControlsManager.selectedActionSpellButton;
         if (!actionSpell) return;
-        
         GameObject actionPrefab = m_data.GetActionData(actionSpell.actionSpell.type).timeLineBarPrefab;
-        if (actionPrefab && !isDead)
+        if (!actionPrefab) return;
+        
+        float desiredTimePos;
+        if (isMouseInTimeline( out desiredTimePos))
         {
-            float desiredTimePos;
-            if (m_timeline.IsPointOnTimeLine(Mouse.current.position.ReadValue(), out desiredTimePos))
+            float timePos;
+            if(m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
             {
-                float timePos;
-                if(m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
-                {
-                    m_timeline.AddAction(actionPrefab, timePos);
-                    actionSpell.Activate();
-                }
+                m_timeline.AddAction(actionPrefab, timePos);
+                actionSpell.Activate();
             }
         }
+    }
+
+    public bool TryDrawAction(ActionSpell _actionSpell, RectTransform _overlay)
+    {
+        GameObject actionPrefab = m_data.GetActionData(_actionSpell.type).timeLineBarPrefab;
+        if (!actionPrefab) return false;
+        
+        float desiredTimePos;
+        if (isMouseInTimeline(out desiredTimePos))
+        {
+            float timePos;
+            if (m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
+            {
+                m_timeline.DrawActionOverlay(actionPrefab, _overlay, timePos);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool isMouseInTimeline(out float _desiredTimePos)
+    {
+        _desiredTimePos = 0.0f;
+        if (!isDead)
+        {
+            if (m_timeline.IsPointOnTimeLine(Mouse.current.position.ReadValue(), out _desiredTimePos))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public override void StartFight()

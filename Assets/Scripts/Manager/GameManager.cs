@@ -50,11 +50,13 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private CharacterData m_playerToSpawn;
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
+    [SerializeField] private GameObject m_overlayPrefab;
 
     public Player player => m_player;
     public List<NPC> npcs => m_npcs;
 
     private bool m_startFight = false;
+    private Transform m_currentOverlay;
     public void Awake()
     {
         m_timelineManager = GetComponent<TimelineManager>();
@@ -79,9 +81,29 @@ public class GameManager : MonoBehaviour
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
         
+        CreateOverlay();
+
         if(m_startFightAtStart) StartFight();
     }
 
+
+    public void OnDisable()
+    {
+        m_actionSpellsManager.Reset();
+        for (int i = 0; i < m_npcs.Count; ++i)
+        {
+            m_npcs[i].OnDestroy();
+        }
+        m_npcs = new List<NPC>();
+        
+        NPC.OnNPCDead -= OnNPCDead;
+        Player.OnPlayerDead -= OnPlayerDead;
+        
+        DestroyOverlay();
+        
+        m_player.OnDestroy();
+        m_player = null;
+    }
 
     public void StartFight()
     {
@@ -107,24 +129,10 @@ public class GameManager : MonoBehaviour
         m_player.StopFight();
     }
 
-    public void OnDisable()
-    {
-        m_actionSpellsManager.Reset();
-        for (int i = 0; i < m_npcs.Count; ++i)
-        {
-            m_npcs[i].OnDestroy();
-        }
-        m_npcs = new List<NPC>();
-        
-        NPC.OnNPCDead -= OnNPCDead;
-        Player.OnPlayerDead -= OnPlayerDead;
-        m_player.OnDestroy();
-        m_player = null;
-    }
-
     public void Update()
     {
         if(m_startFight) m_player.Update();
+        if(!ControlsManager.selectedActionSpellButton) m_currentOverlay.gameObject.SetActive(false);
     }
     
     private void OnPlayerDead()
@@ -142,5 +150,28 @@ public class GameManager : MonoBehaviour
         }
         OnLoose?.Invoke();
         StopFight();
+    }
+    
+    private void CreateOverlay()
+    {
+        m_currentOverlay = Instantiate(m_overlayPrefab, m_npcs[0].timeline.transform).transform;
+        m_currentOverlay.gameObject.SetActive(false);
+    }
+    private void DestroyOverlay()
+    {
+        Destroy(m_currentOverlay.gameObject);
+    }
+
+    public void DrawHoverAction(ActionSpell _actionSpell)
+    {
+        foreach (var npc in m_npcs)
+        {
+            if (npc.TryDrawAction(_actionSpell, m_currentOverlay as RectTransform))
+            {
+                m_currentOverlay.gameObject.SetActive(true);
+                return;
+            }
+        }
+        m_currentOverlay.gameObject.SetActive(false);
     }
 }

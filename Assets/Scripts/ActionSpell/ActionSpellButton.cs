@@ -12,11 +12,12 @@ public class ActionSpellButton : MonoBehaviour
     [SerializeField] private Animator m_button;
     [SerializeField] private Image m_cooldownUIImage;
     [SerializeField] private Image m_itemColor;
+    [SerializeField] private TextMeshProUGUI m_cooldownUIText;
     private Color m_originalColor;
     
     private ActionSpell m_actionSpell;
     private float m_cooldown = 0.0f;
-    private bool m_attachedToMouse;
+    private bool m_isSelected;
     private Vector3 m_originalPos;
     
     private Camera m_cameraRef;
@@ -60,21 +61,24 @@ public class ActionSpellButton : MonoBehaviour
 
     void Update()
     {
-        if (m_attachedToMouse)
+        Vector3 position = m_button.transform.localPosition;
+        if (m_isSelected)
         {
             Vector2 localPoint;
             isMouseOnButton(out localPoint);
-            m_button.transform.localPosition = localPoint;
+            m_button.transform.localPosition = Vector3.Lerp(position, localPoint, 0.1f);
+            GameManager.instance.DrawHoverAction(actionSpell);
         }
         else
         {
-            m_button.transform.localPosition = m_originalPos;
+            m_button.transform.localPosition = Vector3.Lerp(position, m_originalPos, 0.1f);
         }
         
         if (m_cooldown > 0.0f)
         {
             m_cooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
             m_cooldownUIImage.fillAmount = m_cooldown / m_actionSpell.cooldown;
+            m_cooldownUIText.text = math.ceil(m_cooldown).ToString();
             if (m_cooldown <= 0.0f)
             {
                 Reset();
@@ -84,6 +88,7 @@ public class ActionSpellButton : MonoBehaviour
         {
             m_itemColor.color = m_originalColor;
             m_cooldownUIImage.fillAmount = 0.0f;
+            m_cooldownUIText.text = "";
         }
     }
 
@@ -108,7 +113,7 @@ public class ActionSpellButton : MonoBehaviour
         TimeLine.OnNPCAddAction += Activate;
         m_itemColor.color = Color.gray;
 
-        m_attachedToMouse = true;
+        m_isSelected = true;
         
         m_button.SetTrigger("Select");
     }
@@ -122,14 +127,14 @@ public class ActionSpellButton : MonoBehaviour
 
     public void UnSelect()
     {
-        m_attachedToMouse = false;
+        m_isSelected = false;
         TimeLine.OnNPCAddAction -= Activate;
         m_button.SetTrigger("UnSelect");
     }
 
     private void OtherSelected(ActionSpellButton _other)
     {
-        if(m_attachedToMouse && this != _other) UnSelect();
+        if(m_isSelected && this != _other) UnSelect();
     }
     
     public void Reset()

@@ -10,7 +10,7 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] private GameObject m_timelinePrefab;
     [SerializeField] private Transform m_timelineParent;
     [SerializeField] private float m_timelineScale = 0.5f;
-
+    
     [SerializeField] private List<TimeLine> m_timeLines;
     private float m_width = 0.0f;
     

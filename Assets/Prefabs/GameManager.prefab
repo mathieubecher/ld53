@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a2fe877bca0e34ab28779c15a44303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_startFightAtStart: 0
   m_player:
-    m_name: 
     m_life:
       m_currentLife: 0
       m_maxLife: 0
@@ -59,28 +59,15 @@ MonoBehaviour:
     m_isAttacking: 0
     m_buffDamage: 0
     m_targets: []
+    m_line: {fileID: 0}
   m_npcs: []
-  m_npcNames:
-  - "Jos\xE9"
-  - Francis
-  - Richard
-  - Patrick
-  - Albert
-  - "Andr\xE9"
-  - Ulrich
-  - Alfred
-  - Bernard
-  m_playerNames:
-  - XXX_TheEv1l_XXX
-  - Rox0r420
-  - "G\xEAr41T_2_R1vi@"
-  - Knight69
   m_actionSpells:
   - {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
   - {fileID: 11400000, guid: d30b9c765463e5a40bbf5a7063941c03, type: 2}
   - {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
   m_playerToSpawn: {fileID: 0}
   m_NPCToSpawn: []
+  m_overlayPrefab: {fileID: 5311616371157578801, guid: 5d995dbaf3e99054c9b173f2c0d9eaf8, type: 3}
 --- !u!114 &1935299600206908664
 MonoBehaviour:
   m_ObjectHideFlags: 0

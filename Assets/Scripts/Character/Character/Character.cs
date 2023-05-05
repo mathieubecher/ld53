@@ -50,6 +50,7 @@ using Random = UnityEngine.Random;
     public CharacterData data => m_data;
     public String name => m_data.characterName;
     public bool isAttacking => m_isAttacking;
+    public TimeLine timeline => m_timeline;
 
     private Character() { }
     public Character(CharacterData _data, bool _npc)
