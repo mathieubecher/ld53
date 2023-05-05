@@ -7,13 +7,10 @@ using UnityEngine.InputSystem;
 [Serializable] public class NPC : Character
 {
     public delegate void NPCDeadEvent();
+
     public static event NPCDeadEvent OnNPCDead;
-    
-    public static int NUMBER_NPC = 0;
     public NPC(CharacterData _data) : base(_data, true)
     {
-        m_name = GameManager.instance.npcNames[NUMBER_NPC];
-        ++NUMBER_NPC;
         ControlsManager.OnRelease += OnRelease;
     }
 

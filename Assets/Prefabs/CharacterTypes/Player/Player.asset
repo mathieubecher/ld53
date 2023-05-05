@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   m_className: Player
+  m_characterName: XXX_TheEv1l_XXX
   m_spritePrefab: {fileID: 1600728368570027554, guid: 71d40886a24424e48b228e533d8e280d, type: 3}
   m_life: 10
   m_strength: 1

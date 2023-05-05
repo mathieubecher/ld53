@@ -13,6 +13,7 @@ public class CharacterData : ScriptableObject
     }
 
     [SerializeField] private string m_className = "Bandit";
+    [SerializeField] private string m_characterName;
     [SerializeField] private GameObject m_spritePrefab;
     [SerializeField] private float  m_life = 10.0f;
     [SerializeField] private float  m_strength = 1.0f;
@@ -33,6 +34,8 @@ public class CharacterData : ScriptableObject
     public float hitStunProba => m_hitStunProba;
     
     public List<ActionData> actionDatas => m_actionDatas;
+    public string characterName => m_characterName;
+
     public ActionData GetActionData(ActionType actionType)
     {
         if (actionType == ActionType.HIT) return m_hitAction;

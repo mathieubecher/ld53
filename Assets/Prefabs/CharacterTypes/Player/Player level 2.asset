@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player level 2
   m_EditorClassIdentifier: 
   m_className: Player
+  m_characterName: Rox0r420
   m_spritePrefab: {fileID: 1600728368570027554, guid: d48b28be812d62f45aaf2f4deaf3edd1, type: 3}
   m_life: 20
   m_strength: 2

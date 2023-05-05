@@ -35,7 +35,6 @@ using Random = UnityEngine.Random;
 
     }
     
-    [SerializeField] protected string m_name;
     [SerializeField] protected Life m_life;
     [SerializeField] protected Character m_target;
     [Header("Serialized Data")]
@@ -49,7 +48,7 @@ using Random = UnityEngine.Random;
     public CharacterSprite sprite => m_sprite;
     public bool isDead => m_life.isDead;
     public CharacterData data => m_data;
-    public String name => m_name;
+    public String name => m_data.characterName;
     public bool isAttacking => m_isAttacking;
 
     private Character() { }
@@ -79,7 +78,6 @@ using Random = UnityEngine.Random;
     {
         if (isDead) return;
         m_isGuarding = false;
-        //Debug.Log(m_name +" play action " + _action.type + " at time " + _action.timePosition);
         m_sprite.PlayAction(m_target, _action);
         if (_action.type == ActionType.ATTACK) m_isAttacking = true;
 
@@ -114,7 +112,7 @@ using Random = UnityEngine.Random;
 
     public virtual void Dead()
     {
-        Debug.Log(m_name + " is dead.");
+        Debug.Log(name + " is dead.");
         m_sprite.Dead();
         
     }

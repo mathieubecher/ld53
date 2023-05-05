@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NPCTank
   m_EditorClassIdentifier: 
   m_className: Bandit
+  m_characterName: Bob
   m_spritePrefab: {fileID: 4522466753895615754, guid: 278947f1f4ca47145bafcdc49e0a7b75, type: 3}
   m_life: 5
   m_strength: 1

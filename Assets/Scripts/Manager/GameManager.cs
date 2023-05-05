@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,10 +43,9 @@ public class GameManager : MonoBehaviour
     public static event EndSceneEvent OnWin;
     public static event EndSceneEvent OnLoose;
     
+    [FormerlySerializedAs("m_startGameAtStart")] [SerializeField] private bool m_startFightAtStart = false;
     [SerializeField] private Player m_player;
     [SerializeField] private List<NPC> m_npcs;
-    [SerializeField] public List<string> m_npcNames;
-    [SerializeField] public List<string> m_playerNames;
     [SerializeField] private List<ActionSpell> m_actionSpells;
     
     [SerializeField] private CharacterData m_playerToSpawn;
@@ -53,8 +53,6 @@ public class GameManager : MonoBehaviour
 
     public Player player => m_player;
     public List<NPC> npcs => m_npcs;
-    public List<string> npcNames => m_npcNames;
-    public List<string> playerNames => m_playerNames;
 
     private bool m_startFight = false;
     public void Awake()
@@ -67,8 +65,6 @@ public class GameManager : MonoBehaviour
 
     public void OnEnable()
     {
-        NPC.NUMBER_NPC = 0;
-        Player.NUMBER_PLAYER = 0;
         m_timelineManager.ResetWidth();
 
         foreach (var NPCData in m_NPCToSpawn)
@@ -83,7 +79,7 @@ public class GameManager : MonoBehaviour
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
         
-        //StartFight();
+        if(m_startFightAtStart) StartFight();
     }
 
 

@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 
 [Serializable] public class Player : Character
 {
-    public static int NUMBER_PLAYER = 0;
-    
     public delegate void PlayerDeadEvent();
     public static event PlayerDeadEvent OnPlayerDead;
 
@@ -29,7 +27,6 @@ using Random = UnityEngine.Random;
     [SerializeField] private List<NPCTarget> m_targets;
     public Player(CharacterData _data) : base(_data, false)
     {
-        m_name = GameManager.instance.playerNames[NUMBER_PLAYER];
         m_timeline.EnableBarrier(true);
         m_line = m_sprite.GetComponent<LineRenderer>();
     }

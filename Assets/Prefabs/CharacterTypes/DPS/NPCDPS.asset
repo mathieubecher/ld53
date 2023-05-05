@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NPCDPS
   m_EditorClassIdentifier: 
   m_className: Bandit DPS
+  m_characterName: Alberto
   m_spritePrefab: {fileID: 4522466753895615754, guid: 1d21419c33bf6684fbfef3081054b63d, type: 3}
   m_life: 3
   m_strength: 1
