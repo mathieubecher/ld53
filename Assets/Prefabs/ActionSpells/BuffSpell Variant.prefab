@@ -103,6 +103,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.53333336
       objectReference: {fileID: 0}
+    - target: {fileID: 2872566779341392748, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872566779341392748, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872566779341392748, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7374320791743103410, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -112,12 +124,28 @@ PrefabInstance:
       value: BuffSpell Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 35.4641
+      value: -10.1299
       objectReference: {fileID: 0}
     - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: -14.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}

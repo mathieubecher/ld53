@@ -9,12 +9,17 @@ using UnityEngine.UI;
 
 public class ActionSpellButton : MonoBehaviour
 {
+    [SerializeField] private Animator m_button;
     [SerializeField] private Image m_cooldownUIImage;
     [SerializeField] private Image m_itemColor;
     private Color m_originalColor;
     
     private ActionSpell m_actionSpell;
     private float m_cooldown = 0.0f;
+    private bool m_attachedToMouse;
+    private Vector3 m_originalPos;
+    
+    private Camera m_cameraRef;
 
     public ActionSpell actionSpell => m_actionSpell;
     public void SetActionSpell(ActionSpell _actionSpell)
@@ -32,29 +37,49 @@ public class ActionSpellButton : MonoBehaviour
     void Awake()
     {
         m_originalColor = m_itemColor.color;
+        m_cameraRef = FindObjectOfType<Canvas>().worldCamera;
     }
 
     private void OnEnable()
     {
-        OnResetByOtherClick += Reset;
+        m_originalPos = m_button.transform.localPosition;
+        //OnResetByOtherClick += UnSelect;
         ControlsManager.OnClick += OnClick;
-        ControlsManager.OnRelease += Reset;
-        ControlsManager.OnRightClick += Reset;
+        ControlsManager.OnRelease += UnSelect;
+        ControlsManager.OnRightClick += UnSelect;
     }
     private void OnDisable()
     {
-        OnResetByOtherClick -= Reset;
+        m_button.transform.localPosition = m_originalPos;
+        //OnResetByOtherClick -= UnSelect;
         ControlsManager.OnClick -= OnClick;
-        ControlsManager.OnRelease -= Reset;
-        ControlsManager.OnRightClick -= Reset;
+        ControlsManager.OnRelease -= UnSelect;
+        ControlsManager.OnRightClick -= UnSelect;
     }
 
     void Update()
     {
+        if (m_attachedToMouse)
+        {
+            Vector2 localPoint;
+            if (isMouseOnButton(out localPoint))
+            {
+                m_button.transform.localPosition = localPoint;
+            }
+        }
+        else
+        {
+            m_button.transform.localPosition = m_originalPos;
+        }
+        
         if (m_cooldown > 0.0f)
         {
             m_cooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
             m_cooldownUIImage.fillAmount = m_cooldown / m_actionSpell.cooldown;
+            if (m_cooldown <= 0.0f)
+            {
+                Reset();
+            }
         }
         else
         {
@@ -68,12 +93,9 @@ public class ActionSpellButton : MonoBehaviour
         if (m_cooldown > 0.0f) return;
 
         Vector2 localPoint;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(transform as RectTransform, Mouse.current.position.ReadValue(), FindObjectOfType<Canvas>().worldCamera, out localPoint))
+        if (isMouseOnButton(out localPoint))
         {
-            if (((RectTransform)transform).rect.Contains(localPoint))
-            {
-                Select();
-            }
+            Select();
         }
 
     }
@@ -86,17 +108,42 @@ public class ActionSpellButton : MonoBehaviour
 
         TimeLine.OnNPCAddAction += Activate;
         m_itemColor.color = Color.gray;
+
+        m_attachedToMouse = true;
+        
+        m_button.SetTrigger("Select");
     }
 
     public void Activate()
     {
         m_cooldown += m_actionSpell.cooldown;
         m_itemColor.color = Color.gray;
-        Reset();
+        m_button.SetTrigger("Activate");
+    }
+
+    public void UnSelect()
+    {
+        m_attachedToMouse = false;
+        TimeLine.OnNPCAddAction -= Activate;
+        m_button.SetTrigger("UnSelect");
     }
 
     public void Reset()
     {
-        TimeLine.OnNPCAddAction -= Activate;
+        m_button.SetTrigger("Reset");
+        m_cooldown = 0.0f;
+    }
+
+    
+    private bool isMouseOnButton(out Vector2 _localPoint)
+    {
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(transform as RectTransform, Mouse.current.position.ReadValue(), m_cameraRef, out _localPoint))
+        {
+            if (((RectTransform)transform).rect.Contains(_localPoint))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
