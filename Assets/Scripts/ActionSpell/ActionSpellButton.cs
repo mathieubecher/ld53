@@ -30,7 +30,7 @@ public class ActionSpellButton : MonoBehaviour
     public delegate void ActionSpellClickEvent(ActionType _type);
     public static event ActionSpellClickEvent OnActionSpellClick;
     
-    private delegate void ResetByOtherClickEvent();
+    private delegate void ResetByOtherClickEvent(ActionSpellButton _other);
     private static event ResetByOtherClickEvent OnResetByOtherClick;
     
 
@@ -43,15 +43,16 @@ public class ActionSpellButton : MonoBehaviour
     private void OnEnable()
     {
         m_originalPos = m_button.transform.localPosition;
-        //OnResetByOtherClick += UnSelect;
+        OnResetByOtherClick += OtherSelected;
         ControlsManager.OnClick += OnClick;
         ControlsManager.OnRelease += UnSelect;
         ControlsManager.OnRightClick += UnSelect;
     }
+
     private void OnDisable()
     {
         m_button.transform.localPosition = m_originalPos;
-        //OnResetByOtherClick -= UnSelect;
+        OnResetByOtherClick -= OtherSelected;
         ControlsManager.OnClick -= OnClick;
         ControlsManager.OnRelease -= UnSelect;
         ControlsManager.OnRightClick -= UnSelect;
@@ -62,10 +63,8 @@ public class ActionSpellButton : MonoBehaviour
         if (m_attachedToMouse)
         {
             Vector2 localPoint;
-            if (isMouseOnButton(out localPoint))
-            {
-                m_button.transform.localPosition = localPoint;
-            }
+            isMouseOnButton(out localPoint);
+            m_button.transform.localPosition = localPoint;
         }
         else
         {
@@ -104,7 +103,7 @@ public class ActionSpellButton : MonoBehaviour
     {
         if (m_cooldown > 0.0f) return;
         ControlsManager.SetCurrentActionSpellButton(this);
-        OnResetByOtherClick?.Invoke();
+        OnResetByOtherClick?.Invoke(this);
 
         TimeLine.OnNPCAddAction += Activate;
         m_itemColor.color = Color.gray;
@@ -128,6 +127,11 @@ public class ActionSpellButton : MonoBehaviour
         m_button.SetTrigger("UnSelect");
     }
 
+    private void OtherSelected(ActionSpellButton _other)
+    {
+        if(m_attachedToMouse && this != _other) UnSelect();
+    }
+    
     public void Reset()
     {
         m_button.SetTrigger("Reset");
