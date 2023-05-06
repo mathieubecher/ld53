@@ -98,7 +98,7 @@ using Random = UnityEngine.Random;
         }
 
         var lastAction = actions[^1];
-        if (lastAction.played && lastAction.duration + lastAction.timePosition <= elapsedTime + 0.1f)
+        if (lastAction.duration + lastAction.timePosition <= elapsedTime + 10.0f)
         {
             ChooseAction(math.max(elapsedTime, lastAction.timePosition + lastAction.duration));
         }
@@ -107,30 +107,37 @@ using Random = UnityEngine.Random;
     private void ChooseAction(float _timePos)
     {
         if (m_target == null || m_target.isDead) SelectTarget();
-        
-        float maxWeight = 0.0f;
-        var maxWeightAction = m_data.actionDatas[0];
-        foreach (var action in m_data.actionDatas)
+        m_timeline.AddAction(GetRandomAction().timeLineBarPrefab, _timePos);
+    }
+    public CharacterData.ActionData GetRandomAction()
+    {
+        float totalWeight = 0f;
+        foreach (CharacterData.ActionData action in m_data.actionDatas)
         {
-            float weight = GetWeight(action);
-            if (weight > maxWeight)
+            totalWeight += GetWeight(action);
+        }
+
+        float randomValue = Random.Range(0f, totalWeight);
+
+        foreach (CharacterData.ActionData action in m_data.actionDatas)
+        {
+            randomValue -= GetWeight(action);
+            if (randomValue <= 0f)
             {
-                maxWeight = weight;
-                maxWeightAction = action;
+                return action;
             }
         }
-        m_timeline.AddAction(maxWeightAction.timeLineBarPrefab, _timePos + 0.1f);
-    }
 
+        return m_data.actionDatas[0];
+    }
     private float GetWeight(CharacterData.ActionData _action)
     {
-        float random = Random.Range(0.6f, 1.4f);
         switch (_action.actionType)
         {
             case ActionType.GUARD :
-                return random * m_data.strength  * (m_target.isAttacking ? 5.0f : 0.6f);
+                return 1.0f;
             case ActionType.ATTACK :
-                return m_data.strength * random;
+                return 3.0f;
             default : return 0.0f;
         }
     }

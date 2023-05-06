@@ -36,14 +36,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 640674495229421180, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 640674495229421180, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 640674495229421180, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -122,30 +114,6 @@ PrefabInstance:
     - target: {fileID: 8262932557589273309, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
       propertyPath: m_Name
       value: BuffSpell Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -10.1299
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -14.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8604734183121149807, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bda2e85486e73049ab486a04f822d7b, type: 3}

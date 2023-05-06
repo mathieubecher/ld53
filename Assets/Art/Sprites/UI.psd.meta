@@ -232,9 +232,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 17
-        y: 936
+        y: 932
         width: 70
-        height: 61
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,10 +252,10 @@ TextureImporter:
       name: UI_4
       rect:
         serializedVersion: 2
-        x: 27
-        y: 834
-        width: 56
-        height: 68
+        x: 21
+        y: 833
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,9 +274,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 23
-        y: 747
-        width: 71
-        height: 62
+        y: 742
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -656,7 +656,7 @@ TextureImporter:
         width: 248
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -696,6 +696,7 @@ TextureImporter:
       UI_21: 1739843063
       UI_22: -678588456
       UI_23: 17424471
+      UI_24: -1946077828
       UI_3: 1123324053
       UI_4: 1822927307
       UI_5: 1894971853

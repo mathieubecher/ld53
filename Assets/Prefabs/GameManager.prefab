@@ -83,6 +83,7 @@ MonoBehaviour:
   m_timelinePrefab: {fileID: 4528226277256636141, guid: 736453a8aa9278344804b174b34fcf0c, type: 3}
   m_timelineParent: {fileID: 0}
   m_timelineScale: 0.33
+  m_cellPerUnit: 4
   m_timeLines: []
 --- !u!114 &6008026967275968890
 MonoBehaviour:
@@ -117,4 +118,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionSpellParent: {fileID: 0}
-  m_margin: 10
+  m_margin: 5

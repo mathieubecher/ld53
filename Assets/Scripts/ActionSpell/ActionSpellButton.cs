@@ -11,9 +11,7 @@ public class ActionSpellButton : MonoBehaviour
 {
     [SerializeField] private Animator m_button;
     [SerializeField] private Image m_cooldownUIImage;
-    [SerializeField] private Image m_itemColor;
     [SerializeField] private TextMeshProUGUI m_cooldownUIText;
-    private Color m_originalColor;
     
     private ActionSpell m_actionSpell;
     private float m_cooldown = 0.0f;
@@ -37,7 +35,6 @@ public class ActionSpellButton : MonoBehaviour
 
     void Awake()
     {
-        m_originalColor = m_itemColor.color;
         m_cameraRef = FindObjectOfType<Canvas>().worldCamera;
     }
 
@@ -69,9 +66,13 @@ public class ActionSpellButton : MonoBehaviour
             m_button.transform.localPosition = Vector3.Lerp(position, localPoint, 0.1f);
             GameManager.instance.DrawHoverAction(actionSpell);
         }
-        else
+        else if(m_cooldown <= 0.0f)
         {
             m_button.transform.localPosition = Vector3.Lerp(position, m_originalPos, 0.1f);
+        }
+        else
+        {
+            m_button.transform.localPosition = m_originalPos;
         }
         
         if (m_cooldown > 0.0f)
@@ -86,7 +87,6 @@ public class ActionSpellButton : MonoBehaviour
         }
         else
         {
-            m_itemColor.color = m_originalColor;
             m_cooldownUIImage.fillAmount = 0.0f;
             m_cooldownUIText.text = "";
         }
@@ -109,7 +109,6 @@ public class ActionSpellButton : MonoBehaviour
         if (m_cooldown > 0.0f) return;
         ControlsManager.SetCurrentActionSpellButton(this);
         OnResetByOtherClick?.Invoke(this);
-        m_itemColor.color = Color.gray;
 
         m_isSelected = true;
         
@@ -119,7 +118,6 @@ public class ActionSpellButton : MonoBehaviour
     public void Activate()
     {
         m_cooldown += m_actionSpell.cooldown;
-        m_itemColor.color = Color.gray;
         m_button.SetTrigger("Activate");
     }
 
