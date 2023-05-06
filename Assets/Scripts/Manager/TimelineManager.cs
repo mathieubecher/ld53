@@ -10,12 +10,14 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] private GameObject m_timelinePrefab;
     [SerializeField] private Transform m_timelineParent;
     [SerializeField] private float m_timelineScale = 0.5f;
+    [SerializeField] private int m_cellPerUnit = 4;
     
     [SerializeField] private List<TimeLine> m_timeLines;
     private float m_width = 0.0f;
     
     public float width => m_width;
     public float timelineScale => m_timelineScale;
+    public int cellPerUnit => m_cellPerUnit;
 
     void Awake()
     {
@@ -43,6 +45,7 @@ public class TimelineManager : MonoBehaviour
         GameObject timelineInstance = Instantiate(m_timelinePrefab, m_timelineParent);
         TimeLine timeline = timelineInstance.GetComponentInChildren<TimeLine>();
         timeline.SetTimeScale(m_timelineScale);
+        timeline.SetCellsPerUnit(m_cellPerUnit);
         //timeline.StartTimer();
 
         timeline.parent.localPosition += Vector3.left * m_width;

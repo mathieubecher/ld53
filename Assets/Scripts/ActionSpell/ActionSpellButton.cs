@@ -109,8 +109,6 @@ public class ActionSpellButton : MonoBehaviour
         if (m_cooldown > 0.0f) return;
         ControlsManager.SetCurrentActionSpellButton(this);
         OnResetByOtherClick?.Invoke(this);
-
-        TimeLine.OnNPCAddAction += Activate;
         m_itemColor.color = Color.gray;
 
         m_isSelected = true;
@@ -128,7 +126,6 @@ public class ActionSpellButton : MonoBehaviour
     public void UnSelect()
     {
         m_isSelected = false;
-        TimeLine.OnNPCAddAction -= Activate;
         m_button.SetTrigger("UnSelect");
     }
 

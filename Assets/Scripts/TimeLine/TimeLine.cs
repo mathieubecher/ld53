@@ -10,8 +10,6 @@ using UnityEngine.InputSystem;
 public class TimeLine : MonoBehaviour
 {
     const float EPSILON = 0.00001f;
-    public delegate void SimpleEvent();
-    public static event SimpleEvent OnNPCAddAction;
     
     [SerializeField] private float m_timeScale = 0.5f;
     
@@ -25,11 +23,11 @@ public class TimeLine : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private GameObject m_barPrefab;
     [SerializeField] private float m_barSize = 60.0f;
-    
+
     private GameTimer m_timer;
     private List<TimeLineBar> m_bars;
     private List<TimeLineAction> m_actions;
-    private int m_priority = 0;
+    private int m_cellsPerUnit;
     
     public RectTransform parent => m_parent;
     public float elapsedTime => m_timer.elapsedTime;
@@ -161,14 +159,14 @@ public class TimeLine : MonoBehaviour
 
     public bool TryAddAction(GameObject _actionPrefab, float _desiredTimePos, out float _timePos)
     {
-        _timePos = _desiredTimePos;
+        _timePos = GetCellForTimePos(_desiredTimePos);
         if (!m_timer.isStarted) return false;
         
         float delaTimePos = _timePos - m_timer.elapsedTime;
         if (delaTimePos < -1.0f) return false;
         if (delaTimePos < 0.0f)
         {
-            _timePos = m_timer.elapsedTime;
+            _timePos = GetCellForTimePos(m_timer.elapsedTime);
         }
 
         Rect actionRect = ((RectTransform)_actionPrefab.transform).rect;
@@ -184,7 +182,7 @@ public class TimeLine : MonoBehaviour
                 {
                     if (testTimePos <= otherTest.timePosition && testTimePos + duration >= otherTest.timePosition) return false;
                 }
-                _timePos = testTimePos;
+                _timePos = GetCellForTimePos(testTimePos);
                 return true;
             }
             else if (_timePos + duration >= other.timePosition && _timePos + duration < other.timePosition + otherDuration)
@@ -203,6 +201,18 @@ public class TimeLine : MonoBehaviour
 
         if (_timePos - m_timer.elapsedTime < 0.0f) return false;
         return true;
+    }
+
+    private float GetCellForTimePos(float _timePos)
+    {
+        float floorPos = math.floor(_timePos);
+        float posInUnit = _timePos - floorPos;
+        float cellSize = 1.0f / m_cellsPerUnit;
+        for (int i = 0; i < m_cellsPerUnit; ++i)
+        {
+            if (posInUnit <= i * cellSize) return floorPos + i * cellSize;
+        }
+        return floorPos + 1.0f;
     }
 
     public void AddAction(GameObject _actionPrefab, float _timePos)
@@ -257,9 +267,14 @@ public class TimeLine : MonoBehaviour
         m_timeScale = _timeScale;
         m_timer.SetTimeScale(_timeScale);
     }
+    public void SetCellsPerUnit(int _cellsPerUnit)
+    {
+        m_cellsPerUnit = _cellsPerUnit;
+    }
     
     private float Mod(float x, int m) {
         float r = x % m;
         return r < 0.0f ? r + m : r;
     }
+
 }
