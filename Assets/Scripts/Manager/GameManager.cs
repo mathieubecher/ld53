@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private CharacterData m_playerToSpawn;
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
+    [SerializeField] private Transform m_arrow;
     [SerializeField] private GameObject m_overlayPrefab;
 
     public Player player => m_player;
@@ -132,7 +133,11 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         if(m_startFight) m_player.Update();
-        if(!ControlsManager.selectedActionSpellButton) m_currentOverlay.gameObject.SetActive(false);
+        if(!ControlsManager.selectedActionSpellButton)
+        {
+            m_currentOverlay.gameObject.SetActive(false);
+            m_arrow.gameObject.SetActive(false);
+        }
     }
     
     private void OnPlayerDead()
@@ -156,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         m_currentOverlay = Instantiate(m_overlayPrefab, m_npcs[0].timeline.transform).transform;
         m_currentOverlay.gameObject.SetActive(false);
+        m_arrow.gameObject.SetActive(false);
     }
     private void DestroyOverlay()
     {
@@ -166,12 +172,14 @@ public class GameManager : MonoBehaviour
     {
         foreach (var npc in m_npcs)
         {
-            if (npc.TryDrawAction(_actionSpell, m_currentOverlay as RectTransform))
+            if (npc.TryDrawAction(_actionSpell, m_arrow, m_currentOverlay as RectTransform))
             {
                 m_currentOverlay.gameObject.SetActive(true);
+                m_arrow.gameObject.SetActive(true);
                 return;
             }
         }
         m_currentOverlay.gameObject.SetActive(false);
+        m_arrow.gameObject.SetActive(false);
     }
 }

@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TimeLine : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TimeLine : MonoBehaviour
     
     [SerializeField] private float m_timeScale = 0.5f;
     
+    [SerializeField] private Image m_header;
     [SerializeField] private RectTransform m_parent;
     [SerializeField] private RectTransform m_barrier;
     [SerializeField] private RectTransform m_actionsParent;
@@ -266,6 +268,10 @@ public class TimeLine : MonoBehaviour
         if (_timeScale <= 0.0f) return;
         m_timeScale = _timeScale;
         m_timer.SetTimeScale(_timeScale);
+    }
+    public void SetHeader(Sprite _sprite)
+    {
+        m_header.sprite = _sprite;
     }
     public void SetCellsPerUnit(int _cellsPerUnit)
     {

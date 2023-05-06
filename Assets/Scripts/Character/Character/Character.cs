@@ -55,7 +55,7 @@ using Random = UnityEngine.Random;
     private Character() { }
     public Character(CharacterData _data, bool _npc)
     {
-        m_timeline = GameManager.timelineManager.RequestTimeline();
+        m_timeline = GameManager.timelineManager.RequestTimeline(_data.header);
         m_timeline.OnAction += OnAction;
         m_data = _data;
         m_life = new Life(m_data.life);

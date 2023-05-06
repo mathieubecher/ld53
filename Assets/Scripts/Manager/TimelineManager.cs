@@ -11,6 +11,7 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] private Transform m_timelineParent;
     [SerializeField] private float m_timelineScale = 0.5f;
     [SerializeField] private int m_cellPerUnit = 4;
+    [SerializeField] private float m_offset = 10.0f;
     
     [SerializeField] private List<TimeLine> m_timeLines;
     private float m_width = 0.0f;
@@ -40,16 +41,17 @@ public class TimelineManager : MonoBehaviour
         }
     }
     
-    public TimeLine RequestTimeline()
+    public TimeLine RequestTimeline(Sprite _header)
     {
         GameObject timelineInstance = Instantiate(m_timelinePrefab, m_timelineParent);
         TimeLine timeline = timelineInstance.GetComponentInChildren<TimeLine>();
         timeline.SetTimeScale(m_timelineScale);
         timeline.SetCellsPerUnit(m_cellPerUnit);
+        timeline.SetHeader(_header);
         //timeline.StartTimer();
 
         timeline.parent.localPosition += Vector3.left * m_width;
-        m_width += timeline.parent.rect.width;
+        m_width += timeline.parent.rect.width + m_offset;
         m_timeLines.Add(timeline);
         
         return timeline;

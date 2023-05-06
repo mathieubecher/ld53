@@ -14,6 +14,7 @@ public class CharacterData : ScriptableObject
 
     [SerializeField] private string m_className = "Bandit";
     [SerializeField] private string m_characterName;
+    [SerializeField] private Sprite m_timeLineHeader;
     [SerializeField] private GameObject m_spritePrefab;
     [SerializeField] private float  m_life = 10.0f;
     [SerializeField] private float  m_strength = 1.0f;
@@ -26,6 +27,7 @@ public class CharacterData : ScriptableObject
     [SerializeField] private ActionData m_hitAction;
     
     public GameObject spritePrefab => m_spritePrefab;
+    public Sprite header => m_timeLineHeader;
     public float life => m_life;
     public float strength => m_strength;
     public float magica => m_magica;

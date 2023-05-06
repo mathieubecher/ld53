@@ -58,28 +58,14 @@ public class ActionSpellButton : MonoBehaviour
 
     void Update()
     {
-        Vector3 position = m_button.transform.localPosition;
-        if (m_isSelected)
-        {
-            Vector2 localPoint;
-            isMouseOnButton(out localPoint);
-            m_button.transform.localPosition = Vector3.Lerp(position, localPoint, 0.1f);
-            GameManager.instance.DrawHoverAction(actionSpell);
-        }
-        else if(m_cooldown <= 0.0f)
-        {
-            m_button.transform.localPosition = Vector3.Lerp(position, m_originalPos, 0.1f);
-        }
-        else
-        {
-            m_button.transform.localPosition = m_originalPos;
-        }
-        
         if (m_cooldown > 0.0f)
         {
             m_cooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
             m_cooldownUIImage.fillAmount = m_cooldown / m_actionSpell.cooldown;
-            m_cooldownUIText.text = math.ceil(m_cooldown).ToString();
+            float floorCooldown = math.floor(m_cooldown);
+            float cooldownMs = math.floor((m_cooldown - floorCooldown) * 10.0f);
+            
+            m_cooldownUIText.text = floorCooldown + "<size=15>."+ cooldownMs +"</size>";
             if (m_cooldown <= 0.0f)
             {
                 Reset();
@@ -90,6 +76,27 @@ public class ActionSpellButton : MonoBehaviour
             m_cooldownUIImage.fillAmount = 0.0f;
             m_cooldownUIText.text = "";
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 position = m_button.transform.localPosition;
+        if (m_isSelected)
+        {
+            Vector2 localPoint;
+            isMouseOnButton(out localPoint);
+            m_button.transform.localPosition = Vector3.Lerp(position, localPoint, 0.3f);
+            GameManager.instance.DrawHoverAction(actionSpell);
+        }
+        else if(m_cooldown <= 0.0f)
+        {
+            m_button.transform.localPosition = Vector3.Lerp(position, m_originalPos, 0.3f);
+        }
+        else
+        {
+            m_button.transform.localPosition = m_originalPos;
+        }
+
     }
 
     public void OnClick()
@@ -124,6 +131,7 @@ public class ActionSpellButton : MonoBehaviour
     public void UnSelect()
     {
         m_isSelected = false;
+        if (m_cooldown > 0.0f) return;
         m_button.SetTrigger("UnSelect");
     }
 

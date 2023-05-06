@@ -39,7 +39,7 @@ using UnityEngine.InputSystem;
         }
     }
 
-    public bool TryDrawAction(ActionSpell _actionSpell, RectTransform _overlay)
+    public bool TryDrawAction(ActionSpell _actionSpell, Transform _arrow, RectTransform _overlay)
     {
         GameObject actionPrefab = m_data.GetActionData(_actionSpell.type).timeLineBarPrefab;
         if (!actionPrefab) return false;
@@ -51,6 +51,7 @@ using UnityEngine.InputSystem;
             if (m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
             {
                 m_timeline.DrawActionOverlay(actionPrefab, _overlay, timePos);
+                _arrow.position = m_sprite.transform.position;
                 return true;
             }
         }
