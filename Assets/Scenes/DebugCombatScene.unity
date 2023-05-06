@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -332,6 +332,14 @@ PrefabInstance:
       propertyPath: m_startFightAtStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_NPCToSpawn.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_NPCToSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1924e20a6be9a304c8565aeb7a64bcec, type: 2}
     - target: {fileID: 2167017090646954845, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_RootOrder
       value: 2

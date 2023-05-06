@@ -253,7 +253,6 @@ public class TimeLine : MonoBehaviour
     
     public void StopTimer()
     {
-        Debug.Log(m_timer);
         m_timer.Stop();
     }
     
