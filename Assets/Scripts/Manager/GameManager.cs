@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
         
         m_player = new Player(m_playerToSpawn);
-        m_actionSpellsManager.Init(m_actionSpells, m_timelineManager.width);
+        m_actionSpellsManager.Init(m_actionSpells, m_timelineManager.width - 5.0f);
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;

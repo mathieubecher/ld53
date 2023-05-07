@@ -21,6 +21,7 @@ public class TimeLine : MonoBehaviour
     [SerializeField] private RectTransform m_overlayParent;
     [Header("Cursor")]
     [SerializeField] private RectTransform m_cursor;
+    [SerializeField] private Animator m_cursorAnimator;
     [SerializeField, Range(0,10)] private float m_cursorTimeOffset = 0.0f;
     [Header("Prefab")]
     [SerializeField] private GameObject m_barPrefab;
@@ -65,16 +66,30 @@ public class TimeLine : MonoBehaviour
         }
     }
 
+    public void TickCursor()
+    {
+        m_cursorAnimator.SetTrigger("Tick");
+    }
+    
     public void EnableBarrier(bool _enable)
     {
         m_barrier.gameObject.SetActive(_enable);
     }
-    
+
+    private int m_currentTick = 0;
     private void Update()
     {
         float dt = m_timer.timeScale * Time.deltaTime;
         Rect parentRect = ((RectTransform)transform).rect;
         Vector2 zeroPos = Vector2.up * ((parentRect.height) / 2.0f + m_barSize);
+
+        float TOLERANCE = 0.0001f;
+        int nextTick = (int) math.floor((elapsedTime + 0.05f) * m_cellsPerUnit);
+        if (nextTick != m_currentTick)
+        {
+            m_currentTick = nextTick;
+            TickCursor();
+        }
 
         ManageCursor(zeroPos);
         ManageBars(elapsedTime, zeroPos);
@@ -85,7 +100,7 @@ public class TimeLine : MonoBehaviour
     {
         if (m_cursor)
         {
-            m_cursor.localPosition = _zeroPos + Vector2.down * ((m_cursorTimeOffset + 1.0f) * m_barSize);
+            m_cursor.localPosition = new Vector2(m_cursor.localPosition.x, _zeroPos.y - (m_cursorTimeOffset + 1.0f) * m_barSize);
         }
     }
 

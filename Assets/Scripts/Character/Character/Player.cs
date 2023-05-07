@@ -79,7 +79,7 @@ using Random = UnityEngine.Random;
         }
         else
         {
-            Vector3[] points = new[] {m_sprite.transform.position + Vector3.up * 0.8f, m_target.sprite.transform.position + Vector3.up * 0.8f};
+            Vector3[] points = {m_target.sprite.transform.position + Vector3.up * 0.8f, m_sprite.transform.position + Vector3.up * 0.8f};
             m_line.SetPositions(points);
             m_line.enabled = true;
         }
