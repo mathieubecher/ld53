@@ -29,4 +29,4 @@ MonoBehaviour:
     timeLineBarPrefab: {fileID: 4388841509119564361, guid: 39d32d9b95cb7ad4197a81f3ce215c19, type: 3}
   m_hitAction:
     actionType: 4
-    timeLineBarPrefab: {fileID: 4388841509119564361, guid: 4ccd16200cfd94145ba60f2988c987ad, type: 3}
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: ef951da9c72f9a8419f13ebf3bf30b05, type: 3}
