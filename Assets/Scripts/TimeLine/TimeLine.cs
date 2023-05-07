@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TimeLine : MonoBehaviour
@@ -36,8 +31,23 @@ public class TimeLine : MonoBehaviour
     public float elapsedTime => m_timer.elapsedTime;
     public List<TimeLineAction> actions => m_actions;
 
+    public TimeLineAction currentAction
+    {
+        get
+        {
+            foreach (var action in m_actions)
+            {
+                if (action.played && action.timePosition + action.duration >= elapsedTime)
+                    return action;
+            }
+
+            return null;
+        }
+    }
+
     public delegate void OnActionEvent(TimeLineAction _action);
     public event OnActionEvent OnAction;
+    public event OnActionEvent OnEndAction;
     
     private void Awake()
     {
@@ -119,14 +129,20 @@ public class TimeLine : MonoBehaviour
     private void ManageActions(float _elapsedTime, float _dt, Vector2 _zeroPos)
     {
         m_actions.RemoveAll(x => x == null);
+        if (!m_timer.isStarted) return;
         foreach (TimeLineAction action in m_actions)
         {
-            if (!action.played && m_timer.isStarted && action.timePosition <= _elapsedTime + _dt)
+            if (!action.played && action.timePosition <= _elapsedTime + _dt)
             {
                 action.played = true;
                 OnAction?.Invoke(action);
             }
-            else if (m_timer.isStarted && _elapsedTime - 10.0f > action.timePosition)
+            else if (!action.stop && action.timePosition + action.duration <= elapsedTime + _dt)
+            {
+                action.stop = true;
+                OnEndAction?.Invoke(action);
+            }
+            else if (_elapsedTime - 10.0f > action.timePosition)
             {
                 Destroy(action.gameObject);
                 continue;

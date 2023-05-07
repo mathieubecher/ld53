@@ -19,19 +19,19 @@ public class CharacterData : ScriptableObject
     [SerializeField] private float  m_life = 10.0f;
     [SerializeField] private float  m_strength = 1.0f;
     [SerializeField] private float  m_magica = 0.0f;
-    [SerializeField] private float  m_resistance = 0.0f;
     [SerializeField] private float  m_magicaResistance = 0.0f;
     [SerializeField] private float  m_hitStunProba = 0.0f;
+    [SerializeField] private float m_guardValue = 1.0f;
     
     [SerializeField] private List<ActionData> m_actionDatas;
     [SerializeField] private ActionData m_hitAction;
-    
+
     public GameObject spritePrefab => m_spritePrefab;
     public Sprite header => m_timeLineHeader;
     public float life => m_life;
     public float strength => m_strength;
     public float magica => m_magica;
-    public float resistance => m_resistance;
+    public float guardValue => m_guardValue;
     public float magicaResistance => m_magicaResistance;
     public float hitStunProba => m_hitStunProba;
     
