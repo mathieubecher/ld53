@@ -114,7 +114,7 @@ public class ActionSpellButton : MonoBehaviour
     public void Select()
     {
         if (m_cooldown > 0.0f) return;
-        ControlsManager.SetCurrentActionSpellButton(this);
+        ControlsManager.instance.SetCurrentActionSpellButton(this);
         OnResetByOtherClick?.Invoke(this);
 
         m_isSelected = true;
@@ -157,5 +157,10 @@ public class ActionSpellButton : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public bool IsHover()
+    {
+        return isMouseOnButton(out _);
     }
 }

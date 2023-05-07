@@ -6,15 +6,58 @@ using UnityEngine.InputSystem;
 
 public class ControlsManager : MonoBehaviour
 {
+
+    private static ControlsManager m_instance;
+    public static ControlsManager instance
+    {
+        get
+        {
+            if (!m_instance)
+            {
+                m_instance = FindObjectOfType<ControlsManager>();
+            }
+            return m_instance;
+        }
+    }
+    
+    [SerializeField] private Texture2D m_idleCursor;
+    [SerializeField] private Texture2D m_hoverCursor;
+    [SerializeField] private Texture2D m_selectCursor;
+    
     private static ActionSpellButton m_selectedActionSpellButton;
+    private bool m_isHover;
     public static ActionSpellButton selectedActionSpellButton => m_selectedActionSpellButton;
-    public static void SetCurrentActionSpellButton(ActionSpellButton _actionSpellButton)
+    public void SetCurrentActionSpellButton(ActionSpellButton _actionSpellButton)
     {
         m_selectedActionSpellButton = _actionSpellButton;
+        SelectCursor();
     }
     private void ResetActionType()
     {
         m_selectedActionSpellButton = null;
+        if (m_isHover) HoverCursor();
+        else IdleCursor();
+    }
+    private void OnActionHover(bool _ishover)
+    {
+        m_isHover = _ishover;
+        if (m_selectedActionSpellButton) return;
+        if(_ishover) HoverCursor();
+        else IdleCursor();
+    }
+
+    private void IdleCursor()
+    {
+        Cursor.SetCursor(m_idleCursor, new Vector2(1.0f, 1.0f), CursorMode.ForceSoftware);
+    }
+    private void HoverCursor()
+    {
+        Cursor.SetCursor(m_hoverCursor, new Vector2(16.0f,21.0f), CursorMode.ForceSoftware);
+    }
+
+    private void SelectCursor()
+    {
+        Cursor.SetCursor(m_selectCursor, new Vector2(16.0f,21.0f), CursorMode.ForceSoftware);
     }
     
     public delegate void ClickEvent();
@@ -33,6 +76,17 @@ public class ControlsManager : MonoBehaviour
     void OnEnable()
     {
         ResetActionType();
+        ActionSpellsManager.OnHover += OnActionHover;
+    }
+
+    void OnDisable()
+    {
+        ActionSpellsManager.OnHover -= OnActionHover;
+        
+    }
+
+    void Update()
+    {
     }
     
     public void ReadClickInput(InputAction.CallbackContext _context)

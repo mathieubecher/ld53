@@ -9,17 +9,41 @@ public class ActionSpellsManager : MonoBehaviour
     [SerializeField] private float m_margin = 10.0f;
 
     private List<ActionSpellButton> m_buttons;
-    public void Awake()
+    private bool m_isHover;
+    
+    public delegate void HoverEvent(bool _isHover);
+    public static event HoverEvent OnHover;
+
+    private void Awake()
     {
         ControlsManager.OnSpellInput += OnSpellInput;
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
         Reset();
         ControlsManager.OnSpellInput -= OnSpellInput;
     }
 
+    private void Update()
+    {
+        bool isHover = false;
+        foreach (var button in m_buttons)
+        {
+            if (button.IsHover())
+            {
+                isHover = true;
+                break;
+            }
+        }
+
+        if (m_isHover != isHover)
+        {
+            OnHover?.Invoke(isHover);
+            m_isHover = isHover;
+        }
+    }
+    
     public void Init(List<ActionSpell> _actionSpells, float _offset)
     {
         m_buttons = new List<ActionSpellButton>();
