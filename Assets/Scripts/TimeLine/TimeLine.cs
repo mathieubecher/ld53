@@ -177,10 +177,10 @@ public class TimeLine : MonoBehaviour
         return cursorPos;
     }
     
-    public void DrawActionOverlay(GameObject _actionPrefab, RectTransform _overlay, float _timePos)
+    public void DrawActionOverlay(float _duration, RectTransform _overlay, float _timePos)
     {
         _overlay.SetParent(m_overlayParent);
-        _overlay.sizeDelta = ((RectTransform)_actionPrefab.transform).sizeDelta;
+        _overlay.sizeDelta = new Vector2(_overlay.sizeDelta.x, _duration * m_barSize);
         
         Rect parentRect = ((RectTransform)transform).rect;
         Vector2 zeroPos = Vector2.up * ((parentRect.height) / 2.0f + m_barSize);
@@ -190,7 +190,7 @@ public class TimeLine : MonoBehaviour
         
     }
 
-    public bool TryAddAction(GameObject _actionPrefab, float _desiredTimePos, out float _timePos)
+    public bool TryAddAction(float _duration, float _desiredTimePos, out float _timePos)
     {
         _timePos = GetCellForTimePos(_desiredTimePos);
         if (!m_timer.isStarted) return false;
@@ -202,8 +202,6 @@ public class TimeLine : MonoBehaviour
             _timePos = GetCellForTimePos(m_timer.elapsedTime);
         }
 
-        Rect actionRect = ((RectTransform)_actionPrefab.transform).rect;
-        float duration = actionRect.height / m_barSize;
         foreach (TimeLineAction other in m_actions)
         {
             float otherDuration = ((RectTransform)other.transform).rect.height / m_barSize;
@@ -213,20 +211,20 @@ public class TimeLine : MonoBehaviour
                 if (testTimePos - _timePos > 0.5f) return false;
                 foreach (TimeLineAction otherTest in m_actions)
                 {
-                    if (testTimePos <= otherTest.timePosition && testTimePos + duration >= otherTest.timePosition) return false;
+                    if (testTimePos <= otherTest.timePosition && testTimePos + _duration >= otherTest.timePosition) return false;
                 }
                 _timePos = GetCellForTimePos(testTimePos);
                 return true;
             }
-            else if (_timePos + duration >= other.timePosition && _timePos + duration < other.timePosition + otherDuration)
+            else if (_timePos + _duration >= other.timePosition && _timePos + _duration < other.timePosition + otherDuration)
             {
                 return false;
             }
-            else if (_timePos >= other.timePosition && _timePos + duration <= other.timePosition + otherDuration)
+            else if (_timePos >= other.timePosition && _timePos + _duration <= other.timePosition + otherDuration)
             {
                 return false;
             }
-            else if (_timePos <= other.timePosition && _timePos + duration >= other.timePosition + otherDuration)
+            else if (_timePos <= other.timePosition && _timePos + _duration >= other.timePosition + otherDuration)
             {
                 return false;
             }
@@ -248,12 +246,16 @@ public class TimeLine : MonoBehaviour
         return floorPos + 1.0f;
     }
 
-    public void AddAction(GameObject _actionPrefab, float _timePos)
+    public void AddAction(ActionType _type, Color _color, Sprite _icone, float _duration, float _timePos)
     {
-        GameObject actionObject = Instantiate(_actionPrefab, m_actionsParent);
+        GameObject actionObject = Instantiate(TimelineManager.GetGenericAction(), m_actionsParent);
         TimeLineAction action = actionObject.GetComponent<TimeLineAction>();
+        action.SetActionType(_type);
         action.SetTimePosition(_timePos);
-        action.SetDuration(((RectTransform)actionObject.transform).rect.height / m_barSize);
+        action.SetDuration(_duration);
+        action.SetColor(_color);
+        action.SetIcone(_icone);
+        action.SetSize(m_barSize * _duration);
         
         if (action.type == ActionType.HIT)
         {

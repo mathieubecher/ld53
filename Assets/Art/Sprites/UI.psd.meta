@@ -168,8 +168,8 @@ TextureImporter:
       name: UI_0
       rect:
         serializedVersion: 2
-        x: 119
-        y: 740
+        x: 837
+        y: 424
         width: 82
         height: 249
       alignment: 0
@@ -689,6 +689,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_25
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 860
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 744e43dd301054841a39a48fac75058d
+      internalID: -535750769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_26
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 859
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 079709fbfba30884583738922146ddd8
+      internalID: -256505060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_27
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 858
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ae00f0c8a056c344bef57b0a2f48d1a
+      internalID: 1521346350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -718,6 +781,9 @@ TextureImporter:
       UI_22: -678588456
       UI_23: 17424471
       UI_24: -1946077828
+      UI_25: -535750769
+      UI_26: -256505060
+      UI_27: 1521346350
       UI_3: 1123324053
       UI_4: 1822927307
       UI_5: 1894971853

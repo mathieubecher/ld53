@@ -8,8 +8,8 @@ public class CharacterData : ScriptableObject
 {
     [Serializable] public struct ActionData
     {
-        [SerializeField] public ActionType actionType;
-        [SerializeField] public GameObject timeLineBarPrefab;
+        public ActionType actionType;
+        public float duration;
     }
 
     [SerializeField] private string m_className = "Bandit";

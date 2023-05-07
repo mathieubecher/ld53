@@ -50,7 +50,6 @@ using Random = UnityEngine.Random;
         base.Taunt(_attacker, _aggro);
         var target = m_targets.Find(x => x.target == _attacker);
         target.aggro += _aggro;
-        Debug.Log("Taunt ! " + _attacker.name);
         SelectTarget();
     }
 
@@ -107,10 +106,11 @@ using Random = UnityEngine.Random;
     private void ChooseAction(float _timePos)
     {
         if (m_target == null || m_target.isDead) SelectTarget();
-        m_timeline.AddAction(GetRandomAction().timeLineBarPrefab, _timePos);
+        AddAction(GetRandomAction().actionType, _timePos);
     }
     public CharacterData.ActionData GetRandomAction()
     {
+        m_waiting = 0.1f;
         float totalWeight = 0f;
         foreach (CharacterData.ActionData action in m_data.actionDatas)
         {

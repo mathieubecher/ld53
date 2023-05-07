@@ -115,9 +115,17 @@ using Random = UnityEngine.Random;
         if (m_life.isDead) Dead();
         else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
-            m_timeline.AddAction(m_data.GetActionData(ActionType.HIT).timeLineBarPrefab, m_timeline.elapsedTime);
+            AddAction(ActionType.HIT, m_timeline.elapsedTime);
         }
     }
+
+    protected void AddAction(ActionType _type, float _timePos)
+    {
+        CharacterData.ActionData data = m_data.GetActionData(_type);
+        m_timeline.AddAction(data.actionType, GameManager.GetColor(data.actionType), GameManager.GetIcone(data.actionType),
+            data.duration, _timePos);
+    }
+
 
     private void GuardBreak()
     {
