@@ -30,6 +30,7 @@ public class TimeLine : MonoBehaviour
     public RectTransform parent => m_parent;
     public float elapsedTime => m_timer.elapsedTime;
     public List<TimeLineAction> actions => m_actions;
+    public int cellsPerUnit => m_cellsPerUnit;
 
     public TimeLineAction currentAction
     {
@@ -261,16 +262,18 @@ public class TimeLine : MonoBehaviour
         return floorPos + 1.0f;
     }
 
-    public void AddAction(ActionType _type, Color _color, Sprite _icone, float _duration, float _timePos)
+    public void AddAction(ActionData _data, float _timePos)
     {
         GameObject actionObject = Instantiate(TimelineManager.GetGenericAction(), m_actionsParent);
         TimeLineAction action = actionObject.GetComponent<TimeLineAction>();
-        action.SetActionType(_type);
+        
+        action.SetTimeline(this);
+        action.SetActionData(_data);
         action.SetTimePosition(_timePos);
-        action.SetDuration(_duration);
-        action.SetColor(_color);
-        action.SetSize(m_barSize * _duration);
-        action.SetIcone(_icone);
+        action.SetDuration(_data.duration);
+        action.SetColor(GameManager.GetColor(_data.actionType));
+        action.SetSize(m_barSize * _data.duration);
+        action.SetIcone(GameManager.GetIcone(_data.actionType));
         
         if (action.type == ActionType.HIT)
         {

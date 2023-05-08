@@ -51,7 +51,7 @@ using UnityEngine.InputSystem;
     {
         ActionType type = GameManager.GetCombinedType(_action.type, _otherType);
         
-        _action.SetActionType(type);
+        if(m_data.GetActionData(type) != null) _action.SetActionData(m_data.GetActionData(type));
         _action.SetColor(GameManager.GetColor(type));
         _action.SetIcone(GameManager.GetIcone(type));
     }
@@ -97,6 +97,7 @@ using UnityEngine.InputSystem;
     public override void StartFight()
     {
         m_target = GameManager.instance.player;
+        m_sprite.SetTarget(m_target);
         base.StartFight();
     }
 

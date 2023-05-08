@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -50,6 +48,7 @@ using Random = UnityEngine.Random;
     public CharacterData data => m_data;
     public String name => m_data.characterName;
     public TimeLine timeline => m_timeline;
+    public Character target => m_target;
 
     private Character() { }
     public Character(CharacterData _data, bool _npc)
@@ -75,23 +74,26 @@ using Random = UnityEngine.Random;
         GameManager.characterSpriteManager.RemoveCharacterSprite(m_sprite);
     }
 
-    private TimeLineAction m_lastActionPlayed;
+    private TimeLineAction m_currentActionPlayed;
+
     private void OnAction(TimeLineAction _action)
     {
         if (isDead) return;
-        m_lastActionPlayed = _action;
+     
+        m_currentActionPlayed = _action;
+        m_currentActionPlayed.PlayAction(this);
         m_guardValue = 0.0f;
-        m_sprite.PlayAction(m_target, _action);
+        //m_sprite.PlayAction(m_target, _action);
     }
     private void OnEndAction(TimeLineAction _action)
     {
         m_guardValue = 0.0f;
-        if (m_lastActionPlayed && m_lastActionPlayed == _action)
+        if (m_currentActionPlayed && m_currentActionPlayed == _action)
         {
             m_sprite.Idle();
         }
     }
-
+    
 
     public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
     {
@@ -117,9 +119,8 @@ using Random = UnityEngine.Random;
 
     protected void AddAction(ActionType _type, float _timePos)
     {
-        CharacterData.ActionData data = m_data.GetActionData(_type);
-        m_timeline.AddAction(data.actionType, GameManager.GetColor(data.actionType), GameManager.GetIcone(data.actionType),
-            data.duration, _timePos);
+        ActionData data = m_data.GetActionData(_type);
+        m_timeline.AddAction(data, _timePos);
     }
 
 
@@ -156,7 +157,7 @@ using Random = UnityEngine.Random;
         if (isDead) return;
         switch (_effect)
         {
-            case ActionEffect.MELEE_ATTACK:
+            case ActionEffect.ATTACK:
                 if (_target != null)
                 {
                     _target.Hit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect);
@@ -170,6 +171,9 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.START_GUARD:
                 m_guardValue = m_data.guardValue;
+                break;
+            case ActionEffect.STOP_GUARD:
+                m_guardValue = 0.0f;
                 break;
             case ActionEffect.BUFF:
                 m_buffDamage = true;

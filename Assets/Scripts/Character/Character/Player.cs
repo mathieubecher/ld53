@@ -40,7 +40,7 @@ using Random = UnityEngine.Random;
             m_targets.Add(new NPCTarget(character, 0));
         }
 
-        m_waiting = 3.0f;
+        m_waiting = 30.0f;
 
         SelectTarget();
     }
@@ -67,6 +67,7 @@ using Random = UnityEngine.Random;
     private void SelectTarget()
     {
         m_target = m_targets.OrderByDescending(x => x.aggro * (x.target.isDead ? 0.0f : 1.0f) + (x.target.isDead ? 0.0f : 1.0f)).ToList()[0].target;
+        m_sprite.SetTarget(m_target);
     }
 
     [SerializeField] private LineRenderer m_line;
@@ -108,18 +109,18 @@ using Random = UnityEngine.Random;
         if (m_target == null || m_target.isDead) SelectTarget();
         AddAction(GetRandomAction().actionType, _timePos);
     }
-    public CharacterData.ActionData GetRandomAction()
+    public ActionData GetRandomAction()
     {
         m_waiting = 0.1f;
         float totalWeight = 0f;
-        foreach (CharacterData.ActionData action in m_data.actionDatas)
+        foreach (ActionData action in m_data.actionDatas)
         {
             totalWeight += GetWeight(action);
         }
 
         float randomValue = Random.Range(0f, totalWeight);
 
-        foreach (CharacterData.ActionData action in m_data.actionDatas)
+        foreach (ActionData action in m_data.actionDatas)
         {
             randomValue -= GetWeight(action);
             if (randomValue <= 0f)
@@ -130,7 +131,7 @@ using Random = UnityEngine.Random;
 
         return m_data.actionDatas[0];
     }
-    private float GetWeight(CharacterData.ActionData _action)
+    private float GetWeight(ActionData _action)
     {
         switch (_action.actionType)
         {

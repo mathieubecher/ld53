@@ -4,19 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[Serializable] public struct ActionStepData
+{
+    public ActionStep steps;
+    public int numberOfCells;
+}
+[Serializable] public class ActionData
+{
+    public ActionType actionType;
+    public float duration;
+    public List<ActionStepData> actions;
+}
+[Serializable] public struct RandomAction
+{
+    public ActionType actionType;
+    public float weight;
+}
+
 [CreateAssetMenu(fileName = "Data", menuName = "Character/New type", order = 1)]
 public class CharacterData : ScriptableObject
 {
-    [Serializable] public struct ActionData
-    {
-        public ActionType actionType;
-        public float duration;
-    }
-    [Serializable] public struct RandomAction
-    {
-        public ActionType actionType;
-        public float weight;
-    }
 
     [SerializeField] private string m_className = "Bandit";
     [SerializeField] private string m_characterName;
