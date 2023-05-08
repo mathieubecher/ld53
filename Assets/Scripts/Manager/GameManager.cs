@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         }
 
         m_player.StartFight();
+
+        m_actionSpellsManager.SartFight();
     }
 
     private void StopFight()
@@ -146,6 +148,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(m_player);
         m_player.StopFight();
+        
+        m_actionSpellsManager.StopFight();
     }
 
     public void Update()

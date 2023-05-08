@@ -15,6 +15,7 @@ public class ActionSpellsManager : MonoBehaviour
     }
     
     [SerializeField] private Transform m_actionSpellParent;
+    [SerializeField] private Transform m_garbage;
     [SerializeField] private TextMeshProUGUI m_cooldownText;
     [SerializeField] private float m_buttonHeight = 80.0f;
     [SerializeField] private float m_margin = 10.0f;
@@ -26,7 +27,9 @@ public class ActionSpellsManager : MonoBehaviour
     private float m_cumulHeight = 0.0f;
     private float m_spellCurrentCooldown = 0.0f;
     private List<ActionSpellButton> m_buttons;
+    private ActionSpellButton m_previous;
     private bool m_isHover;
+    private bool m_start;
     private int m_nextSpellNumber;
     
     public delegate void HoverEvent(bool _isHover);
@@ -40,6 +43,15 @@ public class ActionSpellsManager : MonoBehaviour
     private void OnDisable()
     {
         //ControlsManager.OnSpellInput -= OnSpellInput;
+    }
+    public void SartFight()
+    {
+        m_start = true;
+    }
+
+    public void StopFight()
+    {
+        m_start = false;
     }
 
     public void Init(float _offset)
@@ -80,7 +92,7 @@ public class ActionSpellsManager : MonoBehaviour
     {            
         ManageSpellButtons();
 
-        m_spellCurrentCooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
+        if(m_start) m_spellCurrentCooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
         
         if (m_spellCurrentCooldown > 0.0f)
         {
@@ -92,6 +104,10 @@ public class ActionSpellsManager : MonoBehaviour
         
         if (m_spellCurrentCooldown <= 0.0f)
         {
+            if (m_previous)
+            {
+                Destroy(m_previous.gameObject);
+            }
             ++m_nextSpellNumber;
             var npcs = GameManager.instance.npcs;
             var button = AddButton(npcs[m_nextSpellNumber % npcs.Count].SelectActionSpell());
@@ -113,16 +129,31 @@ public class ActionSpellsManager : MonoBehaviour
             {
                 m_upIndex = 0;
                 m_spellPosTimer = 1.0f;
-                if(m_buttons[m_upIndex]) Destroy(m_buttons[m_upIndex].gameObject);
+                if(m_buttons[0])
+                {
+                    m_previous = m_buttons[0];
+                    m_previous.transform.parent = m_garbage;
+                    
+                    if(ControlsManager.selectedActionSpellButton == m_previous)
+                    {
+                        ControlsManager.instance.SetCurrentActionSpellButton(null);
+                    }
+                    m_previous.Remove();
+                }
                 m_buttons.RemoveAt(m_upIndex);
             }
 
             m_spellCurrentCooldown += m_spellCooldown;
         }
-        else
+        else if (m_spellCooldown > 0.0f)
         {
             m_spellPosTimer -= Time.deltaTime * m_animSpeed;
-            if (m_spellPosTimer < 0) m_spellPosTimer = 0.0f;
+            if (m_spellPosTimer < 0)
+            {
+                if(m_previous) Destroy(m_previous.gameObject);
+                m_spellPosTimer = 0.0f;
+            }
+            if(m_previous) m_previous.transform.localPosition = Vector3.Lerp(Vector3.up * (m_buttonHeight + m_margin), Vector3.zero, m_spellPosTimer);
             for (int i = m_upIndex; i < m_buttons.Count; ++i)
             {
                 Vector3 unitPos = Vector3.down * (m_buttonHeight + m_margin);

@@ -29,8 +29,12 @@ public class ControlsManager : MonoBehaviour
     public static ActionSpellButton selectedActionSpellButton => m_selectedActionSpellButton;
     public void SetCurrentActionSpellButton(ActionSpellButton _actionSpellButton)
     {
-        m_selectedActionSpellButton = _actionSpellButton;
-        SelectCursor();
+        if (_actionSpellButton)
+        {
+            m_selectedActionSpellButton = _actionSpellButton;
+            SelectCursor();
+        }
+        else ResetActionType();
     }
     private void ResetActionType()
     {

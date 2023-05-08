@@ -2053,6 +2053,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2167017090646954845}
     m_Modifications:
     - target: {fileID: 1005092493, guid: 2f42ea1d51c823745bf71d53e7f15d3a, type: 3}
+      propertyPath: m_garbage
+      value: 
+      objectReference: {fileID: 8616040075269703019}
+    - target: {fileID: 1005092493, guid: 2f42ea1d51c823745bf71d53e7f15d3a, type: 3}
       propertyPath: m_cooldownText
       value: 
       objectReference: {fileID: 606871706480540861}
@@ -2748,5 +2752,10 @@ MonoBehaviour:
 --- !u!224 &3429808566540464765 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6124334007653158552, guid: b7c185bd4a9dbd1488844c33ef07ae9a, type: 3}
+  m_PrefabInstance: {fileID: 8892113290457431269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8616040075269703019 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 933779081789815182, guid: b7c185bd4a9dbd1488844c33ef07ae9a, type: 3}
   m_PrefabInstance: {fileID: 8892113290457431269}
   m_PrefabAsset: {fileID: 0}
