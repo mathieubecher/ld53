@@ -74,27 +74,6 @@ using Random = UnityEngine.Random;
         GameManager.characterSpriteManager.RemoveCharacterSprite(m_sprite);
     }
 
-    private TimeLineAction m_currentActionPlayed;
-
-    private void OnAction(TimeLineAction _action)
-    {
-        if (isDead) return;
-     
-        m_currentActionPlayed = _action;
-        m_currentActionPlayed.PlayAction(this);
-        m_guardValue = 0.0f;
-        //m_sprite.PlayAction(m_target, _action);
-    }
-    private void OnEndAction(TimeLineAction _action)
-    {
-        m_guardValue = 0.0f;
-        if (m_currentActionPlayed && m_currentActionPlayed == _action)
-        {
-            m_sprite.Idle();
-        }
-    }
-    
-
     public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
     {
         float damage = _damage;
@@ -152,6 +131,27 @@ using Random = UnityEngine.Random;
         m_timeline.StopTimer();
     }
     
+    
+    private TimeLineAction m_currentActionPlayed;
+
+    private void OnAction(TimeLineAction _action)
+    {
+        if (isDead) return;
+     
+        m_currentActionPlayed = _action;
+        m_currentActionPlayed.PlayAction(this);
+        m_guardValue = 0.0f;
+        //m_sprite.PlayAction(m_target, _action);
+    }
+    private void OnEndAction(TimeLineAction _action)
+    {
+        m_guardValue = 0.0f;
+        if (m_currentActionPlayed && m_currentActionPlayed == _action)
+        {
+            m_sprite.Idle();
+        }
+    }
+
     private void PlayActionEffect(ActionEffect _effect, Character _target)
     {
         if (isDead) return;
