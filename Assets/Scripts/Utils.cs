@@ -7,16 +7,17 @@ using System;
     GUARD,
     BUFF,
     HIT,
+    REINFORCED_ATTACK,
+    REINFORCED_GUARD,
+    PARRY,
+    INVULNERABLE_ATTACK
 }
 
 [Serializable] public enum ActionEffect
 {
     MELEE_ATTACK,
     MAGIC_ATTACK,
-    DISTANCE_ATTACK,
     TAUNT,
     START_GUARD,
     BUFF,
-    END_GUARD,
-    HEAL
 }

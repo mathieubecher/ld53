@@ -44,13 +44,11 @@ using Random = UnityEngine.Random;
 
     [SerializeField] private float m_guardValue = 0.0f;
     [SerializeField] private bool m_guardBreaked = false;
-    [SerializeField] private bool m_isAttacking = false;
     [SerializeField] private bool m_buffDamage = false;
     public CharacterSprite sprite => m_sprite;
     public bool isDead => m_life.isDead;
     public CharacterData data => m_data;
     public String name => m_data.characterName;
-    public bool isAttacking => m_isAttacking;
     public TimeLine timeline => m_timeline;
 
     private Character() { }
@@ -61,7 +59,6 @@ using Random = UnityEngine.Random;
         m_timeline.OnEndAction += OnEndAction;
         m_data = _data;
         m_life = new Life(m_data.life);
-        m_isAttacking = false;
         m_guardValue = 0.0f;
         m_buffDamage = false;
         if(_npc) m_sprite = GameManager.characterSpriteManager.RequestNPCSprite(m_data.spritePrefab);
@@ -85,10 +82,10 @@ using Random = UnityEngine.Random;
         m_lastActionPlayed = _action;
         m_guardValue = 0.0f;
         m_sprite.PlayAction(m_target, _action);
-        if (_action.type == ActionType.ATTACK) m_isAttacking = true;
     }
     private void OnEndAction(TimeLineAction _action)
     {
+        m_guardValue = 0.0f;
         if (m_lastActionPlayed && m_lastActionPlayed == _action)
         {
             m_sprite.Idle();
@@ -99,7 +96,6 @@ using Random = UnityEngine.Random;
     public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
     {
         float damage = _damage;
-        m_isAttacking = false;
         if (m_guardValue > 0.0f)
         {
             m_guardValue -= damage;
@@ -164,7 +160,6 @@ using Random = UnityEngine.Random;
                 if (_target != null)
                 {
                     _target.Hit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect);
-                    m_isAttacking = false;
                 }
                 break;
             case ActionEffect.TAUNT :
@@ -175,10 +170,6 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.START_GUARD:
                 m_guardValue = m_data.guardValue;
-                break;
-            case ActionEffect.END_GUARD:
-                m_guardValue = 0.0f;
-                m_guardBreaked = false;
                 break;
             case ActionEffect.BUFF:
                 m_buffDamage = true;

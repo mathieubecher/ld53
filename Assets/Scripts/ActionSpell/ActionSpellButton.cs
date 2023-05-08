@@ -132,9 +132,10 @@ public class ActionSpellButton : MonoBehaviour
 
     public void Activate()
     {
-        m_cooldown += m_actionSpell.cooldown;
-        m_button.SetTrigger("Activate");
-        m_priority = 0;
+        Destroy(gameObject);
+        //m_cooldown += m_actionSpell.cooldown;
+        //m_button.SetTrigger("Activate");
+        //m_priority = 0;
     }
 
     public void UnSelect()

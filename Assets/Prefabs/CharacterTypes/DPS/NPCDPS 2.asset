@@ -29,6 +29,13 @@ MonoBehaviour:
     duration: 2
   - actionType: 3
     duration: 1
+  m_randomActions:
+  - actionType: 1
+    weight: 0.5
+  - actionType: 2
+    weight: 0.25
+  - actionType: 3
+    weight: 0.25
   m_hitAction:
     actionType: 4
     duration: 0.5

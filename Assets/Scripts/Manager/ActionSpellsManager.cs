@@ -2,41 +2,152 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ActionSpellsManager : MonoBehaviour
 {
+    [Serializable] struct SpellForType
+    {
+        public ActionType type;
+        public ActionSpell spell;
+    }
+    
     [SerializeField] private Transform m_actionSpellParent;
+    [SerializeField] private TextMeshProUGUI m_cooldownText;
+    [SerializeField] private float m_buttonHeight = 80.0f;
     [SerializeField] private float m_margin = 10.0f;
-
+    [SerializeField] private float m_animSpeed = 2.0f;
+    [SerializeField] private int m_nbActions = 5;
+    [SerializeField] private float m_spellCooldown = 1.0f;
+    [SerializeField] private List<SpellForType> m_actionSpells;
+    
+    private float m_cumulHeight = 0.0f;
+    private float m_spellCurrentCooldown = 0.0f;
     private List<ActionSpellButton> m_buttons;
     private bool m_isHover;
+    private int m_nextSpellNumber;
     
     public delegate void HoverEvent(bool _isHover);
     public static event HoverEvent OnHover;
 
     private void OnEnable()
     {
-        ControlsManager.OnSpellInput += OnSpellInput;
+        //ControlsManager.OnSpellInput += OnSpellInput;
     }
 
     private void OnDisable()
     {
-        Reset();
-        ControlsManager.OnSpellInput -= OnSpellInput;
+        //ControlsManager.OnSpellInput -= OnSpellInput;
     }
 
+    public void Init(float _offset)
+    {
+        m_buttons = new List<ActionSpellButton>();
+        m_actionSpellParent.localPosition = new Vector2(-_offset, m_actionSpellParent.localPosition.y);
+        m_cumulHeight = 0.0f;
+        m_cooldownText.transform.parent.localPosition = Vector3.down * (m_buttonHeight + m_margin) * (m_nbActions);
+        var npcs = GameManager.instance.npcs;
+        
+        for (m_nextSpellNumber = 0; m_nextSpellNumber < m_nbActions; ++m_nextSpellNumber)
+        {
+            var button = AddButton(npcs[m_nextSpellNumber % npcs.Count].SelectActionSpell());
+            m_buttons.Add(button);
+        }
+        m_spellCurrentCooldown += m_spellCooldown;
+    }
+
+    private ActionSpellButton AddButton(ActionType _type)
+    {
+        SpellForType spellForType = m_actionSpells.Find(x => x.type == _type);
+        if (!spellForType.spell.buttonPrefab) return null;
+
+        GameObject button = Instantiate(spellForType.spell.buttonPrefab, m_actionSpellParent);
+        ActionSpellButton actionSpellButton = button.GetComponent<ActionSpellButton>();
+
+        button.transform.localPosition += Vector3.down * m_cumulHeight;
+
+        m_cumulHeight += m_buttonHeight + m_margin;
+        actionSpellButton.SetActionSpell(spellForType.spell);
+        //actionSpellButton.SetActionSpellNumber(number);
+        return actionSpellButton;
+    }
+
+    private float m_spellPosTimer = 0.0f;
+    private int m_upIndex = 0;
     private void Update()
+    {            
+        ManageSpellButtons();
+
+        m_spellCurrentCooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
+        
+        if (m_spellCurrentCooldown > 0.0f)
+        {
+            float floorCooldown = math.floor(m_spellCurrentCooldown);
+            float cooldownMs = math.floor((m_spellCurrentCooldown - floorCooldown) * 10.0f);
+            
+            m_cooldownText.text = floorCooldown + "<size=15>."+ cooldownMs +"</size>";
+        }
+        
+        if (m_spellCurrentCooldown <= 0.0f)
+        {
+            ++m_nextSpellNumber;
+            var npcs = GameManager.instance.npcs;
+            var button = AddButton(npcs[m_nextSpellNumber % npcs.Count].SelectActionSpell());
+            button.Reset();
+            m_buttons.Add(button);
+            m_cumulHeight -= m_buttonHeight + m_margin;
+            
+            for (int i = m_buttons.Count - 1; i >= 2; --i)
+            {
+                if (m_buttons[i] == null)
+                {
+                    m_upIndex = i;
+                    m_spellPosTimer = 1.0f;
+                    m_buttons.RemoveAt(m_upIndex);
+                    break;
+                }
+            }
+            while (m_buttons.Count > m_nbActions)
+            {
+                m_upIndex = 0;
+                m_spellPosTimer = 1.0f;
+                if(m_buttons[m_upIndex]) Destroy(m_buttons[m_upIndex].gameObject);
+                m_buttons.RemoveAt(m_upIndex);
+            }
+
+            m_spellCurrentCooldown += m_spellCooldown;
+        }
+        else
+        {
+            m_spellPosTimer -= Time.deltaTime * m_animSpeed;
+            if (m_spellPosTimer < 0) m_spellPosTimer = 0.0f;
+            for (int i = m_upIndex; i < m_buttons.Count; ++i)
+            {
+                Vector3 unitPos = Vector3.down * (m_buttonHeight + m_margin);
+                if(m_buttons[i]) 
+                    m_buttons[i].transform.localPosition = Vector3.Lerp(unitPos * i, unitPos * (i + 1), m_spellPosTimer);
+            }
+        }
+
+    }
+
+
+    private void ManageSpellButtons()
     {
         var buttons = m_buttons.OrderBy(x => x.priority).ToList();
         bool isHover = false;
         int i = 1;
         foreach (var button in buttons)
         {
+            if (!button) continue;
+
             if (!isHover && button.IsHover())
             {
                 isHover = true;
             }
+
             button.transform.SetSiblingIndex(i);
             ++i;
         }
@@ -47,29 +158,7 @@ public class ActionSpellsManager : MonoBehaviour
             m_isHover = isHover;
         }
     }
-    
-    public void Init(List<ActionSpell> _actionSpells, float _offset)
-    {
-        m_buttons = new List<ActionSpellButton>();
-        m_actionSpellParent.localPosition = new Vector2(-_offset, m_actionSpellParent.localPosition.y);
-        float cumulHeight = 0.0f;
-        int number = 1;
-        foreach (var actionSpell in _actionSpells)
-        {
-            if (!actionSpell.buttonPrefab) continue;
-            
-            GameObject button = Instantiate(actionSpell.buttonPrefab, m_actionSpellParent);
-            ActionSpellButton actionSpellButton = button.GetComponent<ActionSpellButton>();
-            
-            button.transform.localPosition += Vector3.down * cumulHeight;
-            
-            cumulHeight += ((RectTransform)button.transform).rect.height + m_margin;
-            actionSpellButton.SetActionSpell(actionSpell);
-            actionSpellButton.SetActionSpellNumber(number);
-            m_buttons.Add(actionSpellButton);
-            ++number;
-        }
-    }
+
 
     private void OnSpellInput(int _number)
     {
@@ -84,9 +173,11 @@ public class ActionSpellsManager : MonoBehaviour
 
         foreach (var button in m_buttons)
         {
+            if (!button) continue;
             Destroy(button.gameObject);
         }
         m_buttons = new List<ActionSpellButton>();
         
     }
 }
+

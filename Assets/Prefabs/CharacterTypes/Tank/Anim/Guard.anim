@@ -650,12 +650,5 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 4
-    messageOptions: 0
-  - time: 2
-    functionName: PlayActionEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 6
+    intParameter: 3
     messageOptions: 0

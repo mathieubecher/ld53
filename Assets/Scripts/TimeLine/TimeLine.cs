@@ -190,6 +190,21 @@ public class TimeLine : MonoBehaviour
         
     }
 
+    public bool TryCombineAction(float _desiredTimePos, out TimeLineAction _other)
+    {
+        _other = null;
+        foreach (TimeLineAction other in m_actions)
+        {
+            if (!other.played && _desiredTimePos >= other.timePosition && _desiredTimePos <= other.timePosition + other.duration - 0.2f)
+            {
+                _other = other;
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     public bool TryAddAction(float _duration, float _desiredTimePos, out float _timePos)
     {
         _timePos = GetCellForTimePos(_desiredTimePos);
@@ -254,8 +269,8 @@ public class TimeLine : MonoBehaviour
         action.SetTimePosition(_timePos);
         action.SetDuration(_duration);
         action.SetColor(_color);
-        action.SetIcone(_icone);
         action.SetSize(m_barSize * _duration);
+        action.SetIcone(_icone);
         
         if (action.type == ActionType.HIT)
         {
@@ -263,7 +278,7 @@ public class TimeLine : MonoBehaviour
         }
         m_actions.Add(action);
     }
-
+    
     private void ClearAllActions()
     {
         foreach (var action in m_actions)

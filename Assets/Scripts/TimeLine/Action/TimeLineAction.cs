@@ -27,6 +27,11 @@ public class TimeLineAction : MonoBehaviour
     
     public void SetIcone(Sprite _icone)
     {
+        if (duration <= 0.5f)
+        {
+            m_iconeImage.gameObject.SetActive(false);
+            return;
+        }
         m_icone = _icone;
         m_iconeImage.gameObject.SetActive(m_icone);
         m_iconeImage.sprite = m_icone;
