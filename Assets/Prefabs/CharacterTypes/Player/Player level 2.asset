@@ -19,16 +19,14 @@ MonoBehaviour:
   m_life: 20
   m_strength: 2
   m_magica: 0
+  m_resistance: 0
   m_magicaResistance: 0
   m_hitStunProba: 0
-  m_guardValue: 1
   m_actionDatas:
   - actionType: 1
-    duration: 1.5
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: a25254dc0d43099438688cc9fa117527, type: 3}
   - actionType: 2
-    duration: 2
-  - actionType: 3
-    duration: 0.5
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: 39d32d9b95cb7ad4197a81f3ce215c19, type: 3}
   m_hitAction:
     actionType: 4
-    duration: 3
+    timeLineBarPrefab: {fileID: 4388841509119564361, guid: 4ccd16200cfd94145ba60f2988c987ad, type: 3}

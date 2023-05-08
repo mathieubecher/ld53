@@ -51,7 +51,10 @@ public abstract class CharacterSprite : MonoBehaviour
 
     public void PlayAction(Character _target, TimeLineAction _action)
     {
-        ResetTriggers();
+        m_animator.ResetTrigger("Attack");
+        m_animator.ResetTrigger("Guard");
+        m_animator.ResetTrigger("Buff");
+        m_animator.ResetTrigger("Hit");
         switch (_action.type)
         {
             case ActionType.ATTACK:
@@ -72,34 +75,6 @@ public abstract class CharacterSprite : MonoBehaviour
         m_returnToPosition = false;
         m_action = _action;
         m_target = _target;
-    }
-    
-    public void Break()
-    {
-        ResetTriggers();
-        m_animator.SetTrigger("GuardBreak");
-    }
-
-    public void Idle()
-    {
-        ResetTriggers();
-        m_animator.SetTrigger("Idle");
-    }
-
-    public void Dead()
-    {
-        ResetTriggers();
-        m_animator.SetBool("dead", true);
-    }
-
-    private void ResetTriggers()
-    {
-        m_animator.ResetTrigger("Attack");
-        m_animator.ResetTrigger("Guard");
-        m_animator.ResetTrigger("Buff");
-        m_animator.ResetTrigger("Hit");
-        m_animator.ResetTrigger("Idle");
-        m_animator.ResetTrigger("GuardBreak");
     }
 
     public void ReachTarget(float _time)
@@ -126,4 +101,13 @@ public abstract class CharacterSprite : MonoBehaviour
         OnPlayActionEffect?.Invoke(_effect, m_target);
     }
 
+    public void Dead()
+    {
+        m_animator.ResetTrigger("Attack");
+        m_animator.ResetTrigger("Guard");
+        m_animator.ResetTrigger("Buff");
+        m_animator.ResetTrigger("Hit");
+        m_animator.SetBool("dead", true);
+        
+    }
 }

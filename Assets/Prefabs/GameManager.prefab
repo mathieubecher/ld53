@@ -55,8 +55,7 @@ MonoBehaviour:
     m_data: {fileID: 0}
     m_timeline: {fileID: 0}
     m_sprite: {fileID: 0}
-    m_guardValue: 0
-    m_guardBreaked: 0
+    m_isGuarding: 0
     m_isAttacking: 0
     m_buffDamage: 0
     m_targets: []
@@ -68,20 +67,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
   m_playerToSpawn: {fileID: 0}
   m_NPCToSpawn: []
-  m_actionTypes:
-  - type: 1
-    color: {r: 0.7647059, g: 0.21960784, b: 0.21960784, a: 1}
-    icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 2
-    color: {r: 1, g: 0.77254903, b: 0.34509805, a: 1}
-    icone: {fileID: -535750769, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 3
-    color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
-    icone: {fileID: -256505060, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 4
-    color: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
-    icone: {fileID: 0}
-  m_arrow: {fileID: 0}
   m_overlayPrefab: {fileID: 5311616371157578801, guid: 5d995dbaf3e99054c9b173f2c0d9eaf8, type: 3}
 --- !u!114 &1935299600206908664
 MonoBehaviour:
@@ -95,12 +80,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 809c8c5d02a3b014393f15ee346e385c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_genericAction: {fileID: 4388841509119564361, guid: 9505ad517d7c09e40be12b2c16821474, type: 3}
   m_timelinePrefab: {fileID: 4528226277256636141, guid: 736453a8aa9278344804b174b34fcf0c, type: 3}
   m_timelineParent: {fileID: 0}
   m_timelineScale: 0.33
   m_cellPerUnit: 4
-  m_offset: 10
   m_timeLines: []
 --- !u!114 &6008026967275968890
 MonoBehaviour:
@@ -135,4 +118,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionSpellParent: {fileID: 0}
-  m_margin: -5
+  m_margin: 5

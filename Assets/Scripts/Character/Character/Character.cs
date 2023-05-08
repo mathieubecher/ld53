@@ -42,8 +42,7 @@ using Random = UnityEngine.Random;
     [SerializeField] protected TimeLine m_timeline;
     [SerializeField] protected CharacterSprite m_sprite;
 
-    [SerializeField] private float m_guardValue = 0.0f;
-    [SerializeField] private bool m_guardBreaked = false;
+    [SerializeField] private bool m_isGuarding = false;
     [SerializeField] private bool m_isAttacking = false;
     [SerializeField] private bool m_buffDamage = false;
     public CharacterSprite sprite => m_sprite;
@@ -58,11 +57,10 @@ using Random = UnityEngine.Random;
     {
         m_timeline = GameManager.timelineManager.RequestTimeline(_data.header);
         m_timeline.OnAction += OnAction;
-        m_timeline.OnEndAction += OnEndAction;
         m_data = _data;
         m_life = new Life(m_data.life);
         m_isAttacking = false;
-        m_guardValue = 0.0f;
+        m_isGuarding = false;
         m_buffDamage = false;
         if(_npc) m_sprite = GameManager.characterSpriteManager.RequestNPCSprite(m_data.spritePrefab);
         else m_sprite = GameManager.characterSpriteManager.RequestPlayerSprite(m_data.spritePrefab);
@@ -73,65 +71,37 @@ using Random = UnityEngine.Random;
     {
         m_sprite.OnPlayActionEffect -= PlayActionEffect;
         m_timeline.OnAction -= OnAction;
-        m_timeline.OnEndAction -= OnEndAction;
         GameManager.timelineManager.RemoveTimeLine(m_timeline);
         GameManager.characterSpriteManager.RemoveCharacterSprite(m_sprite);
     }
 
-    private TimeLineAction m_lastActionPlayed;
     private void OnAction(TimeLineAction _action)
     {
         if (isDead) return;
-        m_lastActionPlayed = _action;
-        m_guardValue = 0.0f;
+        m_isGuarding = false;
         m_sprite.PlayAction(m_target, _action);
         if (_action.type == ActionType.ATTACK) m_isAttacking = true;
-    }
-    private void OnEndAction(TimeLineAction _action)
-    {
-        if (m_lastActionPlayed && m_lastActionPlayed == _action)
-        {
-            m_sprite.Idle();
-        }
-    }
 
+    }
 
     public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
     {
         float damage = _damage;
         m_isAttacking = false;
-        if (m_guardValue > 0.0f)
+        if (m_isGuarding)
         {
-            m_guardValue -= damage;
+            damage *= _effect == ActionEffect.MELEE_ATTACK || _effect == ActionEffect.DISTANCE_ATTACK ? m_data.resistance : 1.0f;
+            damage *= _effect == ActionEffect.MAGIC_ATTACK ? m_data.magicaResistance : 1.0f;
             _attacker.BlockAttack(this);
-            if (m_guardValue <= 0.0f) GuardBreak();
-            return;
         }
-
-        if (m_guardBreaked) damage *= 2.0f;
         m_life.Hit(damage);
         m_sprite.Hit(m_life.lifeRatio, damage);
         
         if (m_life.isDead) Dead();
-        else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
+        else if(!m_isGuarding && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
-            AddAction(ActionType.HIT, m_timeline.elapsedTime);
+            m_timeline.AddAction(m_data.GetActionData(ActionType.HIT).timeLineBarPrefab, m_timeline.elapsedTime);
         }
-    }
-
-    protected void AddAction(ActionType _type, float _timePos)
-    {
-        CharacterData.ActionData data = m_data.GetActionData(_type);
-        m_timeline.AddAction(data.actionType, GameManager.GetColor(data.actionType), GameManager.GetIcone(data.actionType),
-            data.duration, _timePos);
-    }
-
-
-    private void GuardBreak()
-    {
-        m_guardBreaked = true;
-        m_sprite.Break();
-        if(m_timeline.currentAction) m_timeline.currentAction.Break();
     }
 
     protected virtual void BlockAttack(Character _blocker)
@@ -143,6 +113,7 @@ using Random = UnityEngine.Random;
 
     public virtual void Dead()
     {
+        Debug.Log(name + " is dead.");
         m_sprite.Dead();
         
     }
@@ -152,6 +123,7 @@ using Random = UnityEngine.Random;
     }
     public void StopFight()
     {
+        Debug.Log(m_timeline);
         m_timeline.StopTimer();
     }
     
@@ -174,11 +146,10 @@ using Random = UnityEngine.Random;
                 }
                 break;
             case ActionEffect.START_GUARD:
-                m_guardValue = m_data.guardValue;
+                m_isGuarding = true;
                 break;
             case ActionEffect.END_GUARD:
-                m_guardValue = 0.0f;
-                m_guardBreaked = false;
+                m_isGuarding = false;
                 break;
             case ActionEffect.BUFF:
                 m_buffDamage = true;

@@ -12,25 +12,18 @@ public class ActionSpellButton : MonoBehaviour
     [SerializeField] private Animator m_button;
     [SerializeField] private Image m_cooldownUIImage;
     [SerializeField] private TextMeshProUGUI m_cooldownUIText;
-    [SerializeField] private TextMeshProUGUI m_actionSpellNumber;
     
     private ActionSpell m_actionSpell;
     private float m_cooldown = 0.0f;
     private bool m_isSelected;
     private Vector3 m_originalPos;
-    [SerializeField] private int m_priority = 0;
     
     private Camera m_cameraRef;
 
     public ActionSpell actionSpell => m_actionSpell;
-    public int priority => m_priority;
     public void SetActionSpell(ActionSpell _actionSpell)
     {
         m_actionSpell = _actionSpell;
-    }
-    public void SetActionSpellNumber(int _number)
-    {
-        m_actionSpellNumber.text = _number.ToString();
     }
 
     public delegate void ActionSpellClickEvent(ActionType _type);
@@ -121,20 +114,18 @@ public class ActionSpellButton : MonoBehaviour
     public void Select()
     {
         if (m_cooldown > 0.0f) return;
-        ControlsManager.instance.SetCurrentActionSpellButton(this);
+        ControlsManager.SetCurrentActionSpellButton(this);
         OnResetByOtherClick?.Invoke(this);
 
         m_isSelected = true;
         
         m_button.SetTrigger("Select");
-        m_priority = 1000;
     }
 
     public void Activate()
     {
         m_cooldown += m_actionSpell.cooldown;
         m_button.SetTrigger("Activate");
-        m_priority = 0;
     }
 
     public void UnSelect()
@@ -142,7 +133,6 @@ public class ActionSpellButton : MonoBehaviour
         m_isSelected = false;
         if (m_cooldown > 0.0f) return;
         m_button.SetTrigger("UnSelect");
-        m_priority = 0;
     }
 
     private void OtherSelected(ActionSpellButton _other)
@@ -154,14 +144,6 @@ public class ActionSpellButton : MonoBehaviour
     {
         m_button.SetTrigger("Reset");
         m_cooldown = 0.0f;
-        m_priority = 10;
-        StartCoroutine(ResetPrio());
-    }
-
-    private IEnumerator ResetPrio()
-    {
-        yield return new WaitForSeconds(0.3f);
-        m_priority = 0;
     }
 
     
@@ -175,10 +157,5 @@ public class ActionSpellButton : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public bool IsHover()
-    {
-        return isMouseOnButton(out _);
     }
 }

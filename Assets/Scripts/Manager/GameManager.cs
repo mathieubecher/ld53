@@ -6,12 +6,6 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-    [Serializable] private class DataType
-    {
-        public ActionType type;
-        public Color color;
-        public Sprite icone;
-    }
     #region Singleton
     private static GameManager m_instance;
     private TimelineManager m_timelineManager;
@@ -49,14 +43,13 @@ public class GameManager : MonoBehaviour
     public static event EndSceneEvent OnWin;
     public static event EndSceneEvent OnLoose;
     
-    [SerializeField] private bool m_startFightAtStart = false;
+    [FormerlySerializedAs("m_startGameAtStart")] [SerializeField] private bool m_startFightAtStart = false;
     [SerializeField] private Player m_player;
     [SerializeField] private List<NPC> m_npcs;
     [SerializeField] private List<ActionSpell> m_actionSpells;
     
     [SerializeField] private CharacterData m_playerToSpawn;
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
-    [SerializeField] private List<DataType> m_actionTypes;
     [SerializeField] private Transform m_arrow;
     [SerializeField] private GameObject m_overlayPrefab;
 
@@ -84,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
         
         m_player = new Player(m_playerToSpawn);
-        m_actionSpellsManager.Init(m_actionSpells, m_timelineManager.width - 5.0f);
+        m_actionSpellsManager.Init(m_actionSpells, m_timelineManager.width);
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
@@ -179,7 +172,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var npc in m_npcs)
         {
-            if (npc.TryDrawAction(_actionSpell.type, m_arrow, m_currentOverlay as RectTransform))
+            if (npc.TryDrawAction(_actionSpell, m_arrow, m_currentOverlay as RectTransform))
             {
                 m_currentOverlay.gameObject.SetActive(true);
                 m_arrow.gameObject.SetActive(true);
@@ -188,18 +181,5 @@ public class GameManager : MonoBehaviour
         }
         m_currentOverlay.gameObject.SetActive(false);
         m_arrow.gameObject.SetActive(false);
-    }
-
-    public static Color GetColor(ActionType _type)
-    {
-        var type = instance.m_actionTypes.Find(x => x.type == _type);
-        return type.color;
-    }
-
-    public static Sprite GetIcone(ActionType _type)
-    {
-        var type = instance.m_actionTypes.Find(x => x.type == _type);
-        return type.icone;
-        
     }
 }

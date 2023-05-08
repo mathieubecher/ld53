@@ -3,28 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class TimelineManager : MonoBehaviour
 {
-    private static TimelineManager m_instance;
-    public static TimelineManager instance
-    {
-        get
-        {
-            if (!m_instance)
-            {
-                m_instance = FindObjectOfType<TimelineManager>();
-            }
-            return m_instance;
-        }
-    }
-    public static GameObject GetGenericAction()
-    {
-        return instance.m_genericAction;
-    }
     
-    [SerializeField] private GameObject m_genericAction;
     [SerializeField] private GameObject m_timelinePrefab;
     [SerializeField] private Transform m_timelineParent;
     [SerializeField] private float m_timelineScale = 0.5f;
@@ -86,5 +68,4 @@ public class TimelineManager : MonoBehaviour
     {
         m_width = 0.0f;
     }
-
 }

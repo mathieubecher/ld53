@@ -24,32 +24,33 @@ using UnityEngine.InputSystem;
     {
         ActionSpellButton actionSpell = ControlsManager.selectedActionSpellButton;
         if (!actionSpell) return;
+        GameObject actionPrefab = m_data.GetActionData(actionSpell.actionSpell.type).timeLineBarPrefab;
+        if (!actionPrefab) return;
         
         float desiredTimePos;
         if (isMouseInTimeline( out desiredTimePos))
         {
             float timePos;
-            float duration = m_data.GetActionData(actionSpell.actionSpell.type).duration;
-            if(m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
+            if(m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
             {
-                AddAction(actionSpell.actionSpell.type, timePos);
+                m_timeline.AddAction(actionPrefab, timePos);
                 actionSpell.Activate();
             }
         }
     }
 
-    public bool TryDrawAction(ActionType _type, Transform _arrow, RectTransform _overlay)
+    public bool TryDrawAction(ActionSpell _actionSpell, Transform _arrow, RectTransform _overlay)
     {
-        
-        float duration = m_data.GetActionData(_type).duration;
+        GameObject actionPrefab = m_data.GetActionData(_actionSpell.type).timeLineBarPrefab;
+        if (!actionPrefab) return false;
         
         float desiredTimePos;
         if (isMouseInTimeline(out desiredTimePos))
         {
             float timePos;
-            if (m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
+            if (m_timeline.TryAddAction(actionPrefab, desiredTimePos, out timePos))
             {
-                m_timeline.DrawActionOverlay(duration, _overlay, timePos);
+                m_timeline.DrawActionOverlay(actionPrefab, _overlay, timePos);
                 _arrow.position = m_sprite.transform.position;
                 return true;
             }
