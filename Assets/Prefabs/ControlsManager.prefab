@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97960c3a906c19c4898931b290e4e687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentActionType: 0
+  m_idleCursor: {fileID: 2800000, guid: ad2b007604564a74e800337ecd264f74, type: 3}
+  m_hoverCursor: {fileID: 2800000, guid: 96482dd7c0a44aa4a98a0152fbc14e97, type: 3}
+  m_selectCursor: {fileID: 2800000, guid: 95064466260a46548975a52335fbd6b0, type: 3}
 --- !u!114 &3788749933934942877
 MonoBehaviour:
   m_ObjectHideFlags: 0
