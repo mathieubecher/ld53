@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Bank" id="{ff4273c2-5e7c-43bb-9e94-e888bd5f8173}">
+		<property name="name">
+			<value>SNK_Char_Foleys</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6bc4cb7a-51eb-4f0a-8de9-88f0b2d49a31}</destination>
+		</relationship>
+	</object>
+</objects>

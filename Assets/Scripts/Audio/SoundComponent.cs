@@ -27,28 +27,22 @@ public class SoundComponent : MonoBehaviour
 
     private void StartSound(EventReference _ref)
     {
+        EventDescription eventDescription = RuntimeManager.GetEventDescription(_ref);
+
         EventInstance instance = RuntimeManager.CreateInstance(_ref);
         RuntimeManager.AttachInstanceToGameObject(instance, transform);
         instance.start();
-
-        List<EventInstance> curInstances;
-        if (!m_refInstanceDict.TryGetValue(_ref, out curInstances))
-        {
-            curInstances = new List<EventInstance>();
-        }
-        curInstances.Add(instance);
     }
 
     public void StopSound(EventReference _eventToStop)
     {
-        List<EventInstance> _instances;
-        if (m_refInstanceDict.TryGetValue(_eventToStop, out _instances))
+        EventDescription eventDescription = RuntimeManager.GetEventDescription(_eventToStop);
+        EventInstance[] instances;
+        eventDescription.getInstanceList(out instances);
+        foreach (EventInstance eventInstance in instances)
         {
-            foreach (EventInstance eventInstance in _instances)
-            {
-                eventInstance.release();
-                eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            }
+            eventInstance.release();
+            eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
