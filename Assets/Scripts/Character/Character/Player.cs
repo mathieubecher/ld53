@@ -48,20 +48,30 @@ using Random = UnityEngine.Random;
     public override void Taunt(Character _attacker, float _aggro)
     {
         base.Taunt(_attacker, _aggro);
-        var target = m_targets.Find(x => x.target == _attacker);
-        target.aggro += _aggro;
+        var attackerTarget = m_targets.Find(x => x.target == _attacker);
+        attackerTarget.aggro += _aggro;
         SelectTarget();
     }
 
-    public override void Hit(Character _attacker, float _damage, ActionEffect _effect)
+    public override bool TryHit(Character _attacker, float _damage, ActionEffect _effect)
     {
         m_waiting = 0.0f;
-        base.Hit(_attacker, _damage, _effect);
-        if (m_life.isDead) return;
-            
-        var target = m_targets.Find(x => x.target == _attacker);
-        target.aggro += _damage;
-        SelectTarget();
+        bool hitSuccess = base.TryHit(_attacker, _damage, _effect);
+        
+        if (!m_life.isDead)
+        {
+            var attackerTarget = m_targets.Find(x => x.target == _attacker);
+            if (hitSuccess)
+            {
+                attackerTarget.aggro += _damage;
+            }
+            else
+            {
+                attackerTarget.aggro = math.max(attackerTarget.aggro - 0.2f, 1.0f);
+            }
+            SelectTarget();
+        }
+        return hitSuccess;
     }
 
     private void SelectTarget()
@@ -141,12 +151,6 @@ using Random = UnityEngine.Random;
                 return 3.0f;
             default : return 0.0f;
         }
-    }
-
-    protected override void BlockAttack(Character _blocker)
-    {
-        var target = m_targets.Find(x => x.target == _blocker);
-        target.aggro = math.max(target.aggro - 0.2f, 0.0f);
     }
 
     private bool m_alreadyDead = false;
