@@ -45,7 +45,7 @@ public class CharacterAudio : MonoBehaviour
             charEvents.OnDie += OnDie;
             charEvents.OnGuardBreak += OnGuardBreak;
             charEvents.OnHealed += OnHealed;
-            charEvents.OnHit += OnHit;
+            charEvents.OnStun += OnStun;
             charEvents.OnMoveEnd += OnMoveEnd;
             charEvents.OnMoveStart += OnMoveStart;
             charEvents.OnNewActionReceived += OnNewActionReceived;
@@ -71,7 +71,7 @@ public class CharacterAudio : MonoBehaviour
             charEvents.OnDie -= OnDie;
             charEvents.OnGuardBreak -= OnGuardBreak;
             charEvents.OnHealed -= OnHealed;
-            charEvents.OnHit -= OnHit;
+            charEvents.OnStun -= OnStun;
             charEvents.OnMoveEnd -= OnMoveEnd;
             charEvents.OnMoveStart -= OnMoveStart;
             charEvents.OnNewActionReceived -= OnNewActionReceived;
@@ -135,7 +135,7 @@ public class CharacterAudio : MonoBehaviour
         //m_soundComponent.PlayMutlipleSounds(new EventReference[] { onAttackSfx, onAttackVo });
     }
 
-    private void OnHit()
+    private void OnStun()
     {
         m_soundComponent.PlaySound(onHitEvent);
     }
