@@ -243,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522466753895615755}
   - component: {fileID: 300259592577348738}
+  - component: {fileID: 2302649485679905864}
   - component: {fileID: 8134126282710201133}
   m_Layer: 0
   m_Name: NPCDPS 2
@@ -287,6 +288,18 @@ MonoBehaviour:
   m_reachTarget: 0
   m_returnToPosition: 0
   m_displacementTime: 0
+--- !u!114 &2302649485679905864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522466753895615754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4340335baafd0354ca4c7a0d0bdd813a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8134126282710201133
 Animator:
   serializedVersion: 5

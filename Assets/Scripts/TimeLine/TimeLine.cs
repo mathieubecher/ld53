@@ -279,6 +279,7 @@ public class TimeLine : MonoBehaviour
         {
             ClearAllActions();
         }
+        
         m_actions.Add(action);
     }
     

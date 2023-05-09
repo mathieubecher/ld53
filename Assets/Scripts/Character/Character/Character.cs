@@ -44,6 +44,7 @@ using Random = UnityEngine.Random;
     [SerializeField] private bool m_guardBreaked = false;
     [SerializeField] private bool m_buffDamage = false;
     public CharacterSprite sprite => m_sprite;
+    public CharacterSpriteEvent spriteEvent => m_sprite.spriteEvent;
     public bool isDead => m_life.isDead;
     public CharacterData data => m_data;
     public String name => m_data.characterName;
@@ -74,15 +75,22 @@ using Random = UnityEngine.Random;
         GameManager.characterSpriteManager.RemoveCharacterSprite(m_sprite);
     }
 
-    public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
+    public void Heal(float _heal)
+    {
+        spriteEvent.Healed();
+        m_life.Hit(-_heal);
+    }
+    
+    public virtual bool TryHit(Character _attacker, float _damage, ActionEffect _effect)
     {
         float damage = _damage;
         if (m_guardValue > 0.0f)
         {
             m_guardValue -= damage;
-            _attacker.BlockAttack(this);
             if (m_guardValue <= 0.0f) GuardBreak();
-            return;
+            else spriteEvent.BlockSuccess();
+            
+            return false;
         }
 
         if (m_guardBreaked) damage *= 2.0f;
@@ -94,12 +102,16 @@ using Random = UnityEngine.Random;
         {
             AddAction(ActionType.HIT, m_timeline.elapsedTime);
         }
+
+        spriteEvent.DamageReceived();
+        return true;
     }
 
     protected void AddAction(ActionType _type, float _timePos)
     {
         ActionData data = m_data.GetActionData(_type);
         m_timeline.AddAction(data, _timePos);
+        spriteEvent.NewActionReceives(data.actionType);
     }
 
 
@@ -107,12 +119,9 @@ using Random = UnityEngine.Random;
     {
         m_guardBreaked = true;
         m_sprite.Break();
-        if(m_timeline.currentAction) m_timeline.currentAction.Break();
-    }
-
-    protected virtual void BlockAttack(Character _blocker)
-    {
         
+        spriteEvent.GuardBreak();
+        if(m_timeline.currentAction) m_timeline.currentAction.Break();
     }
 
     public virtual void Taunt(Character _attacker, float _aggro) {}
@@ -120,6 +129,7 @@ using Random = UnityEngine.Random;
     public virtual void Dead()
     {
         m_sprite.Dead();
+        spriteEvent.Die();
         
     }
     public virtual void StartFight()
@@ -141,11 +151,15 @@ using Random = UnityEngine.Random;
         m_currentActionPlayed = _action;
         m_currentActionPlayed.PlayAction(this);
         m_guardValue = 0.0f;
+        
+        spriteEvent.ActionStart(_action.type);
         //m_sprite.PlayAction(m_target, _action);
     }
     private void OnEndAction(TimeLineAction _action)
     {
         m_guardValue = 0.0f;
+        spriteEvent.ActionEnd(_action.type);
+        
         if (m_currentActionPlayed && m_currentActionPlayed == _action)
         {
             m_sprite.Idle();
@@ -160,7 +174,11 @@ using Random = UnityEngine.Random;
             case ActionEffect.ATTACK:
                 if (_target != null)
                 {
-                    _target.Hit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect);
+                    if (_target.TryHit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect))
+                    {
+                        spriteEvent.DamageInflicted();
+                    }
+                    else spriteEvent.Blocked();
                 }
                 break;
             case ActionEffect.TAUNT :

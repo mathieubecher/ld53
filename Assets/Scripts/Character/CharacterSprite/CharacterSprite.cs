@@ -12,7 +12,9 @@ public abstract class CharacterSprite : MonoBehaviour
     [SerializeField] private bool m_reachTarget = false;
     [SerializeField] private bool m_returnToPosition = false;
     [SerializeField] private float m_displacementTime = 0.0f;
+    protected CharacterSpriteEvent m_spriteEvent;
 
+    public CharacterSpriteEvent spriteEvent => m_spriteEvent;
     
     public delegate void PlayActionEffectEvent(ActionEffect _effect, Character _target);
     public event PlayActionEffectEvent OnPlayActionEffect;
@@ -21,6 +23,7 @@ public abstract class CharacterSprite : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_animator.speed = GameManager.timelineManager.timelineScale;
+        m_spriteEvent = GetComponent<CharacterSpriteEvent>();
     }
 
     void Update()
@@ -61,7 +64,6 @@ public abstract class CharacterSprite : MonoBehaviour
         {
             case ActionStep.IDLE:
                 m_animator.SetTrigger("Idle");
-                StopSprite();
                 break;
             case ActionStep.START_GUARDING:
                 m_animator.SetTrigger("StartGuard");
@@ -126,19 +128,29 @@ public abstract class CharacterSprite : MonoBehaviour
 
     public void ReachTarget(float _time)
     {
-        //Debug.Log("Reach");
+        if (!m_reachTarget && !m_returnToPosition)
+        {
+            m_spriteEvent.MoveStart();
+        }
         m_returnToPosition = false;
         m_reachTarget = true;
         m_displacementTime = _time;
     }
     public void StopSprite()
     {
+        if (m_reachTarget || m_returnToPosition)
+        {
+            m_spriteEvent.MoveEnd();
+        }
         m_reachTarget = false;
         m_returnToPosition = false;
     }
     public void ReturnToPosition(float _time)
     {
-        //Debug.Log("Return");
+        if (!m_reachTarget && !m_returnToPosition)
+        {
+            m_spriteEvent.MoveStart();
+        }
         m_returnToPosition = true;
         m_reachTarget = false;
         m_displacementTime = _time;
