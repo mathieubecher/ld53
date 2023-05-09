@@ -19,7 +19,7 @@ public abstract class CharacterSprite : MonoBehaviour
     
     public delegate void PlayActionEffectEvent(ActionEffect _effect, Character _target);
     public event PlayActionEffectEvent OnPlayActionEffect;
-    
+
     void Awake()
     {
         m_animator = GetComponent<Animator>();
@@ -62,6 +62,7 @@ public abstract class CharacterSprite : MonoBehaviour
         Debug.Log("Play " + _step + " " + _duration);
         m_currentTarget = m_target;
         ResetTriggers();
+        m_spriteEvent.ActionStep(_step);
         switch (_step)
         {
             case ActionStep.IDLE:
