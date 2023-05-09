@@ -486,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2266136855011423632}
   m_Layer: 0
-  m_Name: Shield
+  m_Name: Weapon 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

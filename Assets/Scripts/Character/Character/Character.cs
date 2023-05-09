@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -44,14 +42,13 @@ using Random = UnityEngine.Random;
 
     [SerializeField] private float m_guardValue = 0.0f;
     [SerializeField] private bool m_guardBreaked = false;
-    [SerializeField] private bool m_isAttacking = false;
     [SerializeField] private bool m_buffDamage = false;
     public CharacterSprite sprite => m_sprite;
     public bool isDead => m_life.isDead;
     public CharacterData data => m_data;
     public String name => m_data.characterName;
-    public bool isAttacking => m_isAttacking;
     public TimeLine timeline => m_timeline;
+    public Character target => m_target;
 
     private Character() { }
     public Character(CharacterData _data, bool _npc)
@@ -61,7 +58,6 @@ using Random = UnityEngine.Random;
         m_timeline.OnEndAction += OnEndAction;
         m_data = _data;
         m_life = new Life(m_data.life);
-        m_isAttacking = false;
         m_guardValue = 0.0f;
         m_buffDamage = false;
         if(_npc) m_sprite = GameManager.characterSpriteManager.RequestNPCSprite(m_data.spritePrefab);
@@ -78,28 +74,9 @@ using Random = UnityEngine.Random;
         GameManager.characterSpriteManager.RemoveCharacterSprite(m_sprite);
     }
 
-    private TimeLineAction m_lastActionPlayed;
-    private void OnAction(TimeLineAction _action)
-    {
-        if (isDead) return;
-        m_lastActionPlayed = _action;
-        m_guardValue = 0.0f;
-        m_sprite.PlayAction(m_target, _action);
-        if (_action.type == ActionType.ATTACK) m_isAttacking = true;
-    }
-    private void OnEndAction(TimeLineAction _action)
-    {
-        if (m_lastActionPlayed && m_lastActionPlayed == _action)
-        {
-            m_sprite.Idle();
-        }
-    }
-
-
     public virtual void Hit(Character _attacker, float _damage, ActionEffect _effect)
     {
         float damage = _damage;
-        m_isAttacking = false;
         if (m_guardValue > 0.0f)
         {
             m_guardValue -= damage;
@@ -121,9 +98,8 @@ using Random = UnityEngine.Random;
 
     protected void AddAction(ActionType _type, float _timePos)
     {
-        CharacterData.ActionData data = m_data.GetActionData(_type);
-        m_timeline.AddAction(data.actionType, GameManager.GetColor(data.actionType), GameManager.GetIcone(data.actionType),
-            data.duration, _timePos);
+        ActionData data = m_data.GetActionData(_type);
+        m_timeline.AddAction(data, _timePos);
     }
 
 
@@ -155,16 +131,36 @@ using Random = UnityEngine.Random;
         m_timeline.StopTimer();
     }
     
+    
+    private TimeLineAction m_currentActionPlayed;
+
+    private void OnAction(TimeLineAction _action)
+    {
+        if (isDead) return;
+     
+        m_currentActionPlayed = _action;
+        m_currentActionPlayed.PlayAction(this);
+        m_guardValue = 0.0f;
+        //m_sprite.PlayAction(m_target, _action);
+    }
+    private void OnEndAction(TimeLineAction _action)
+    {
+        m_guardValue = 0.0f;
+        if (m_currentActionPlayed && m_currentActionPlayed == _action)
+        {
+            m_sprite.Idle();
+        }
+    }
+
     private void PlayActionEffect(ActionEffect _effect, Character _target)
     {
         if (isDead) return;
         switch (_effect)
         {
-            case ActionEffect.MELEE_ATTACK:
+            case ActionEffect.ATTACK:
                 if (_target != null)
                 {
                     _target.Hit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect);
-                    m_isAttacking = false;
                 }
                 break;
             case ActionEffect.TAUNT :
@@ -176,9 +172,8 @@ using Random = UnityEngine.Random;
             case ActionEffect.START_GUARD:
                 m_guardValue = m_data.guardValue;
                 break;
-            case ActionEffect.END_GUARD:
+            case ActionEffect.STOP_GUARD:
                 m_guardValue = 0.0f;
-                m_guardBreaked = false;
                 break;
             case ActionEffect.BUFF:
                 m_buffDamage = true;

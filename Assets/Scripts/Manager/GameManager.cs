@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
         public Color color;
         public Sprite icone;
     }
+    [Serializable] private class CombineType
+    {
+        public ActionType typeA;
+        public ActionType typeB;
+        public ActionType result;
+    }
+    
     #region Singleton
     private static GameManager m_instance;
     private TimelineManager m_timelineManager;
@@ -34,14 +41,18 @@ public class GameManager : MonoBehaviour
         get => instance.m_timelineManager;
     }
     
-    public static CharacterSpriteManager characterSpriteManager
+    public static CharacterSpriteManager characterSpriteManager => instance.m_characterSpriteManager;
+    
+    public static ActionSpellsManager ActionSpellsManager => instance.m_actionSpellsManager;
+    
+    public static bool CanCombine(ActionType _typeA, ActionType _typeB)
     {
-        get => instance.m_characterSpriteManager;
+        return instance.m_combineTypes.Exists(x => x.typeA == _typeA && x.typeB == _typeB);
     }
     
-    public static ActionSpellsManager ActionSpellsManager
+    public static ActionType GetCombinedType(ActionType _typeA, ActionType _typeB)
     {
-        get => instance.m_actionSpellsManager;
+        return instance.m_combineTypes.Find(x => x.typeA == _typeA && x.typeB == _typeB).result;
     }
     #endregion
 
@@ -52,11 +63,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool m_startFightAtStart = false;
     [SerializeField] private Player m_player;
     [SerializeField] private List<NPC> m_npcs;
-    [SerializeField] private List<ActionSpell> m_actionSpells;
     
     [SerializeField] private CharacterData m_playerToSpawn;
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
     [SerializeField] private List<DataType> m_actionTypes;
+    [SerializeField] private List<CombineType> m_combineTypes;
     [SerializeField] private Transform m_arrow;
     [SerializeField] private GameObject m_overlayPrefab;
 
@@ -84,7 +95,7 @@ public class GameManager : MonoBehaviour
         }
         
         m_player = new Player(m_playerToSpawn);
-        m_actionSpellsManager.Init(m_actionSpells, m_timelineManager.width - 5.0f);
+        m_actionSpellsManager.Init(m_timelineManager.width - 5.0f);
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
@@ -122,6 +133,8 @@ public class GameManager : MonoBehaviour
         }
 
         m_player.StartFight();
+
+        m_actionSpellsManager.SartFight();
     }
 
     private void StopFight()
@@ -135,6 +148,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(m_player);
         m_player.StopFight();
+        
+        m_actionSpellsManager.StopFight();
     }
 
     public void Update()

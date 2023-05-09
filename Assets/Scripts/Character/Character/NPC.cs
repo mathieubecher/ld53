@@ -29,24 +29,47 @@ using UnityEngine.InputSystem;
         if (isMouseInTimeline( out desiredTimePos))
         {
             float timePos;
-            float duration = m_data.GetActionData(actionSpell.actionSpell.type).duration;
-            if(m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
+            if (m_timeline.TryCombineAction(desiredTimePos,out TimeLineAction other) 
+                && GameManager.CanCombine(other.type, actionSpell.actionSpell.type) )
             {
-                AddAction(actionSpell.actionSpell.type, timePos);
+                Combine(other, actionSpell.actionSpell.type);
                 actionSpell.Activate();
+            }
+            else
+            {
+                float duration = m_data.GetActionData(actionSpell.actionSpell.type).duration;
+                if(m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
+                {
+                    AddAction(actionSpell.actionSpell.type, timePos);
+                    actionSpell.Activate();
+                }
             }
         }
     }
 
+    private void Combine(TimeLineAction _action, ActionType _otherType)
+    {
+        ActionType type = GameManager.GetCombinedType(_action.type, _otherType);
+        
+        if(m_data.GetActionData(type) != null) _action.SetActionData(m_data.GetActionData(type));
+        _action.SetColor(GameManager.GetColor(type));
+        _action.SetIcone(GameManager.GetIcone(type));
+    }
+
     public bool TryDrawAction(ActionType _type, Transform _arrow, RectTransform _overlay)
     {
-        
         float duration = m_data.GetActionData(_type).duration;
         
         float desiredTimePos;
         if (isMouseInTimeline(out desiredTimePos))
         {
             float timePos;
+            if (m_timeline.TryCombineAction(desiredTimePos,out TimeLineAction other) && GameManager.CanCombine(other.type, _type) )
+            {
+                m_timeline.DrawActionOverlay(other.duration, _overlay, other.timePosition);
+                _arrow.position = m_sprite.transform.position;
+                return true;
+            }
             if (m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
             {
                 m_timeline.DrawActionOverlay(duration, _overlay, timePos);
@@ -74,6 +97,7 @@ using UnityEngine.InputSystem;
     public override void StartFight()
     {
         m_target = GameManager.instance.player;
+        m_sprite.SetTarget(m_target);
         base.StartFight();
     }
 
@@ -81,5 +105,10 @@ using UnityEngine.InputSystem;
     {
         base.Dead();
         OnNPCDead?.Invoke();
+    }
+
+    public ActionType SelectActionSpell()
+    {
+        return m_data.SelectActionSpell();
     }
 }

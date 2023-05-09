@@ -57,15 +57,10 @@ MonoBehaviour:
     m_sprite: {fileID: 0}
     m_guardValue: 0
     m_guardBreaked: 0
-    m_isAttacking: 0
     m_buffDamage: 0
     m_targets: []
     m_line: {fileID: 0}
   m_npcs: []
-  m_actionSpells:
-  - {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
-  - {fileID: 11400000, guid: d30b9c765463e5a40bbf5a7063941c03, type: 2}
-  - {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
   m_playerToSpawn: {fileID: 0}
   m_NPCToSpawn: []
   m_actionTypes:
@@ -81,6 +76,31 @@ MonoBehaviour:
   - type: 4
     color: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
     icone: {fileID: 0}
+  - type: 5
+    color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
+    icone: {fileID: -2024962815, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  - type: 6
+    color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
+    icone: {fileID: 632739248, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  - type: 7
+    color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
+    icone: {fileID: 437392599, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  - type: 8
+    color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
+    icone: {fileID: -1359350132, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  m_combineTypes:
+  - typeA: 1
+    typeB: 1
+    result: 5
+  - typeA: 1
+    typeB: 2
+    result: 8
+  - typeA: 2
+    typeB: 2
+    result: 6
+  - typeA: 2
+    typeB: 1
+    result: 7
   m_arrow: {fileID: 0}
   m_overlayPrefab: {fileID: 5311616371157578801, guid: 5d995dbaf3e99054c9b173f2c0d9eaf8, type: 3}
 --- !u!114 &1935299600206908664
@@ -135,4 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionSpellParent: {fileID: 0}
+  m_buttonHeight: 55
   m_margin: -5
+  m_nbActions: 6
+  m_spellCooldown: 1
+  m_actionSpells:
+  - type: 1
+    spell: {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
+  - type: 2
+    spell: {fileID: 11400000, guid: d30b9c765463e5a40bbf5a7063941c03, type: 2}
+  - type: 3
+    spell: {fileID: 11400000, guid: 7b45de00b81a16a4285627c2f97d3099, type: 2}

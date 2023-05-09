@@ -7,7 +7,6 @@ public abstract class CharacterSprite : MonoBehaviour
     [SerializeField] private LifeBar m_bar;
     private Animator m_animator;
     
-    private TimeLineAction m_action;
     private Character m_target;
     
     [SerializeField] private bool m_reachTarget = false;
@@ -49,29 +48,51 @@ public abstract class CharacterSprite : MonoBehaviour
         m_bar.SetLifeRatio(_lifeRatio);
     }
 
-    public void PlayAction(Character _target, TimeLineAction _action)
+    public void SetTarget(Character _target)
     {
+        m_target = _target;
+    }
+    
+    public void PlayActionStep(ActionStep _step, float _duration)
+    {
+        Debug.Log("Play " + _step + " " + _duration);
         ResetTriggers();
-        switch (_action.type)
+        switch (_step)
         {
-            case ActionType.ATTACK:
+            case ActionStep.IDLE:
+                m_animator.SetTrigger("Idle");
+                StopSprite();
+                break;
+            case ActionStep.START_GUARDING:
+                m_animator.SetTrigger("StartGuard");
+                break;
+            case ActionStep.STOP_GUARDING:
+                m_animator.SetTrigger("StopGuard");
+                break;
+            case ActionStep.ATTACK:
                 m_animator.SetTrigger("Attack");
                 break;
-            case ActionType.GUARD:
-                m_animator.SetTrigger("Guard");
+            case ActionStep.SPECIAL:
+                m_animator.SetTrigger("Special");
                 break;
-            case ActionType.BUFF:
-                m_animator.SetTrigger("Buff");
+            case ActionStep.REACH_TARGET:
+                m_animator.SetTrigger("ReachTarget");
+                ReachTarget(_duration);
                 break;
-            case ActionType.HIT:
+            case ActionStep.RETURN_TO_POSITION:
+                m_animator.SetTrigger("ReturnToPosition");
+                ReturnToPosition(_duration);
+                break;
+            case ActionStep.SPECIAL_ANTICIPATION:
+                m_animator.SetTrigger("SpecialAnticipation");
+                break;
+            case ActionStep.HIT:
                 m_animator.SetTrigger("Hit");
+                ReturnToPosition(0.1f);
                 break;
             default:
                 return;
         }
-        m_returnToPosition = false;
-        m_action = _action;
-        m_target = _target;
     }
     
     public void Break()
@@ -94,17 +115,19 @@ public abstract class CharacterSprite : MonoBehaviour
 
     private void ResetTriggers()
     {
-        m_animator.ResetTrigger("Attack");
-        m_animator.ResetTrigger("Guard");
-        m_animator.ResetTrigger("Buff");
-        m_animator.ResetTrigger("Hit");
         m_animator.ResetTrigger("Idle");
-        m_animator.ResetTrigger("GuardBreak");
+        m_animator.ResetTrigger("Guard");
+        m_animator.ResetTrigger("Attack");
+        m_animator.ResetTrigger("Special");
+        m_animator.ResetTrigger("ReachTarget");
+        m_animator.ResetTrigger("ReturnToPosition");
+        m_animator.ResetTrigger("SpecialAnticipation");
     }
 
     public void ReachTarget(float _time)
     {
         //Debug.Log("Reach");
+        m_returnToPosition = false;
         m_reachTarget = true;
         m_displacementTime = _time;
     }

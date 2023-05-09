@@ -5,18 +5,32 @@ using System;
     NULL,
     ATTACK,
     GUARD,
-    BUFF,
+    SPECIAL,
     HIT,
+    REINFORCED_ATTACK,
+    REINFORCED_GUARD,
+    PARRY,
+    INVULNERABLE_ATTACK
 }
 
 [Serializable] public enum ActionEffect
 {
-    MELEE_ATTACK,
-    MAGIC_ATTACK,
-    DISTANCE_ATTACK,
+    ATTACK,
     TAUNT,
     START_GUARD,
+    STOP_GUARD,
     BUFF,
-    END_GUARD,
-    HEAL
+}
+[Serializable] public enum ActionStep
+{
+    ATTACK,
+    SPECIAL,
+    GUARD,
+    REACH_TARGET,
+    RETURN_TO_POSITION,
+    SPECIAL_ANTICIPATION,
+    IDLE,
+    START_GUARDING,
+    STOP_GUARDING,
+    HIT,
 }
