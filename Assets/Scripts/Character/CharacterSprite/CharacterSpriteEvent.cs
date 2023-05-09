@@ -68,7 +68,7 @@ public class CharacterSpriteEvent : MonoBehaviour
 
     public delegate void NewActionReceivesEvent(ActionType _type);
     public event NewActionReceivesEvent OnNewActionReceived;
-    public void NewActionReceives(ActionType _type)
+    public void NewActionReceived(ActionType _type)
     {
         OnNewActionReceived?.Invoke(_type);
     }
