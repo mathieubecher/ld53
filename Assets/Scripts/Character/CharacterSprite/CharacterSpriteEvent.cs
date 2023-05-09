@@ -88,4 +88,10 @@ public class CharacterSpriteEvent : MonoBehaviour
         OnGuardBreak?.Invoke();
     }
 
+    public delegate void HitEvent();
+    public event HitEvent OnHit;
+    public void Hit()
+    {
+        OnHit?.Invoke();
+    }
 }

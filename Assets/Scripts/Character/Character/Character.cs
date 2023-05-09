@@ -101,6 +101,7 @@ using Random = UnityEngine.Random;
         else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
             AddAction(ActionType.HIT, m_timeline.elapsedTime);
+            spriteEvent.Hit();
         }
 
         spriteEvent.DamageReceived();
