@@ -25,24 +25,53 @@ public class SoundComponent : MonoBehaviour
         }
     }
 
-    private void StartSound(EventReference _ref)
+    public void PlayMultipleSounds(EventReference[] _eventsToPlay)
     {
-        EventDescription eventDescription = RuntimeManager.GetEventDescription(_ref);
-
-        EventInstance instance = RuntimeManager.CreateInstance(_ref);
-        RuntimeManager.AttachInstanceToGameObject(instance, transform);
-        instance.start();
+        foreach (EventReference eventRef in _eventsToPlay)
+        {
+            StartSound(eventRef);
+        }
     }
 
-    public void StopSound(EventReference _eventToStop)
+    public void PlayMutlipleSounds(EventReference[] _eventsToPlay, bool _oneInstanceOnly)
     {
-        EventDescription eventDescription = RuntimeManager.GetEventDescription(_eventToStop);
-        EventInstance[] instances;
-        eventDescription.getInstanceList(out instances);
-        foreach (EventInstance eventInstance in instances)
+        foreach (EventReference eventRef in _eventsToPlay)
         {
-            eventInstance.release();
-            eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            if (_oneInstanceOnly)
+            {
+                StopSound(eventRef);
+            }
+            else
+            {
+                StartSound(eventRef);
+            }
+        }
+    }
+
+    private void StartSound(EventReference _ref)
+    {
+        if (!_ref.IsNull)
+        {
+            EventDescription eventDescription = RuntimeManager.GetEventDescription(_ref);
+
+            EventInstance instance = RuntimeManager.CreateInstance(_ref);
+            RuntimeManager.AttachInstanceToGameObject(instance, transform);
+            instance.start();
+            instance.release();
+        }
+    }
+
+    public void StopSound(EventReference _ref)
+    {
+        if (!_ref.IsNull)
+        {
+            EventDescription eventDescription = RuntimeManager.GetEventDescription(_ref);
+            EventInstance[] instances;
+            eventDescription.getInstanceList(out instances);
+            foreach (EventInstance instance in instances)
+            {
+                instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
     }
 }

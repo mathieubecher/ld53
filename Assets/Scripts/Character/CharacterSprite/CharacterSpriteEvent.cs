@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class CharacterSpriteEvent : MonoBehaviour
 {
+    public delegate void ActionStepEvent(ActionStep _step);
+    public event ActionStepEvent OnActionStep;
+    public void ActionStep(ActionStep _step)
+    {
+        OnActionStep?.Invoke(_step);
+    }
+
     public delegate void ActionStartEvent(ActionType _type);
     public event ActionStartEvent OnActionStart;
     public void ActionStart(ActionType _type)
@@ -60,10 +67,10 @@ public class CharacterSpriteEvent : MonoBehaviour
     }
 
     public delegate void NewActionReceivesEvent(ActionType _type);
-    public event NewActionReceivesEvent OnNewActionReceives;
+    public event NewActionReceivesEvent OnNewActionReceived;
     public void NewActionReceives(ActionType _type)
     {
-        OnNewActionReceives?.Invoke(_type);
+        OnNewActionReceived?.Invoke(_type);
     }
 
     public delegate void HealedEvent();

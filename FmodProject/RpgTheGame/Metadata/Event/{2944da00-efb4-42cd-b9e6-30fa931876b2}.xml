@@ -25,6 +25,9 @@
 		<relationship name="markerTracks">
 			<destination>{767acf82-8454-4614-a30f-4c20c838486c}</destination>
 		</relationship>
+		<relationship name="groupTracks">
+			<destination>{0d7cc2a8-e79b-4944-84ef-c749c864c27b}</destination>
+		</relationship>
 		<relationship name="timeline">
 			<destination>{fc47db7a-c329-4b4d-bbb0-432faa060553}</destination>
 		</relationship>
@@ -61,6 +64,11 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{83609899-8840-4a32-99a1-68e446b6977a}" />
 	<object class="MarkerTrack" id="{767acf82-8454-4614-a30f-4c20c838486c}" />
+	<object class="GroupTrack" id="{0d7cc2a8-e79b-4944-84ef-c749c864c27b}">
+		<relationship name="mixerGroup">
+			<destination>{1c21acc1-05f0-43a2-b33d-a53517807ca0}</destination>
+		</relationship>
+	</object>
 	<object class="Timeline" id="{fc47db7a-c329-4b4d-bbb0-432faa060553}">
 		<property name="isProxyEnabled">
 			<value>false</value>
@@ -93,6 +101,20 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6a6b6249-ab50-4625-8014-bcedc3243865}" />
+	<object class="EventMixerGroup" id="{1c21acc1-05f0-43a2-b33d-a53517807ca0}">
+		<property name="name">
+			<value>Audio 1</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{d6d24121-7969-4eca-94ab-f205ee6981a2}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{109e635b-c24f-4c79-8796-8b222c426ca3}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{f66b1c0e-bcb6-49fc-bedb-a3eab4f31835}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{31e87791-0616-4256-9719-c68562858aef}">
 		<relationship name="effects">
 			<destination>{a3e87a6d-c707-41b8-a88c-16b44a6cb994}</destination>
@@ -109,6 +131,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{05e71b00-fcc5-4bbc-922c-9d9201d63650}" />
+	<object class="MixerBusEffectChain" id="{d6d24121-7969-4eca-94ab-f205ee6981a2}">
+		<relationship name="effects">
+			<destination>{df4b09be-55ef-44c3-a771-5efb19048d67}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{109e635b-c24f-4c79-8796-8b222c426ca3}" />
 	<object class="MixerBusFader" id="{a3e87a6d-c707-41b8-a88c-16b44a6cb994}" />
 	<object class="SpatialiserEffect" id="{fd80f823-5847-41e2-8757-3236afcfaabc}" />
 	<object class="SingleSound" id="{9210235d-138d-48f2-9ae3-4e5a83d3437c}">
@@ -131,4 +159,5 @@
 			<destination>{13565d35-1076-453c-b11c-5bc63de39a4c}</destination>
 		</relationship>
 	</object>
+	<object class="MixerBusFader" id="{df4b09be-55ef-44c3-a771-5efb19048d67}" />
 </objects>
