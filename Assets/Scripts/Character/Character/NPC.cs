@@ -50,10 +50,14 @@ using UnityEngine.InputSystem;
     private void Combine(TimeLineAction _action, ActionType _otherType)
     {
         ActionType type = GameManager.GetCombinedType(_action.type, _otherType);
-        
-        if(m_data.GetActionData(type) != null) _action.SetActionData(m_data.GetActionData(type));
-        _action.SetColor(GameManager.GetColor(type));
-        _action.SetIcone(GameManager.GetIcone(type));
+
+        var data = m_data.GetActionData(type);
+        if (data != null)
+        {
+            _action.SetActionData(data);
+            _action.SetColor(data.color);
+            _action.SetIcone(data.icone);
+        }
     }
 
     public bool TryDrawAction(ActionType _type, Transform _arrow, RectTransform _overlay)

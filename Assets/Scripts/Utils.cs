@@ -7,10 +7,11 @@ using System;
     GUARD,
     SPECIAL,
     HIT,
-    REINFORCED_ATTACK,
-    REINFORCED_GUARD,
-    PARRY,
-    INVULNERABLE_ATTACK
+    ATTACK_ATTACK,
+    GUARD_GUARD,
+    GUARD_ATTACK,
+    ATTACK_GUARD,
+    SPECIAL_SPECIAL,
 }
 
 [Serializable] public enum ActionEffect
@@ -20,6 +21,9 @@ using System;
     START_GUARD,
     STOP_GUARD,
     BUFF,
+    ATTACK_MAGIC,
+    INTERRUPT,
+    
 }
 [Serializable] public enum ActionStep
 {
@@ -33,4 +37,5 @@ using System;
     START_GUARDING,
     STOP_GUARDING,
     HIT,
+    INTERRUPT,
 }

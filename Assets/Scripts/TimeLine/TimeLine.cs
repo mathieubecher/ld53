@@ -3,6 +3,46 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public class Aura
+{
+    public float timePosition = 0.0f;
+    public float duration = 0.0f;
+    public AuraEffect effect;
+
+    public class AuraEffect
+    {
+        public float attackMultiplier = 1.0f;
+        public float defenceMultiplier = 1.0f;
+        public bool invulnerability = false;
+        public AuraEffect(){}
+
+        public AuraEffect(float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
+        {
+            attackMultiplier = _attackMultiplier;
+            defenceMultiplier = _defenceMultiplier;
+            invulnerability = _invulnerability;
+        }
+        
+        public static AuraEffect operator +(AuraEffect a, AuraEffect b)
+        {
+            AuraEffect result = new AuraEffect();
+            result.attackMultiplier = a.attackMultiplier * b.attackMultiplier;
+            result.defenceMultiplier = a.defenceMultiplier * b.defenceMultiplier;
+            result.invulnerability = a.invulnerability || b.invulnerability;
+            return result;
+        }
+    }
+    public Aura(){}
+    public Aura(float _timePosition, float _duration, float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
+    {
+        timePosition = _timePosition;
+        duration = _duration;
+        effect = new AuraEffect(_attackMultiplier, _defenceMultiplier, _invulnerability);
+    }
+
+}
+
 public class TimeLine : MonoBehaviour
 {
     const float EPSILON = 0.00001f;
@@ -25,6 +65,7 @@ public class TimeLine : MonoBehaviour
     private GameTimer m_timer;
     private List<TimeLineBar> m_bars;
     private List<TimeLineAction> m_actions;
+    private List<Aura> m_auras;
     private int m_cellsPerUnit;
     
     public RectTransform parent => m_parent;
@@ -56,6 +97,7 @@ public class TimeLine : MonoBehaviour
         m_timer.SetTimeScale(m_timeScale);
 
         m_actions = new List<TimeLineAction>();
+        m_auras = new List<Aura>();
         InstantiateBar();
     }
     private void InstantiateBar()
@@ -250,7 +292,7 @@ public class TimeLine : MonoBehaviour
         return true;
     }
 
-    private float GetCellForTimePos(float _timePos)
+    public float GetCellForTimePos(float _timePos)
     {
         float floorPos = math.floor(_timePos);
         float posInUnit = _timePos - floorPos;
@@ -271,9 +313,9 @@ public class TimeLine : MonoBehaviour
         action.SetActionData(_data);
         action.SetTimePosition(_timePos);
         action.SetDuration(_data.duration);
-        action.SetColor(GameManager.GetColor(_data.actionType));
+        action.SetColor(_data.color);
         action.SetSize(m_barSize * _data.duration);
-        action.SetIcone(GameManager.GetIcone(_data.actionType));
+        action.SetIcone(_data.icone);
         
         if (action.type == ActionType.HIT)
         {
@@ -292,6 +334,38 @@ public class TimeLine : MonoBehaviour
         m_actions = new List<TimeLineAction>();
     }
 
+    
+    public void AddAura(Aura _aura)
+    {
+        m_auras.Add(_aura);
+    }
+
+    public Aura.AuraEffect GetCurrentAura()
+    {
+        Aura.AuraEffect currentAuraEffect = new Aura.AuraEffect();
+        foreach (var aura in m_auras)
+        {
+            if (aura.timePosition >= elapsedTime && aura.timePosition + aura.duration <= elapsedTime)
+            {
+                currentAuraEffect += aura.effect;
+            }
+        }
+
+        return currentAuraEffect;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public void StartTimer()
     {

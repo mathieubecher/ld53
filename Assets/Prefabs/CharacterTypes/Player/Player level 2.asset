@@ -12,45 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: Player level 2
   m_EditorClassIdentifier: 
-  m_className: Player
   m_characterName: Rox0r420
   m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: d48b28be812d62f45aaf2f4deaf3edd1, type: 3}
+  m_actionSets: {fileID: 11400000, guid: a0dcf3b9a35b47d4fb283eb823c5fb9d, type: 2}
   m_life: 20
   m_strength: 2
   m_magica: 0
   m_magicaResistance: 0
   m_hitStunProba: 0
   m_guardValue: 1
-  m_actionDatas:
-  - actionType: 1
-    duration: 1.5
-    actions:
-    - steps: 3
-      numberOfCells: 4
-    - steps: 0
-      numberOfCells: 1
-    - steps: 4
-      numberOfCells: 1
-  - actionType: 2
-    duration: 2
-    actions:
-    - steps: 7
-      numberOfCells: 1
-    - steps: 2
-      numberOfCells: 6
-    - steps: 8
-      numberOfCells: 1
-  - actionType: 3
-    duration: 0.5
-    actions:
-    - steps: 5
-      numberOfCells: 1
-    - steps: 1
-      numberOfCells: 1
   m_randomActions: []
   m_hitAction:
     actionType: 4
+    description: 
+    color: {r: 0.43137255, g: 0.43137255, b: 0.43137255, a: 1}
+    icone: {fileID: 0}
     duration: 3
     actions:
     - steps: 9

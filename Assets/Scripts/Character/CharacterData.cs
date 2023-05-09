@@ -9,12 +9,6 @@ using Random = UnityEngine.Random;
     public ActionStep steps;
     public int numberOfCells;
 }
-[Serializable] public class ActionData
-{
-    public ActionType actionType;
-    public float duration;
-    public List<ActionStepData> actions;
-}
 [Serializable] public struct RandomAction
 {
     public ActionType actionType;
@@ -25,10 +19,11 @@ using Random = UnityEngine.Random;
 public class CharacterData : ScriptableObject
 {
 
-    [SerializeField] private string m_className = "Bandit";
     [SerializeField] private string m_characterName;
     [SerializeField] private Sprite m_timeLineHeader;
     [SerializeField] private GameObject m_spritePrefab;
+    
+    [SerializeField] private ActionSets m_actionSets;
     [SerializeField] private float  m_life = 10.0f;
     [SerializeField] private float  m_strength = 1.0f;
     [SerializeField] private float  m_magica = 0.0f;
@@ -36,7 +31,6 @@ public class CharacterData : ScriptableObject
     [SerializeField] private float  m_hitStunProba = 0.0f;
     [SerializeField] private float m_guardValue = 1.0f;
     
-    [SerializeField] private List<ActionData> m_actionDatas;
     [SerializeField] private List<RandomAction> m_randomActions;
     [SerializeField] private ActionData m_hitAction;
 
@@ -49,13 +43,14 @@ public class CharacterData : ScriptableObject
     public float magicaResistance => m_magicaResistance;
     public float hitStunProba => m_hitStunProba;
     
-    public List<ActionData> actionDatas => m_actionDatas;
+    public ActionSets actionSets => m_actionSets;
+    public List<ActionData> actionDatas => m_actionSets.actions;
     public string characterName => m_characterName;
 
     public ActionData GetActionData(ActionType actionType)
     {
         if (actionType == ActionType.HIT) return m_hitAction;
-        return m_actionDatas.Find(x => x.actionType == actionType);
+        return actionDatas.Find(x => x.actionType == actionType);
     }
 
     public ActionType SelectActionSpell()

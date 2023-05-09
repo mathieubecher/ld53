@@ -53,10 +53,10 @@ using Random = UnityEngine.Random;
         SelectTarget();
     }
 
-    public override bool TryHit(Character _attacker, float _damage, ActionEffect _effect)
+    public override bool TryHit(Character _attacker, float _damage)
     {
         m_waiting = 0.0f;
-        bool hitSuccess = base.TryHit(_attacker, _damage, _effect);
+        bool hitSuccess = base.TryHit(_attacker, _damage);
         
         if (!m_life.isDead)
         {

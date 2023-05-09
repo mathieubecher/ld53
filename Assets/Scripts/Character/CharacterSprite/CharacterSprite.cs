@@ -8,6 +8,7 @@ public abstract class CharacterSprite : MonoBehaviour
     private Animator m_animator;
     
     private Character m_target;
+    private Character m_currentTarget;
     
     [SerializeField] private bool m_reachTarget = false;
     [SerializeField] private bool m_returnToPosition = false;
@@ -59,6 +60,7 @@ public abstract class CharacterSprite : MonoBehaviour
     public void PlayActionStep(ActionStep _step, float _duration)
     {
         Debug.Log("Play " + _step + " " + _duration);
+        m_currentTarget = m_target;
         ResetTriggers();
         switch (_step)
         {
@@ -88,6 +90,9 @@ public abstract class CharacterSprite : MonoBehaviour
             case ActionStep.SPECIAL_ANTICIPATION:
                 m_animator.SetTrigger("SpecialAnticipation");
                 break;
+            case ActionStep.INTERRUPT:
+                m_animator.SetTrigger("Interrupt");
+                break;
             case ActionStep.HIT:
                 m_animator.SetTrigger("Hit");
                 ReturnToPosition(0.1f);
@@ -103,6 +108,12 @@ public abstract class CharacterSprite : MonoBehaviour
         m_animator.SetTrigger("GuardBreak");
     }
 
+    public void CounterAttack(Character _target)
+    {
+        ResetTriggers();
+        m_animator.SetTrigger("CounterAttack");
+        m_currentTarget = _target;
+    }
     public void Idle()
     {
         ResetTriggers();
@@ -124,6 +135,8 @@ public abstract class CharacterSprite : MonoBehaviour
         m_animator.ResetTrigger("ReachTarget");
         m_animator.ResetTrigger("ReturnToPosition");
         m_animator.ResetTrigger("SpecialAnticipation");
+        m_animator.ResetTrigger("CounterAttack");
+        m_animator.ResetTrigger("Interrupt");
     }
 
     public void ReachTarget(float _time)
@@ -158,7 +171,7 @@ public abstract class CharacterSprite : MonoBehaviour
 
     public void PlayActionEffect(ActionEffect _effect)
     {
-        OnPlayActionEffect?.Invoke(_effect, m_target);
+        OnPlayActionEffect?.Invoke(_effect, m_currentTarget);
     }
 
 }

@@ -57,37 +57,11 @@ MonoBehaviour:
     m_sprite: {fileID: 0}
     m_guardValue: 0
     m_guardBreaked: 0
-    m_buffDamage: 0
     m_targets: []
     m_line: {fileID: 0}
   m_npcs: []
   m_playerToSpawn: {fileID: 0}
   m_NPCToSpawn: []
-  m_actionTypes:
-  - type: 1
-    color: {r: 0.7647059, g: 0.21960784, b: 0.21960784, a: 1}
-    icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 2
-    color: {r: 1, g: 0.77254903, b: 0.34509805, a: 1}
-    icone: {fileID: -535750769, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 3
-    color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
-    icone: {fileID: -256505060, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 4
-    color: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
-    icone: {fileID: 0}
-  - type: 5
-    color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
-    icone: {fileID: -2024962815, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 6
-    color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
-    icone: {fileID: 632739248, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 7
-    color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
-    icone: {fileID: 437392599, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  - type: 8
-    color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
-    icone: {fileID: -1359350132, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   m_combineTypes:
   - typeA: 1
     typeB: 1
@@ -101,6 +75,9 @@ MonoBehaviour:
   - typeA: 2
     typeB: 1
     result: 7
+  - typeA: 3
+    typeB: 3
+    result: 9
   m_arrow: {fileID: 0}
   m_overlayPrefab: {fileID: 5311616371157578801, guid: 5d995dbaf3e99054c9b173f2c0d9eaf8, type: 3}
 --- !u!114 &1935299600206908664
@@ -155,8 +132,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionSpellParent: {fileID: 0}
+  m_garbage: {fileID: 0}
+  m_cooldownText: {fileID: 0}
   m_buttonHeight: 55
   m_margin: -5
+  m_animSpeed: 2
   m_nbActions: 6
   m_spellCooldown: 1
   m_actionSpells:

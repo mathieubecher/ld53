@@ -25,6 +25,7 @@ public class TimeLineAction : MonoBehaviour
 
     public void SetActionData(ActionData _data)
     {
+        if (_data.actions.Count == 0) return;
         m_data = _data;
         
     }
@@ -71,7 +72,7 @@ public class TimeLineAction : MonoBehaviour
     {
         m_character = _character;
         m_currentStep = 0;
-        m_character.sprite.PlayActionStep(m_data.actions[m_currentStep].steps, m_data.actions[m_currentStep].numberOfCells / (float)m_parent.cellsPerUnit);
+        m_character.PlayActionStep(m_data.actions[m_currentStep].steps, m_data.actions[m_currentStep].numberOfCells / (float)m_parent.cellsPerUnit);
     }
 
     private void Update()
@@ -90,17 +91,17 @@ public class TimeLineAction : MonoBehaviour
                 if (m_currentStep < m_data.actions.Count)
                 {
                     var nextStep = m_data.actions[m_currentStep];
-                    m_character.sprite.PlayActionStep(nextStep.steps, nextStep.numberOfCells / (float)m_parent.cellsPerUnit);
+                    m_character.PlayActionStep(nextStep.steps, nextStep.numberOfCells / (float)m_parent.cellsPerUnit);
                 }
             }
         }
         
     }
 
-    public void Break()
+    public void Break(Color _color)
     {
         if (type != ActionType.GUARD) return;
-        SetColor(GameManager.GetColor(ActionType.HIT));
+        SetColor(_color);
     }
 
 }

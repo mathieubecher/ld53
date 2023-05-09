@@ -30,9 +30,7 @@ using Random = UnityEngine.Random;
             m_currentLife -= _damage;
             m_currentLife = math.clamp(m_currentLife, 0.0f, m_maxLife);
         }
-
     }
-    
     [SerializeField] protected Life m_life;
     [SerializeField] protected Character m_target;
     [Header("Serialized Data")]
@@ -42,7 +40,6 @@ using Random = UnityEngine.Random;
 
     [SerializeField] private float m_guardValue = 0.0f;
     [SerializeField] private bool m_guardBreaked = false;
-    [SerializeField] private bool m_buffDamage = false;
     public CharacterSprite sprite => m_sprite;
     public CharacterSpriteEvent spriteEvent => m_sprite.spriteEvent;
     public bool isDead => m_life.isDead;
@@ -60,7 +57,6 @@ using Random = UnityEngine.Random;
         m_data = _data;
         m_life = new Life(m_data.life);
         m_guardValue = 0.0f;
-        m_buffDamage = false;
         if(_npc) m_sprite = GameManager.characterSpriteManager.RequestNPCSprite(m_data.spritePrefab);
         else m_sprite = GameManager.characterSpriteManager.RequestPlayerSprite(m_data.spritePrefab);
         m_sprite.OnPlayActionEffect += PlayActionEffect;
@@ -81,14 +77,25 @@ using Random = UnityEngine.Random;
         m_life.Hit(-_heal);
     }
     
-    public virtual bool TryHit(Character _attacker, float _damage, ActionEffect _effect)
+    public virtual bool TryHit(Character _attacker, float _damage)
     {
         float damage = _damage;
         if (m_guardValue > 0.0f)
         {
             m_guardValue -= damage;
-            if (m_guardValue <= 0.0f) GuardBreak();
-            else spriteEvent.BlockSuccess();
+
+            if (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_ATTACK)
+            {
+                m_sprite.CounterAttack(_attacker);
+                if (m_guardValue <= 0.0f) GuardBreak(false);
+                else spriteEvent.BlockSuccess();
+            }
+            else
+            {
+                if (m_guardValue <= 0.0f) GuardBreak(true);
+                else spriteEvent.BlockSuccess();
+            }
+            
             
             return false;
         }
@@ -98,11 +105,12 @@ using Random = UnityEngine.Random;
         m_sprite.Hit(m_life.lifeRatio, damage);
         
         if (m_life.isDead) Dead();
-        else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
+        
+        /*else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
             AddAction(ActionType.HIT, m_timeline.elapsedTime);
             spriteEvent.Stun();
-        }
+        }*/
 
         spriteEvent.DamageReceived();
         return true;
@@ -110,19 +118,20 @@ using Random = UnityEngine.Random;
 
     protected void AddAction(ActionType _type, float _timePos)
     {
+        float timePos = timeline.GetCellForTimePos(_timePos + 1.0f/timeline.cellsPerUnit);
         ActionData data = m_data.GetActionData(_type);
-        m_timeline.AddAction(data, _timePos);
+        m_timeline.AddAction(data, timePos);
         spriteEvent.NewActionReceives(data.actionType);
     }
 
 
-    private void GuardBreak()
+    private void GuardBreak(bool _playAnim)
     {
         m_guardBreaked = true;
-        m_sprite.Break();
+        if(_playAnim) m_sprite.Break();
         
         spriteEvent.GuardBreak();
-        if(m_timeline.currentAction) m_timeline.currentAction.Break();
+        if(m_timeline.currentAction) m_timeline.currentAction.Break(m_data.GetActionData(ActionType.HIT).color);
     }
 
     public virtual void Taunt(Character _attacker, float _aggro) {}
@@ -132,6 +141,12 @@ using Random = UnityEngine.Random;
         m_sprite.Dead();
         spriteEvent.Die();
         
+    }
+
+    public void Staggered()
+    {
+        AddAction(ActionType.HIT, m_timeline.elapsedTime);
+        spriteEvent.Stun();
     }
     public virtual void StartFight()
     {
@@ -163,6 +178,7 @@ using Random = UnityEngine.Random;
         
         if (m_currentActionPlayed && m_currentActionPlayed == _action)
         {
+            m_currentActionPlayed = null;
             m_sprite.Idle();
         }
     }
@@ -170,16 +186,30 @@ using Random = UnityEngine.Random;
     private void PlayActionEffect(ActionEffect _effect, Character _target)
     {
         if (isDead) return;
+
+        var aura = m_timeline.GetCurrentAura();
         switch (_effect)
         {
             case ActionEffect.ATTACK:
-                if (_target != null)
+                if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    if (_target.TryHit(this, m_data.strength + (m_buffDamage ? 1.0f : 0.0f), _effect))
+                    float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
+                    {
+                        m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration,
+                            1.0f, 1.0f, true));
+                    }
+                    if (_target.TryHit(this, strength))
                     {
                         spriteEvent.DamageInflicted();
                     }
                     else spriteEvent.Blocked();
+                }
+                break;
+            case ActionEffect.ATTACK_MAGIC:
+                if (_target != null)
+                {
+                    
                 }
                 break;
             case ActionEffect.TAUNT :
@@ -189,14 +219,24 @@ using Random = UnityEngine.Random;
                 }
                 break;
             case ActionEffect.START_GUARD:
-                m_guardValue = m_data.guardValue;
+                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
                 break;
             case ActionEffect.STOP_GUARD:
                 m_guardValue = 0.0f;
                 break;
+            case ActionEffect.INTERRUPT:
+                _target.Staggered();
+                break;
             case ActionEffect.BUFF:
-                m_buffDamage = true;
+                
+                m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration,
+                    1.0f, 1.0f, true));
                 break;
         }
+    }
+
+    public void PlayActionStep(ActionStep _step, float _duration)
+    {
+        m_sprite.PlayActionStep(_step, _duration);
     }
 }

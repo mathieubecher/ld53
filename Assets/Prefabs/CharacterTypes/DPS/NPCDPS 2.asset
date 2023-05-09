@@ -12,44 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: NPCDPS 2
   m_EditorClassIdentifier: 
-  m_className: Bandit DPS
   m_characterName: "Jos\xE9"
   m_timeLineHeader: {fileID: -1773593991, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 4522466753895615754, guid: bda11c846ec0d854893454aacfed2b70, type: 3}
+  m_actionSets: {fileID: 11400000, guid: 9a750b82a7b8a304d9efd1f322788058, type: 2}
   m_life: 3
   m_strength: 1
   m_magica: 0
   m_magicaResistance: 0
   m_hitStunProba: 1
   m_guardValue: 1
-  m_actionDatas:
-  - actionType: 1
-    duration: 1
-    actions:
-    - steps: 3
-      numberOfCells: 2
-    - steps: 0
-      numberOfCells: 1
-    - steps: 4
-      numberOfCells: 1
-  - actionType: 2
-    duration: 2
-    actions:
-    - steps: 7
-      numberOfCells: 1
-    - steps: 2
-      numberOfCells: 6
-    - steps: 8
-      numberOfCells: 1
-  - actionType: 3
-    duration: 1
-    actions:
-    - steps: 5
-      numberOfCells: 2
-    - steps: 1
-      numberOfCells: 1
-    - steps: 6
-      numberOfCells: 1
   m_randomActions:
   - actionType: 1
     weight: 0.5
@@ -59,6 +31,9 @@ MonoBehaviour:
     weight: 0.25
   m_hitAction:
     actionType: 4
+    description: 
+    color: {r: 0.43137255, g: 0.43137255, b: 0.43137255, a: 1}
+    icone: {fileID: 0}
     duration: 0.5
     actions:
     - steps: 9

@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private CharacterData m_playerToSpawn;
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
-    [SerializeField] private List<DataType> m_actionTypes;
     [SerializeField] private List<CombineType> m_combineTypes;
     [SerializeField] private Transform m_arrow;
     [SerializeField] private GameObject m_overlayPrefab;
@@ -205,16 +204,4 @@ public class GameManager : MonoBehaviour
         m_arrow.gameObject.SetActive(false);
     }
 
-    public static Color GetColor(ActionType _type)
-    {
-        var type = instance.m_actionTypes.Find(x => x.type == _type);
-        return type.color;
-    }
-
-    public static Sprite GetIcone(ActionType _type)
-    {
-        var type = instance.m_actionTypes.Find(x => x.type == _type);
-        return type.icone;
-        
-    }
 }
