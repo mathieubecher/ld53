@@ -5,7 +5,7 @@
 			<value>Char_Vo_Action_Hurt</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{acb49f1a-dab3-402f-9f4b-6ea3e7578352}</destination>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{0fefa82f-f5b9-4d9d-a68c-244923c99a5f}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{972c7c4e-d703-44e9-8a80-c37fd7817292}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{b2a70ab5-ad2a-4f09-afe9-cdd49568acf6}">
@@ -93,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{31e87791-0616-4256-9719-c68562858aef}">
 		<relationship name="effects">
 			<destination>{a3e87a6d-c707-41b8-a88c-16b44a6cb994}</destination>
+			<destination>{fd80f823-5847-41e2-8757-3236afcfaabc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9a6117e5-44a5-4c9d-a88c-8847496dd148}" />
@@ -106,6 +110,7 @@
 	</object>
 	<object class="MixerBusFader" id="{05e71b00-fcc5-4bbc-922c-9d9201d63650}" />
 	<object class="MixerBusFader" id="{a3e87a6d-c707-41b8-a88c-16b44a6cb994}" />
+	<object class="SpatialiserEffect" id="{fd80f823-5847-41e2-8757-3236afcfaabc}" />
 	<object class="SingleSound" id="{9210235d-138d-48f2-9ae3-4e5a83d3437c}">
 		<relationship name="audioFile">
 			<destination>{f4971b83-fbb5-4917-aca9-5f88aa9f8b21}</destination>

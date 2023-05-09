@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{56deb9a3-e109-4f59-9e06-b574143f8a5e}">
 		<property name="assetPath">
-			<value>VO_HumanFight_13.wav</value>
+			<value>Placeholders/VO/VO_HumanFight_13.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
