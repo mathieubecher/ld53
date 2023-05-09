@@ -30,8 +30,11 @@ public class ActionSpellButton : MonoBehaviour
         m_actionSpellNumber.text = _number.ToString();
     }
 
-    public delegate void ActionSpellClickEvent(ActionType _type);
-    public static event ActionSpellClickEvent OnActionSpellClick;
+    public delegate void ActionSpellEvent();
+    private static event ActionSpellEvent OnSelected;
+    private static event ActionSpellEvent OnDropped;
+    private static event ActionSpellEvent OnActivated;
+    
     
     private delegate void ResetByOtherClickEvent(ActionSpellButton _other);
     private static event ResetByOtherClickEvent OnResetByOtherClick;
@@ -47,8 +50,8 @@ public class ActionSpellButton : MonoBehaviour
         m_originalPos = m_button.transform.localPosition;
         OnResetByOtherClick += OtherSelected;
         ControlsManager.OnClick += OnClick;
-        ControlsManager.OnRelease += UnSelect;
-        ControlsManager.OnRightClick += UnSelect;
+        ControlsManager.OnRelease += Dropped;
+        ControlsManager.OnRightClick += Dropped;
     }
 
     private void OnDisable()
@@ -56,8 +59,8 @@ public class ActionSpellButton : MonoBehaviour
         m_button.transform.localPosition = m_originalPos;
         OnResetByOtherClick -= OtherSelected;
         ControlsManager.OnClick -= OnClick;
-        ControlsManager.OnRelease -= UnSelect;
-        ControlsManager.OnRightClick -= UnSelect;
+        ControlsManager.OnRelease -= Dropped;
+        ControlsManager.OnRightClick -= Dropped;
     }
 
     private void FixedUpdate()
@@ -96,21 +99,23 @@ public class ActionSpellButton : MonoBehaviour
         
         m_button.SetTrigger("Select");
         m_priority = 1000;
+        
+        OnSelected?.Invoke();
     }
 
     public void Activate()
     {
         Destroy(gameObject);
-        //m_cooldown += m_actionSpell.cooldown;
-        //m_button.SetTrigger("Activate");
-        //m_priority = 0;
+        
+        OnActivated?.Invoke();
     }
 
-    public void UnSelect()
+    public void Dropped()
     {
         m_isSelected = false;
         m_button.SetTrigger("UnSelect");
         m_priority = 0;
+        OnDropped?.Invoke();
     }
     
     public void Remove()
@@ -122,7 +127,7 @@ public class ActionSpellButton : MonoBehaviour
 
     private void OtherSelected(ActionSpellButton _other)
     {
-        if(m_isSelected && this != _other) UnSelect();
+        if(m_isSelected && this != _other) Dropped();
     }
     
     public void Reset()
