@@ -141,11 +141,9 @@ public class GameManager : MonoBehaviour
         m_startFight = false;
         foreach (NPC npc in m_npcs)
         {
-            Debug.Log(npc);
             npc.StopFight();
         }
 
-        Debug.Log(m_player);
         m_player.StopFight();
         
         m_actionSpellsManager.StopFight();

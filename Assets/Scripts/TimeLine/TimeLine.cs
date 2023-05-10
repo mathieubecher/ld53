@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Aura
+[Serializable] public class Aura
 {
     public float timePosition = 0.0f;
     public float duration = 0.0f;
     public AuraEffect effect;
 
-    public class AuraEffect
+    [Serializable] public class AuraEffect
     {
         public float attackMultiplier = 1.0f;
         public float defenceMultiplier = 1.0f;
@@ -65,7 +66,7 @@ public class TimeLine : MonoBehaviour
     private GameTimer m_timer;
     private List<TimeLineBar> m_bars;
     private List<TimeLineAction> m_actions;
-    private List<Aura> m_auras;
+    [SerializeField] private List<Aura> m_auras;
     private int m_cellsPerUnit;
     
     public RectTransform parent => m_parent;
@@ -345,7 +346,7 @@ public class TimeLine : MonoBehaviour
         Aura.AuraEffect currentAuraEffect = new Aura.AuraEffect();
         foreach (var aura in m_auras)
         {
-            if (aura.timePosition >= elapsedTime && aura.timePosition + aura.duration <= elapsedTime)
+            if (elapsedTime >= aura.timePosition && aura.timePosition + aura.duration >= elapsedTime)
             {
                 currentAuraEffect += aura.effect;
             }
@@ -353,16 +354,6 @@ public class TimeLine : MonoBehaviour
 
         return currentAuraEffect;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

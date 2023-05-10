@@ -9,6 +9,7 @@ public class TimeLineAction : MonoBehaviour
     [SerializeField] private Character m_character;
     [SerializeField] private Image m_colorImage;
     [SerializeField] private Image m_iconeImage;
+    private ActionType m_actionType;
     private float m_timePosition;
     private float m_duration;
     private TimeLine m_parent;
@@ -17,7 +18,7 @@ public class TimeLineAction : MonoBehaviour
 
     private Sprite m_icone;
     private Color m_color;
-    public ActionType type => m_data.actionType;
+    public ActionType type => m_actionType;
     public float timePosition => m_timePosition;
     public float duration => m_duration;
 
@@ -25,6 +26,7 @@ public class TimeLineAction : MonoBehaviour
 
     public void SetActionData(ActionData _data)
     {
+        m_actionType = _data.actionType;
         if (_data.actions.Count == 0) return;
         m_data = _data;
         
@@ -100,8 +102,8 @@ public class TimeLineAction : MonoBehaviour
 
     public void Break(Color _color)
     {
-        if (type != ActionType.GUARD) return;
-        SetColor(_color);
+        if (type == ActionType.GUARD || type == ActionType.GUARD_GUARD || type == ActionType.GUARD_ATTACK) 
+            SetColor(_color);
     }
 
 }

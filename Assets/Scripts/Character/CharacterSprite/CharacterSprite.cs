@@ -59,7 +59,7 @@ public abstract class CharacterSprite : MonoBehaviour
     
     public void PlayActionStep(ActionStep _step, float _duration)
     {
-        Debug.Log("Play " + _step + " " + _duration);
+        //Debug.Log("Play " + _step + " " + _duration);
         m_currentTarget = m_target;
         ResetTriggers();
         m_spriteEvent.ActionStep(_step);
@@ -113,6 +113,14 @@ public abstract class CharacterSprite : MonoBehaviour
     {
         ResetTriggers();
         m_animator.SetTrigger("CounterAttack");
+        m_currentTarget = _target;
+    }
+    
+    public void CounterAttackThenBreak(Character _target)
+    {
+        ResetTriggers();
+        m_animator.SetTrigger("CounterAttack");
+        m_animator.SetTrigger("GuardBreak");
         m_currentTarget = _target;
     }
     public void Idle()

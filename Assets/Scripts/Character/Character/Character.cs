@@ -86,13 +86,12 @@ using Random = UnityEngine.Random;
 
             if (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_ATTACK)
             {
-                m_sprite.CounterAttack(_attacker);
-                if (m_guardValue <= 0.0f) GuardBreak(false);
-                else spriteEvent.BlockSuccess();
+                if (m_guardValue <= 0.0f) CounterAttackThenBreak(_attacker);
+                else CounterAttack(_attacker);
             }
             else
             {
-                if (m_guardValue <= 0.0f) GuardBreak(true);
+                if (m_guardValue <= 0.0f) GuardBreak();
                 else spriteEvent.BlockSuccess();
             }
             
@@ -105,7 +104,6 @@ using Random = UnityEngine.Random;
         m_sprite.Hit(m_life.lifeRatio, damage);
         
         if (m_life.isDead) Dead();
-        
         /*else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
         {
             AddAction(ActionType.HIT, m_timeline.elapsedTime);
@@ -116,19 +114,24 @@ using Random = UnityEngine.Random;
         return true;
     }
 
-    protected void AddAction(ActionType _type, float _timePos)
+    private void CounterAttack(Character _attacker)
     {
-        float timePos = timeline.GetCellForTimePos(_timePos + 1.0f/timeline.cellsPerUnit);
-        ActionData data = m_data.GetActionData(_type);
-        m_timeline.AddAction(data, timePos);
-        spriteEvent.NewActionReceived(data.actionType);
+        m_sprite.CounterAttack(_attacker);
+        spriteEvent.BlockSuccess();
     }
 
-
-    private void GuardBreak(bool _playAnim)
+    private void CounterAttackThenBreak(Character _attacker)
     {
         m_guardBreaked = true;
-        if(_playAnim) m_sprite.Break();
+        m_sprite.CounterAttackThenBreak(_attacker);
+        spriteEvent.GuardBreak();
+        if (m_timeline.currentAction) m_timeline.currentAction.Break(m_data.GetActionData(ActionType.HIT).color);
+    }
+
+    private void GuardBreak()
+    {
+        m_guardBreaked = true;
+        m_sprite.Break();
         
         spriteEvent.GuardBreak();
         if(m_timeline.currentAction) m_timeline.currentAction.Break(m_data.GetActionData(ActionType.HIT).color);
@@ -136,18 +139,28 @@ using Random = UnityEngine.Random;
 
     public virtual void Taunt(Character _attacker, float _aggro) {}
 
+    public void Staggered()
+    {
+        Debug.Log("Stagger.");
+        AddAction(ActionType.HIT, m_timeline.elapsedTime);
+        spriteEvent.Stun();
+    }
+
+    
+    protected void AddAction(ActionType _type, float _timePos)
+    {
+        float timePos = timeline.GetCellForTimePos(_timePos + 1.0f/timeline.cellsPerUnit);
+        ActionData data = m_data.GetActionData(_type);
+        m_timeline.AddAction(data, timePos);
+        spriteEvent.NewActionReceived(data.actionType);
+    }
+    
     public virtual void Dead()
     {
         m_sprite.Dead();
         spriteEvent.Die();
-        
     }
 
-    public void Staggered()
-    {
-        AddAction(ActionType.HIT, m_timeline.elapsedTime);
-        spriteEvent.Stun();
-    }
     public virtual void StartFight()
     {
         m_timeline.StartTimer();
@@ -156,8 +169,7 @@ using Random = UnityEngine.Random;
     {
         m_timeline.StopTimer();
     }
-    
-    
+
     private TimeLineAction m_currentActionPlayed;
 
     private void OnAction(TimeLineAction _action)
@@ -187,23 +199,31 @@ using Random = UnityEngine.Random;
     {
         if (isDead) return;
 
-        var aura = m_timeline.GetCurrentAura();
+        var aura = _target.m_timeline.GetCurrentAura();
+        Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
         switch (_effect)
         {
             case ActionEffect.ATTACK:
+                Debug.Log("Try attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
                     float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
-                        m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration,
-                            1.0f, 1.0f, true));
+                        Debug.Log("Is invulnerable.");
+                        m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true));
                     }
                     if (_target.TryHit(this, strength))
                     {
+                        Debug.Log("Attack done " + strength + ".");
                         spriteEvent.DamageInflicted();
                     }
-                    else spriteEvent.Blocked();
+                    else
+                    {
+                        Debug.Log("Attack blocked.");
+                        spriteEvent.Blocked();
+                    }
                 }
                 break;
             case ActionEffect.ATTACK_MAGIC:
@@ -220,9 +240,12 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.START_GUARD:
                 m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
+                
+                Debug.Log("Guard start " + m_guardValue + ".");
                 break;
             case ActionEffect.STOP_GUARD:
                 m_guardValue = 0.0f;
+                Debug.Log("Guard stop.");
                 break;
             case ActionEffect.INTERRUPT:
                 _target.Staggered();
