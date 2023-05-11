@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     
     public static CharacterSpriteManager characterSpriteManager => instance.m_characterSpriteManager;
     
-    public static ActionSpellsManager ActionSpellsManager => instance.m_actionSpellsManager;
+    public static ActionSpellsManager actionSpellsManager => instance.m_actionSpellsManager;
     
     public static bool CanCombine(ActionType _typeA, ActionType _typeB)
     {

@@ -22,9 +22,12 @@ public class ActionSpellsManager : MonoBehaviour
     [SerializeField] private float m_animSpeed = 2.0f;
     [SerializeField] private int m_nbActions = 5;
     [SerializeField] private float m_spellCooldown = 1.0f;
+    [SerializeField] private float m_timeWarpScale = 1.5f;
+    [SerializeField] private float m_timeWarpDuration = 5.0f;
     [SerializeField] private List<SpellForType> m_actionSpells;
     
     private float m_cumulHeight = 0.0f;
+    private float m_timeWarp = 0.0f;
     private float m_spellCurrentCooldown = 0.0f;
     private List<ActionSpellButton> m_buttons;
     private ActionSpellButton m_previous;
@@ -92,7 +95,11 @@ public class ActionSpellsManager : MonoBehaviour
     {            
         ManageSpellButtons();
 
-        if(m_start) m_spellCurrentCooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale;
+        if(m_start)
+        {
+            m_timeWarp -= Time.deltaTime * GameManager.timelineManager.timelineScale;
+            m_spellCurrentCooldown -= Time.deltaTime * GameManager.timelineManager.timelineScale * (m_timeWarp > 0.0f ? m_timeWarpScale : 1.0f);
+        }
         
         if (m_spellCurrentCooldown > 0.0f)
         {
@@ -209,6 +216,11 @@ public class ActionSpellsManager : MonoBehaviour
         }
         m_buttons = new List<ActionSpellButton>();
         
+    }
+
+    public void TimeWarp()
+    {
+        m_timeWarp += m_timeWarpDuration;
     }
 }
 

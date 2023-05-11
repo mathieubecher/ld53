@@ -255,6 +255,9 @@ using Random = UnityEngine.Random;
                 m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration,
                     1.0f, 1.0f, true));
                 break;
+            case ActionEffect.TIME_WARP:
+                GameManager.actionSpellsManager.TimeWarp();
+                break;
         }
     }
 

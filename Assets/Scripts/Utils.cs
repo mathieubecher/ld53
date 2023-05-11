@@ -25,6 +25,7 @@ using System;
     BUFF,
     ATTACK_MAGIC,
     INTERRUPT,
+    TIME_WARP,
     
 }
 [Serializable] public enum ActionStep
