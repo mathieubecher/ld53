@@ -8,28 +8,28 @@ public class CharacterAudio : MonoBehaviour
 {
     public CharacterSpriteEvent charEvents;
     private SoundComponent m_soundComponent;
+    public bool isPlayer;
 
-    public EventReference onAttackSfx;
-    public EventReference onAttackVo;
-    public EventReference onGuardSfx;
-    public EventReference onGuardVo;
-    public EventReference onBuffSfx;
-    public EventReference onBuffVo;
-    public EventReference onBuffAnticipSfx;
-    public EventReference onActionEndEvent;
-    public EventReference onBlockedEvent;
-    public EventReference onBlockSuccessEvent;
-    public EventReference onDamageInflictedEvent;
-    public EventReference onDamageReceivedEvent;
-    public EventReference onDieEvent;
-    public EventReference onGuardBreakSfx;
-    public EventReference onGuardBreakVo;
-    public EventReference onHealedEvent;
-    public EventReference onHitEvent;
-    public EventReference onMoveStartEvent;
-    public EventReference onMoveEndEvent;
-    public EventReference onNewActionReceived;
-    public EventReference onFootstepFoley;
+    [Header("Sfx")]
+    public EventReference attackSfx;
+    public EventReference guardSfx;
+    public EventReference buffSfx;
+    public EventReference buffAnticipSfx;
+    public EventReference damageReceivedSfx;
+    public EventReference deathSfx;
+    public EventReference guardBreakSfx;
+    public EventReference stunSfx;
+    public EventReference footstepSfx;
+    public EventReference blockSfx;
+
+    [Header("Voices")]
+    public EventReference attackVo;
+    public EventReference attackStartVo;
+    public EventReference damageReceivedVo;
+    public EventReference damageInflictedVo;
+    public EventReference guardVo;
+    public EventReference buffVo;
+    public EventReference actionReceivedVo;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -93,7 +93,7 @@ public class CharacterAudio : MonoBehaviour
 
     public void OnFootstep()
     {
-        m_soundComponent.PlaySound(onFootstepFoley);
+        m_soundComponent.PlaySound(footstepSfx);
     }
 
     private void OnActionStep(ActionStep _step)
@@ -103,23 +103,23 @@ public class CharacterAudio : MonoBehaviour
             case ActionStep.IDLE:
                 break;
             case ActionStep.START_GUARDING:
-                m_soundComponent.PlayMultipleSounds(new EventReference[] { onGuardSfx, onGuardVo });
+                m_soundComponent.PlayMultipleSounds(new EventReference[] { guardSfx, guardVo });
                 break;
             case ActionStep.STOP_GUARDING:
                 break;
             case ActionStep.ATTACK:
-                m_soundComponent.PlayMultipleSounds(new EventReference[] { onAttackSfx, onAttackVo });
+                m_soundComponent.PlayMultipleSounds(new EventReference[] { attackSfx, attackVo });
                 break;
             case ActionStep.SPECIAL:
-                m_soundComponent.PlayMultipleSounds(new EventReference[] { onBuffSfx, onBuffVo });
-                m_soundComponent.StopSound(onBuffAnticipSfx);
+                m_soundComponent.PlayMultipleSounds(new EventReference[] { buffSfx, buffVo });
+                m_soundComponent.StopSound(buffAnticipSfx);
                 break;
             case ActionStep.REACH_TARGET:
                 break;
             case ActionStep.RETURN_TO_POSITION:
                 break;
             case ActionStep.SPECIAL_ANTICIPATION:
-                m_soundComponent.PlaySound(onBuffAnticipSfx);
+                m_soundComponent.PlaySound(buffAnticipSfx);
                 break;
             case ActionStep.HIT:
                 break;
@@ -130,12 +130,14 @@ public class CharacterAudio : MonoBehaviour
 
     private void OnNewActionReceived(ActionType _type)
     {
-        m_soundComponent.PlaySound(onNewActionReceived);
+        if (!isPlayer)
+            m_soundComponent.PlaySound(actionReceivedVo);
     }
 
     private void OnMoveStart()
     {
         //m_soundComponent.PlayMutlipleSounds(new EventReference[] { onAttackSfx, onAttackVo });
+        m_soundComponent.PlaySound(attackStartVo);
     }
 
     private void OnMoveEnd()
@@ -145,48 +147,48 @@ public class CharacterAudio : MonoBehaviour
 
     private void OnStun()
     {
-        m_soundComponent.PlaySound(onHitEvent);
+        m_soundComponent.PlaySound(stunSfx);
     }
 
     private void OnHealed()
     {
-        m_soundComponent.PlaySound(onHealedEvent);
+        //m_soundComponent.PlaySound(onHealedEvent);
     }
 
     private void OnGuardBreak()
     {
-        m_soundComponent.PlaySound(onGuardBreakSfx);
+        m_soundComponent.PlaySound(guardBreakSfx);
     }
 
     private void OnDie()
     {
-        m_soundComponent.PlaySound(onDieEvent);
+        m_soundComponent.PlayMultipleSounds(new EventReference[] { deathSfx, damageReceivedVo });
     }
 
     private void OnDamageReceived()
     {
-        m_soundComponent.PlaySound(onDamageReceivedEvent);
-        m_soundComponent.StopSound(onBuffAnticipSfx);
+        m_soundComponent.PlayMultipleSounds(new EventReference[] { damageReceivedSfx, damageReceivedVo });
+        m_soundComponent.StopSound(buffAnticipSfx);
     }
 
     private void OnDamageInflicted()
     {
-        m_soundComponent.PlaySound(onDamageInflictedEvent);
+        //m_soundComponent.PlaySound(damageInflictedVo);
     }
 
     private void OnBlockSuccess()
     {
-        m_soundComponent.PlaySound(onBlockSuccessEvent);
+        m_soundComponent.PlaySound(blockSfx);
     }
 
     private void OnBlocked()
     {
-        m_soundComponent.PlaySound(onBlockedEvent);
+
     }
 
     private void OnActionEnd(ActionType _type)
     {
-        m_soundComponent.PlaySound(onActionEndEvent);
+
     }
 
     private void OnActionStart(ActionType _type)

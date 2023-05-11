@@ -58,150 +58,122 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charEvents: {fileID: 0}
-  onAttackSfx:
+  attackSfx:
     Guid:
       Data1: 843746815
       Data2: 1262807065
       Data3: -1650099301
       Data4: 1659843079
-    Path: event:/Characters/Actions/Char_Act_Attack
-  onAttackVo:
-    Guid:
-      Data1: 1110815039
-      Data2: 1189867491
-      Data3: -399104579
-      Data4: 1776648168
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Attack
-  onGuardSfx:
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Attack
+  guardSfx:
     Guid:
       Data1: -482286439
       Data2: 1190480195
       Data3: -1845285713
       Data4: 1435004327
-    Path: event:/Characters/Actions/Char_Act_Guard
-  onGuardVo:
-    Guid:
-      Data1: 1831633239
-      Data2: 1169576749
-      Data3: 323332229
-      Data4: -968322175
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Guard
-  onBuffSfx:
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Guard
+  buffSfx:
     Guid:
       Data1: -828276629
       Data2: 1186648590
       Data3: -715382873
       Data4: 1007977826
-    Path: event:/Characters/Actions/Char_Act_Buff
-  onBuffVo:
-    Guid:
-      Data1: 1459316619
-      Data2: 1082341091
-      Data3: 811101618
-      Data4: -974858506
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Buff
-  onBuffAnticipSfx:
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Buff
+  buffAnticipSfx:
     Guid:
       Data1: -1025080114
       Data2: 1245302679
       Data3: -2062960460
       Data4: 1031725174
-    Path: event:/Characters/Actions/Char_Act_BuffAnticipation
-  onActionEndEvent:
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_BuffAnticipation
+  damageReceivedSfx:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onBlockedEvent:
+      Data1: 287979896
+      Data2: 1298629106
+      Data3: -940842822
+      Data4: 1095837352
+    Path: event:/Characters/Foleys/Char_Fol_Hit
+  deathSfx:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onBlockSuccessEvent:
+      Data1: -1792659953
+      Data2: 1298524192
+      Data3: -1758410329
+      Data4: 883809732
+    Path: event:/Characters/Foleys/Char_Fol_Die
+  guardBreakSfx:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDamageInflictedEvent:
+      Data1: 545398812
+      Data2: 1258289545
+      Data3: 899890817
+      Data4: -244453561
+    Path: event:/Characters/SFX/Char_Sfx_GuardBreak
+  stunSfx:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDamageReceivedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDieEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onGuardBreakSfx:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onGuardBreakVo:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onHealedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onHitEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onMoveStartEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onMoveEndEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onNewActionReceived:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onFootstepFoley:
+      Data1: -399381449
+      Data2: 1147491336
+      Data3: -1343502671
+      Data4: 1009073719
+    Path: event:/Characters/SFX/Char_Sfx_Stun
+  footstepSfx:
     Guid:
       Data1: 900984879
       Data2: 1153973188
       Data3: -1792516424
       Data4: 1658232051
     Path: event:/Characters/Foleys/Char_Fol_Fts
+  blockSfx:
+    Guid:
+      Data1: -1257511446
+      Data2: 1306237063
+      Data3: -1459747911
+      Data4: -1472149238
+    Path: event:/Characters/Foleys/Char_Fol_Block
+  attackVo:
+    Guid:
+      Data1: 1110815039
+      Data2: 1189867491
+      Data3: -399104579
+      Data4: 1776648168
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Attack
+  attackStartVo:
+    Guid:
+      Data1: 1924340969
+      Data2: 1079473221
+      Data3: -1792094529
+      Data4: 1900606630
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_AttackStart
+  damageReceivedVo:
+    Guid:
+      Data1: 287979896
+      Data2: 1298629106
+      Data3: -940842822
+      Data4: 1095837352
+    Path: event:/Characters/Foleys/Char_Fol_Hit
+  damageInflictedVo:
+    Guid:
+      Data1: 357671142
+      Data2: 1184086672
+      Data3: 253220488
+      Data4: -713060519
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_AttackSuccess
+  guardVo:
+    Guid:
+      Data1: 1831633239
+      Data2: 1169576749
+      Data3: 323332229
+      Data4: -968322175
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Guard
+  buffVo:
+    Guid:
+      Data1: 1459316619
+      Data2: 1082341091
+      Data3: 811101618
+      Data4: -974858506
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Buff
+  actionReceivedVo:
+    Guid:
+      Data1: -1076599409
+      Data2: 1080534787
+      Data3: 1357069235
+      Data4: 889652148
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Receive

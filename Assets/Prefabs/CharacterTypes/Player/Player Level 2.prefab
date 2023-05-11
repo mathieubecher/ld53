@@ -815,6 +815,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1600728368570027555}
     m_Modifications:
     - target: {fileID: 494241377751586663, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 494241377751586663, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
       propertyPath: charEvents
       value: 
       objectReference: {fileID: 503830323702802307}

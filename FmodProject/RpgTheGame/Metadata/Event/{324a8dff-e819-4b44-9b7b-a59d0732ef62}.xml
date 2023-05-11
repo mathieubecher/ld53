@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{324a8dff-e819-4b44-9b7b-a59d0732ef62}">
 		<property name="name">
-			<value>Char_Act_Attack</value>
+			<value>Char_Sfx_Act_Attack</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -73,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{363b4580-b15b-4112-afa4-92735f6a9498}">
 		<property name="volume">
-			<value>-5</value>
+			<value>-6</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{fbd03da5-4528-46c2-9adb-f3c60e218467}</destination>

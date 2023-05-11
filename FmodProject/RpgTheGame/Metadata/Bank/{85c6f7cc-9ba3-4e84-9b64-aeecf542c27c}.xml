@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Bank" id="{85c6f7cc-9ba3-4e84-9b64-aeecf542c27c}">
 		<property name="name">
-			<value>SNK_Char_Actions</value>
+			<value>SNK_Char_Sfx</value>
 		</property>
 		<relationship name="folder">
 			<destination>{6bc4cb7a-51eb-4f0a-8de9-88f0b2d49a31}</destination>

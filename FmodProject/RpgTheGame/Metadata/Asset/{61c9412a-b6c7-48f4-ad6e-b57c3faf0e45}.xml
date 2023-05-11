@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="EncodableAsset" id="{61c9412a-b6c7-48f4-ad6e-b57c3faf0e45}">
 		<property name="assetPath">
-			<value>Placeholders/Actions/Buff/</value>
+			<value>Placeholders/Sfx/Actions/Buff/</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{34db6cde-1739-454e-b735-958293805eb1}</destination>
