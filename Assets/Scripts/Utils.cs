@@ -12,6 +12,8 @@ using System;
     GUARD_ATTACK,
     ATTACK_GUARD,
     SPECIAL_SPECIAL,
+    SPECIAL_ATTACK,
+    SPECIAL_GUARD,
 }
 
 [Serializable] public enum ActionEffect

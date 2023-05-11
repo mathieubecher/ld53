@@ -138,7 +138,6 @@ public abstract class CharacterSprite : MonoBehaviour
     private void ResetTriggers()
     {
         m_animator.ResetTrigger("Idle");
-        m_animator.ResetTrigger("Guard");
         m_animator.ResetTrigger("Attack");
         m_animator.ResetTrigger("Special");
         m_animator.ResetTrigger("ReachTarget");

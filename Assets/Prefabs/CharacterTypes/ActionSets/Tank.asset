@@ -83,3 +83,25 @@ MonoBehaviour:
       numberOfCells: 1
     - steps: 10
       numberOfCells: 1
+  - actionType: 10
+    description: 
+    color: {r: 1, g: 0.53716546, b: 0.41176474, a: 1}
+    icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+    duration: 0.5
+    actions:
+    - steps: 3
+      numberOfCells: 1
+    - steps: 0
+      numberOfCells: 1
+    - steps: 4
+      numberOfCells: 0
+  - actionType: 11
+    description: 
+    color: {r: 1, g: 0.9254902, b: 0.34509805, a: 1}
+    icone: {fileID: 632739248, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+    duration: 0.5
+    actions:
+    - steps: 7
+      numberOfCells: 1
+    - steps: 8
+      numberOfCells: 1

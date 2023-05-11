@@ -132,7 +132,7 @@ public class ActionSpellsManager : MonoBehaviour
                 if(m_buttons[0])
                 {
                     m_previous = m_buttons[0];
-                    m_previous.transform.parent = m_garbage;
+                    m_previous.transform.SetParent(m_garbage);
                     
                     if(ControlsManager.selectedActionSpellButton == m_previous)
                     {

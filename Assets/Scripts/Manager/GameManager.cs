@@ -167,7 +167,6 @@ public class GameManager : MonoBehaviour
 
     private void OnNPCDead()
     {
-        bool loose = false;
         foreach (NPC npc in m_npcs)
         {
             if (!npc.isDead) return;

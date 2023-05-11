@@ -239,7 +239,7 @@ using Random = UnityEngine.Random;
                 }
                 break;
             case ActionEffect.START_GUARD:
-                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
+                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
                 
                 Debug.Log("Guard start " + m_guardValue + ".");
                 break;
