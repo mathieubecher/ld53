@@ -29,6 +29,7 @@ public class CharacterAudio : MonoBehaviour
     public EventReference onMoveStartEvent;
     public EventReference onMoveEndEvent;
     public EventReference onNewActionReceived;
+    public EventReference onFootstepFoley;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -49,10 +50,11 @@ public class CharacterAudio : MonoBehaviour
             charEvents.OnMoveEnd += OnMoveEnd;
             charEvents.OnMoveStart += OnMoveStart;
             charEvents.OnNewActionReceived += OnNewActionReceived;
+            charEvents.OnFootstep += OnFootstep;
         }
         else
         {
-            Debug.LogError($"Event components not referenced on {gameObject.name} audio component");
+            Debug.LogError($"Event component not referenced on {gameObject.name} audio component");
         }
     }
 
@@ -75,10 +77,11 @@ public class CharacterAudio : MonoBehaviour
             charEvents.OnMoveEnd -= OnMoveEnd;
             charEvents.OnMoveStart -= OnMoveStart;
             charEvents.OnNewActionReceived -= OnNewActionReceived;
+            charEvents.OnFootstep -= OnFootstep;
         }
         else
         {
-            Debug.LogError($"Event components not referenced on {gameObject.name} audio component");
+            Debug.LogError($"Event component not referenced on {gameObject.name} audio component");
         }
     }
 
@@ -86,6 +89,11 @@ public class CharacterAudio : MonoBehaviour
     {
         if (!TryGetComponent<SoundComponent>(out m_soundComponent))
             m_soundComponent = gameObject.AddComponent<SoundComponent>();
+    }
+
+    public void OnFootstep()
+    {
+        m_soundComponent.PlaySound(onFootstepFoley);
     }
 
     private void OnActionStep(ActionStep _step)

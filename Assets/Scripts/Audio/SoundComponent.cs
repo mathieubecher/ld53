@@ -33,7 +33,7 @@ public class SoundComponent : MonoBehaviour
         }
     }
 
-    public void PlayMutlipleSounds(EventReference[] _eventsToPlay, bool _oneInstanceOnly)
+    public void PlayMultipleSounds(EventReference[] _eventsToPlay, bool _oneInstanceOnly)
     {
         foreach (EventReference eventRef in _eventsToPlay)
         {

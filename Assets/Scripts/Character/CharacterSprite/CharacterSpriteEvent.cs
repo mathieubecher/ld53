@@ -101,4 +101,11 @@ public class CharacterSpriteEvent : MonoBehaviour
     {
         OnStun?.Invoke();
     }
+
+    public delegate void FootstepEvent();
+    public event FootstepEvent OnFootstep;
+    public void Footstep()
+    {
+        OnFootstep?.Invoke();
+    }
 }
