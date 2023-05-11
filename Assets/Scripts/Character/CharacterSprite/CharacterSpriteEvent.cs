@@ -52,6 +52,21 @@ public class CharacterSpriteEvent : MonoBehaviour
     {
         OnBlockSuccess?.Invoke();
     }
+
+    public delegate void MagicDamageInflictedEvent();
+    public event MagicDamageInflictedEvent OnMagicDamageInflicted;
+    public void MagicDamageInflicted()
+    {
+        OnMagicDamageInflicted?.Invoke();
+    }
+
+    public delegate void MagicBlockedEvent();
+    public event MagicBlockedEvent OnMagicBlocked;
+    public void MagicBlocked()
+    {
+        OnMagicBlocked?.Invoke();
+    }
+    
     public delegate void MoveStartEvent();
     public event MoveStartEvent OnMoveStart;
     public void MoveStart()
@@ -107,15 +122,5 @@ public class CharacterSpriteEvent : MonoBehaviour
     public void Footstep()
     {
         OnFootstep?.Invoke();
-    }
-
-    public void MagicDamageInflicted()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void MagicBlocked()
-    {
-        throw new System.NotImplementedException();
     }
 }
