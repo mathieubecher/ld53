@@ -182,4 +182,9 @@ public abstract class CharacterSprite : MonoBehaviour
         OnPlayActionEffect?.Invoke(_effect, m_currentTarget);
     }
 
+
+    public void PlayFootstep()
+    {
+        spriteEvent.Footstep();
+    }
 }

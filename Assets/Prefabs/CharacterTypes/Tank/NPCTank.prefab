@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 300259592577348738}
   - component: {fileID: 6363115865185119377}
   - component: {fileID: 8134126282710201133}
-  - component: {fileID: 8079018201906385929}
   m_Layer: 0
   m_Name: NPCTank
   m_TagString: Untagged
@@ -354,6 +353,7 @@ Transform:
   - {fileID: 2266136855011423632}
   - {fileID: 4522466753044587756}
   - {fileID: 6160965358997622860}
+  - {fileID: 2239029564998463218}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -406,159 +406,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8079018201906385929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4522466753895615754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6606975104c2bd34686ee03b179b4c7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charEvents: {fileID: 6363115865185119377}
-  onAttackSfx:
-    Guid:
-      Data1: 843746815
-      Data2: 1262807065
-      Data3: -1650099301
-      Data4: 1659843079
-    Path: event:/Characters/Actions/Char_Act_Attack
-  onAttackVo:
-    Guid:
-      Data1: 1110815039
-      Data2: 1189867491
-      Data3: -399104579
-      Data4: 1776648168
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Attack
-  onGuardSfx:
-    Guid:
-      Data1: -482286439
-      Data2: 1190480195
-      Data3: -1845285713
-      Data4: 1435004327
-    Path: event:/Characters/Actions/Char_Act_Guard
-  onGuardVo:
-    Guid:
-      Data1: 1831633239
-      Data2: 1169576749
-      Data3: 323332229
-      Data4: -968322175
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Guard
-  onBuffSfx:
-    Guid:
-      Data1: -828276629
-      Data2: 1186648590
-      Data3: -715382873
-      Data4: 1007977826
-    Path: event:/Characters/Actions/Char_Act_Buff
-  onBuffVo:
-    Guid:
-      Data1: 1459316619
-      Data2: 1082341091
-      Data3: 811101618
-      Data4: -974858506
-    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Buff
-  onBuffAnticipSfx:
-    Guid:
-      Data1: -1025080114
-      Data2: 1245302679
-      Data3: -2062960460
-      Data4: 1031725174
-    Path: event:/Characters/Actions/Char_Act_BuffAnticipation
-  onActionEndEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onBlockedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onBlockSuccessEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDamageInflictedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDamageReceivedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onDieEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onGuardBreakSfx:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onGuardBreakVo:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onHealedEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onHitEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onMoveStartEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onMoveEndEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  onNewActionReceived:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
 --- !u!1 &6226850460965688108
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,4 +702,70 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5726774596157194808, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
   m_PrefabInstance: {fileID: 1943780965606494836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2454646544947728545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4522466753895615755}
+    m_Modifications:
+    - target: {fileID: 494241377751586663, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: charEvents
+      value: 
+      objectReference: {fileID: 6363115865185119377}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843364877064827173, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: m_Name
+      value: CharacterAudio
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+--- !u!4 &2239029564998463218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4396086639276555859, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+  m_PrefabInstance: {fileID: 2454646544947728545}
   m_PrefabAsset: {fileID: 0}

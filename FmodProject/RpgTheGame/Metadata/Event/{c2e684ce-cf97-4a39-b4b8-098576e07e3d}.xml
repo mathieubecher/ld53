@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{c2e684ce-cf97-4a39-b4b8-098576e07e3d}">
 		<property name="name">
-			<value>Char_Act_BuffAnticipation</value>
+			<value>Char_Sfx_Act_BuffAnticipation</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -122,7 +122,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{c45d51e0-21c2-4e86-b892-5af786f92199}">
 		<property name="volume">
-			<value>-6.5</value>
+			<value>-3</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>

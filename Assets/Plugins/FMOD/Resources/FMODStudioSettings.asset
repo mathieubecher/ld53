@@ -308,8 +308,8 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - SNK_Char_Actions
   - SNK_Char_Foleys
+  - SNK_Char_Sfx
   - SNK_Char_Voices
   - SNK_Test
   - SNK_UI_Spells

@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4843364877064827173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4396086639276555859}
+  - component: {fileID: 7318875709710694917}
+  - component: {fileID: 494241377751586663}
+  m_Layer: 0
+  m_Name: CharacterAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4396086639276555859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843364877064827173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7318875709710694917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843364877064827173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759931e57c527824080a068bda8a9bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &494241377751586663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843364877064827173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6606975104c2bd34686ee03b179b4c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charEvents: {fileID: 0}
+  attackSfx:
+    Guid:
+      Data1: 843746815
+      Data2: 1262807065
+      Data3: -1650099301
+      Data4: 1659843079
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Attack
+  guardSfx:
+    Guid:
+      Data1: -482286439
+      Data2: 1190480195
+      Data3: -1845285713
+      Data4: 1435004327
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Guard
+  buffSfx:
+    Guid:
+      Data1: -828276629
+      Data2: 1186648590
+      Data3: -715382873
+      Data4: 1007977826
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_Buff
+  buffAnticipSfx:
+    Guid:
+      Data1: -1025080114
+      Data2: 1245302679
+      Data3: -2062960460
+      Data4: 1031725174
+    Path: event:/Characters/SFX/Actions/Char_Sfx_Act_BuffAnticipation
+  damageReceivedSfx:
+    Guid:
+      Data1: 287979896
+      Data2: 1298629106
+      Data3: -940842822
+      Data4: 1095837352
+    Path: event:/Characters/Foleys/Char_Fol_Hit
+  deathSfx:
+    Guid:
+      Data1: -1792659953
+      Data2: 1298524192
+      Data3: -1758410329
+      Data4: 883809732
+    Path: event:/Characters/Foleys/Char_Fol_Die
+  guardBreakSfx:
+    Guid:
+      Data1: 545398812
+      Data2: 1258289545
+      Data3: 899890817
+      Data4: -244453561
+    Path: event:/Characters/SFX/Char_Sfx_GuardBreak
+  stunSfx:
+    Guid:
+      Data1: -399381449
+      Data2: 1147491336
+      Data3: -1343502671
+      Data4: 1009073719
+    Path: event:/Characters/SFX/Char_Sfx_Stun
+  footstepSfx:
+    Guid:
+      Data1: 900984879
+      Data2: 1153973188
+      Data3: -1792516424
+      Data4: 1658232051
+    Path: event:/Characters/Foleys/Char_Fol_Fts
+  blockSfx:
+    Guid:
+      Data1: -1257511446
+      Data2: 1306237063
+      Data3: -1459747911
+      Data4: -1472149238
+    Path: event:/Characters/Foleys/Char_Fol_Block
+  attackVo:
+    Guid:
+      Data1: 1110815039
+      Data2: 1189867491
+      Data3: -399104579
+      Data4: 1776648168
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Attack
+  attackStartVo:
+    Guid:
+      Data1: 1924340969
+      Data2: 1079473221
+      Data3: -1792094529
+      Data4: 1900606630
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_AttackStart
+  damageReceivedVo:
+    Guid:
+      Data1: 287979896
+      Data2: 1298629106
+      Data3: -940842822
+      Data4: 1095837352
+    Path: event:/Characters/Foleys/Char_Fol_Hit
+  damageInflictedVo:
+    Guid:
+      Data1: 357671142
+      Data2: 1184086672
+      Data3: 253220488
+      Data4: -713060519
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_AttackSuccess
+  guardVo:
+    Guid:
+      Data1: 1831633239
+      Data2: 1169576749
+      Data3: 323332229
+      Data4: -968322175
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Guard
+  buffVo:
+    Guid:
+      Data1: 1459316619
+      Data2: 1082341091
+      Data3: 811101618
+      Data4: -974858506
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Buff
+  actionReceivedVo:
+    Guid:
+      Data1: -1076599409
+      Data2: 1080534787
+      Data3: 1357069235
+      Data4: 889652148
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Receive

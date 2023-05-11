@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{cea1806b-d20e-46ba-a71f-5cd56285143c}">
 		<property name="name">
-			<value>Char_Act_Buff</value>
+			<value>Char_Sfx_Act_Buff</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -123,7 +123,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{56c55077-a2a2-40dd-95cd-a8e65dea150f}">
 		<property name="volume">
-			<value>-5</value>
+			<value>-4</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -151,7 +151,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{d6491a03-17b6-4cfb-9b63-36435766c8d5}">
 		<property name="volume">
-			<value>-11</value>
+			<value>-6.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 2</value>

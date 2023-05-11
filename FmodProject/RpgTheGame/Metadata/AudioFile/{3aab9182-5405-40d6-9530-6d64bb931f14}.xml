@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{3aab9182-5405-40d6-9530-6d64bb931f14}">
 		<property name="assetPath">
-			<value>Placeholders/Actions/Buff/Designed, Stinger, Impact, Big Hit 02 SND11657 1.wav</value>
+			<value>Placeholders/Sfx/Actions/Buff/Designed, Stinger, Impact, Big Hit 02 SND11657 1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
