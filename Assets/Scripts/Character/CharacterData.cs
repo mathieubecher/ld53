@@ -20,6 +20,7 @@ public class CharacterData : ScriptableObject
 {
 
     [SerializeField] private string m_characterName;
+    [SerializeField] private string m_faction;
     [SerializeField] private Sprite m_timeLineHeader;
     [SerializeField] private GameObject m_spritePrefab;
     
@@ -27,26 +28,23 @@ public class CharacterData : ScriptableObject
     [SerializeField] private float  m_life = 10.0f;
     [SerializeField] private float  m_strength = 1.0f;
     [SerializeField] private float  m_magica = 0.0f;
-    [SerializeField] private float  m_magicaResistance = 0.0f;
-    [SerializeField] private float  m_hitStunProba = 0.0f;
     [SerializeField] private float m_guardValue = 1.0f;
     
     [SerializeField] private List<RandomAction> m_randomActions;
     [SerializeField] private ActionData m_hitAction;
 
+    public string characterName => m_characterName;
+    public string faction => m_faction;
     public GameObject spritePrefab => m_spritePrefab;
     public Sprite header => m_timeLineHeader;
     public float life => m_life;
     public float strength => m_strength;
     public float magica => m_magica;
     public float guardValue => m_guardValue;
-    public float magicaResistance => m_magicaResistance;
-    public float hitStunProba => m_hitStunProba;
     
     public ActionSets actionSets => m_actionSets;
     public List<ActionData> actionDatas => m_actionSets.actions;
-    public string characterName => m_characterName;
-
+    
     public ActionData GetActionData(ActionType actionType)
     {
         if (actionType == ActionType.HIT) return m_hitAction;

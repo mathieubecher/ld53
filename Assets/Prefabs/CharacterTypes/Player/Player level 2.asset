@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: Player level 2
   m_EditorClassIdentifier: 
   m_characterName: Rox0r420
+  m_faction: Player
   m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: d48b28be812d62f45aaf2f4deaf3edd1, type: 3}
   m_actionSets: {fileID: 11400000, guid: a0dcf3b9a35b47d4fb283eb823c5fb9d, type: 2}
   m_life: 20
   m_strength: 2
   m_magica: 0
-  m_magicaResistance: 0
-  m_hitStunProba: 0
   m_guardValue: 1
   m_randomActions: []
   m_hitAction:

@@ -14,6 +14,7 @@ using System;
     SPECIAL_SPECIAL,
     SPECIAL_ATTACK,
     SPECIAL_GUARD,
+    GUARD_SPECIAL,
 }
 
 [Serializable] public enum ActionEffect
@@ -26,7 +27,9 @@ using System;
     ATTACK_MAGIC,
     INTERRUPT,
     TIME_WARP,
+    POTION,
     
+
 }
 [Serializable] public enum ActionStep
 {

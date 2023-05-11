@@ -308,6 +308,7 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - SNK_Amb
   - SNK_Char_Foleys
   - SNK_Char_Sfx
   - SNK_Char_Voices

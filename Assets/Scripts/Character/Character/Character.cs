@@ -44,7 +44,8 @@ using Random = UnityEngine.Random;
     public CharacterSpriteEvent spriteEvent => m_sprite.spriteEvent;
     public bool isDead => m_life.isDead;
     public CharacterData data => m_data;
-    public String name => m_data.characterName;
+    public string name => m_data.characterName;
+    public string faction => m_data.faction;
     public TimeLine timeline => m_timeline;
     public Character target => m_target;
 
@@ -104,15 +105,26 @@ using Random = UnityEngine.Random;
         m_sprite.Hit(m_life.lifeRatio, damage);
         
         if (m_life.isDead) Dead();
-        /*else if(m_guardValue <= 0.0f && Random.Range(0.0f, 1.0f) < m_data.hitStunProba)
-        {
-            AddAction(ActionType.HIT, m_timeline.elapsedTime);
-            spriteEvent.Stun();
-        }*/
-
+        
         spriteEvent.DamageReceived();
         return true;
     }
+    
+    private bool TryHitMagic(float _damage)
+    {
+        if (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_SPECIAL) return false;
+        float damage = _damage;
+        
+        if (m_guardBreaked) damage *= 2.0f;
+        m_life.Hit(damage);
+        m_sprite.Hit(m_life.lifeRatio, damage);
+        
+        if (m_life.isDead) Dead();
+        
+        spriteEvent.DamageReceived();
+        return true;
+    }
+
 
     private void CounterAttack(Character _attacker)
     {
@@ -227,9 +239,20 @@ using Random = UnityEngine.Random;
                 }
                 break;
             case ActionEffect.ATTACK_MAGIC:
-                if (_target != null)
+                Debug.Log("Try attack: " + m_currentActionPlayed.type);
+                if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    
+                    float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    if(_target.TryHitMagic(strength))
+                    {
+                        Debug.Log("Magic attack done " + strength + ".");
+                        spriteEvent.MagicDamageInflicted();
+                    }
+                    else
+                    {
+                        Debug.Log("Magic attack blocked.");
+                        spriteEvent.MagicBlocked();
+                    }
                 }
                 break;
             case ActionEffect.TAUNT :
@@ -257,6 +280,23 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.TIME_WARP:
                 GameManager.actionSpellsManager.TimeWarp();
+                break;
+            case ActionEffect.POTION:
+                if (m_currentActionPlayed)
+                {
+                    switch(m_currentActionPlayed.type)
+                    {
+                        case ActionType.SPECIAL_ATTACK :
+                            GameManager.instance.AttackBuffFaction(faction, 2.0f, m_data.actionSets.attackPotionBuffDuration);
+                            break;
+                        case ActionType.SPECIAL_GUARD :
+                            GameManager.instance.AttackDeBuffFaction(faction, 0.5f, m_data.actionSets.guardPotionBuffDuration);
+                            break;
+                        default :
+                            GameManager.instance.HealFaction(faction, m_data.actionSets.healPotionBuffValue);
+                            break;
+                    }
+                }
                 break;
         }
     }

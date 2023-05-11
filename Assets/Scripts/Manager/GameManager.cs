@@ -201,4 +201,48 @@ public class GameManager : MonoBehaviour
         m_arrow.gameObject.SetActive(false);
     }
 
+    public void HealFaction(string _faction, float _value)
+    {
+        if (m_player.faction == _faction)
+        {
+            m_player.Heal(_value);   
+        }
+        foreach (var npc in m_npcs)
+        {
+            if (npc.faction == _faction)
+            {
+                npc.Heal(_value);
+            }   
+        }
+    }
+
+    public void AttackBuffFaction(string _faction, float _value, float _duration)
+    {
+        if (m_player.faction == _faction)
+        {
+            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));   
+        }
+        foreach (var npc in m_npcs)
+        {
+            if (npc.faction == _faction)
+            {
+                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));  
+            }   
+        }
+    }
+
+    public void AttackDeBuffFaction(string _otherFaction, float _value, float _duration)
+    {
+        if (m_player.faction != _otherFaction)
+        {
+            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));   
+        }
+        foreach (var npc in m_npcs)
+        {
+            if (npc.faction != _otherFaction)
+            {
+                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));  
+            }   
+        }
+    }
 }

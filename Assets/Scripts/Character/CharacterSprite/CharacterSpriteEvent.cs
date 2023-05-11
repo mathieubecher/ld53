@@ -108,4 +108,14 @@ public class CharacterSpriteEvent : MonoBehaviour
     {
         OnFootstep?.Invoke();
     }
+
+    public void MagicDamageInflicted()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void MagicBlocked()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: NPCDPS
   m_EditorClassIdentifier: 
   m_characterName: Alberto
+  m_faction: NPC
   m_timeLineHeader: {fileID: -1777121103, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 4522466753895615754, guid: 1d21419c33bf6684fbfef3081054b63d, type: 3}
   m_actionSets: {fileID: 11400000, guid: 9a750b82a7b8a304d9efd1f322788058, type: 2}
   m_life: 3
   m_strength: 1
   m_magica: 0
-  m_magicaResistance: 0
-  m_hitStunProba: 1
   m_guardValue: 1
   m_randomActions:
   - actionType: 1
