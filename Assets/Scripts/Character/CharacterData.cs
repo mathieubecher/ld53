@@ -15,6 +15,12 @@ using Random = UnityEngine.Random;
     public float weight;
 }
 
+[Serializable] public class ActionPatternData
+{
+    public float weight;
+    public List<CharacterActionData> actions;
+}
+
 [CreateAssetMenu(fileName = "Data", menuName = "Character/New type", order = 1)]
 public class CharacterData : ScriptableObject
 {
@@ -31,7 +37,8 @@ public class CharacterData : ScriptableObject
     [SerializeField] private float m_guardValue = 1.0f;
     
     [SerializeField] private List<RandomAction> m_randomActions;
-    [SerializeField] private ActionData m_hitAction;
+    [SerializeField] private CharacterActionData m_hitAction;
+    [SerializeField] private List<ActionPatternData> m_patterns;
 
     public string characterName => m_characterName;
     public string faction => m_faction;
@@ -43,9 +50,10 @@ public class CharacterData : ScriptableObject
     public float guardValue => m_guardValue;
     
     public ActionSets actionSets => m_actionSets;
-    public List<ActionData> actionDatas => m_actionSets.actions;
+    public List<CharacterActionData> actionDatas => m_actionSets.actions;
+    public List<ActionPatternData> patterns => m_patterns;
     
-    public ActionData GetActionData(ActionType actionType)
+    public CharacterActionData GetActionData(ActionType actionType)
     {
         if (actionType == ActionType.HIT) return m_hitAction;
         return actionDatas.Find(x => x.actionType == actionType);

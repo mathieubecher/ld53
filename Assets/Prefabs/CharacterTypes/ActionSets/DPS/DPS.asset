@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cfd390ee8a6e744801b17e4c6a200b, type: 3}
+  m_Name: DPS
+  m_EditorClassIdentifier: 
+  m_invulnerabilityDuration: 1
+  m_attackBuffDuration: 6
+  m_attackPotionBuffDuration: 6
+  m_guardPotionBuffDuration: 6
+  m_healPotionBuffValue: 5
+  m_actions:
+  - {fileID: 11400000, guid: 3d1ac201a24acfc439b51c5f05dc65c8, type: 2}
+  - {fileID: 11400000, guid: 39de19374b805b047a4b9e50d5cae630, type: 2}
+  - {fileID: 11400000, guid: 939f5242b1b844042a8c9f899ace1f46, type: 2}
+  - {fileID: 11400000, guid: d4599542d41554d478dfd40daaf61157, type: 2}
+  - {fileID: 11400000, guid: 4da1fd48dddf26647ae85cd810dd1d84, type: 2}
+  - {fileID: 11400000, guid: 1285a3b5df5ee0044a87921ee73c22d2, type: 2}
+  - {fileID: 11400000, guid: f610fe1dfe4d84f45a378f1f50b89e2f, type: 2}
+  - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
+  - {fileID: 11400000, guid: 8b6f4c4b1e63e754e801860a9d06f4d7, type: 2}
+  - {fileID: 11400000, guid: 7a3f9cc462be2a54c8129211ec3a6e8c, type: 2}

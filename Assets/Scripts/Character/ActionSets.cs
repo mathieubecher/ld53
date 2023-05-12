@@ -21,8 +21,8 @@ public class ActionSets : ScriptableObject
     [SerializeField] private float m_attackPotionBuffDuration;
     [SerializeField] private float m_guardPotionBuffDuration;
     [SerializeField] private float m_healPotionBuffValue;
-    [SerializeField] private List<ActionData> m_actionDatas;
-    public List<ActionData> actions => m_actionDatas;
+    [SerializeField] private List<CharacterActionData> m_actions;
+    public List<CharacterActionData> actions => m_actions;
     public float invulnerabilityDuration => m_invulnerabilityDuration;
     public float attackBuffDuration => m_attackBuffDuration;
     

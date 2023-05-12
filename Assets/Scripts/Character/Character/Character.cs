@@ -162,7 +162,7 @@ using Random = UnityEngine.Random;
     protected void AddAction(ActionType _type, float _timePos)
     {
         float timePos = timeline.GetCellForTimePos(_timePos/* + 1.0f/timeline.cellsPerUnit*/);
-        ActionData data = m_data.GetActionData(_type);
+        CharacterActionData data = m_data.GetActionData(_type);
         m_timeline.AddAction(data, timePos);
         spriteEvent.NewActionReceived(data.actionType);
     }

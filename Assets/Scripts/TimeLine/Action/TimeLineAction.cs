@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimeLineAction : MonoBehaviour
 {
-    [SerializeField] private ActionData m_data;
+    [SerializeField] private CharacterActionData m_data;
     [SerializeField] private Character m_character;
     [SerializeField] private Image m_colorImage;
     [SerializeField] private Image m_iconeImage;
@@ -24,7 +24,7 @@ public class TimeLineAction : MonoBehaviour
 
     private int m_currentStep = -1;
 
-    public void SetActionData(ActionData _data)
+    public void SetActionData(CharacterActionData _data)
     {
         m_actionType = _data.actionType;
         if (_data.actions.Count == 0) return;

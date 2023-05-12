@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 {
     public delegate void PlayerDeadEvent();
     public static event PlayerDeadEvent OnPlayerDead;
-
+    
     [Serializable] private class NPCTarget
     {
         public NPC target;
@@ -22,6 +22,7 @@ using Random = UnityEngine.Random;
             aggro = _aggro;
         }
     }
+    
 
     private float m_waiting;
     [SerializeField] private List<NPCTarget> m_targets;
@@ -94,7 +95,7 @@ using Random = UnityEngine.Random;
             m_line.enabled = true;
         }
         
-        if (m_life.isDead) return;
+        if (m_life.isDead ||  m_data.patterns.Count == 0) return;
         
         m_waiting -= Time.deltaTime * GameManager.timelineManager.timelineScale;
         if (m_waiting > 0.0f) return;
@@ -117,29 +118,29 @@ using Random = UnityEngine.Random;
     private void ChooseAction(float _timePos)
     {
         if (m_target == null || m_target.isDead) SelectTarget();
-        AddAction(GetRandomAction().actionType, _timePos);
+        AddActions(GetRandomAction(), _timePos);
     }
-    public ActionData GetRandomAction()
+    private ActionPatternData GetRandomAction()
     {
         m_waiting = 0.1f;
         float totalWeight = 0f;
-        foreach (ActionData action in m_data.actionDatas)
+        foreach (ActionPatternData action in m_data.patterns)
         {
-            totalWeight += GetWeight(action);
+            totalWeight += action.weight;
         }
 
         float randomValue = Random.Range(0f, totalWeight);
 
-        foreach (ActionData action in m_data.actionDatas)
+        foreach (ActionPatternData action in m_data.patterns)
         {
-            randomValue -= GetWeight(action);
+            randomValue -= action.weight;
             if (randomValue <= 0f)
             {
                 return action;
             }
         }
 
-        return m_data.actionDatas[0];
+        return m_data.patterns[0];
     }
     private float GetWeight(ActionData _action)
     {
@@ -152,12 +153,14 @@ using Random = UnityEngine.Random;
             default : return 0.0f;
         }
     }
-
-    private bool m_alreadyDead = false;
     public override void Dead()
     {
-        m_alreadyDead = true;
         base.Dead();
         OnPlayerDead?.Invoke();
+    }
+    
+    private void AddActions(ActionPatternData _pattern, float _timePos)
+    {
+        
     }
 }

@@ -305,7 +305,7 @@ public class TimeLine : MonoBehaviour
         return floorPos + 1.0f;
     }
 
-    public void AddAction(ActionData _data, float _timePos)
+    public void AddAction(CharacterActionData _data, float _timePos)
     {
         GameObject actionObject = Instantiate(TimelineManager.GetGenericAction(), m_actionsParent);
         TimeLineAction action = actionObject.GetComponent<TimeLineAction>();
