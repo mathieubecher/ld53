@@ -122,7 +122,7 @@ public class ActionSpellsManager : MonoBehaviour
             m_buttons.Add(button);
             m_cumulHeight -= m_buttonHeight + m_margin;
             
-            for (int i = m_buttons.Count - 1; i >= 2; --i)
+            for (int i = m_buttons.Count - 1; i >= 1; --i)
             {
                 if (m_buttons[i] == null)
                 {
