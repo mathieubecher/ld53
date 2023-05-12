@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack_Attack
   m_EditorClassIdentifier: 
   actionType: 5
-  description: 
+  description: Deals [strength] x2 damages to target.
   color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
   icone: {fileID: -2024962815, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1.5

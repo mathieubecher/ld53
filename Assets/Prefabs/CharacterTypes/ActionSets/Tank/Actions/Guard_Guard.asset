@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Guard_Guard
   m_EditorClassIdentifier: 
   actionType: 6
-  description: 
+  description: Block [guard] x2 damages before breaking and take x2 damages.
   color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
   icone: {fileID: 632739248, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 2

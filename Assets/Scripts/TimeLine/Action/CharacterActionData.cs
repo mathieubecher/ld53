@@ -8,7 +8,7 @@ using UnityEngine;
 public class CharacterActionData : ScriptableObject
 {
     public ActionType actionType;
-    public string description;
+    [TextArea(3, 10)] public string description;
     public Color color;
     public Sprite icone;
     public float duration;
