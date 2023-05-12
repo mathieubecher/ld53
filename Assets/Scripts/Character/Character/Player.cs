@@ -104,23 +104,23 @@ using Random = UnityEngine.Random;
         float elapsedTime = m_timeline.elapsedTime;
         if (actions.Count == 0)
         {
-            ChooseAction(elapsedTime);
+            ChooseActionPattern(elapsedTime);
             return;
         }
 
         var lastAction = actions[^1];
         if (lastAction.duration + lastAction.timePosition <= elapsedTime + 10.0f)
         {
-            ChooseAction(math.max(elapsedTime, lastAction.timePosition + lastAction.duration));
+            ChooseActionPattern(math.max(elapsedTime, lastAction.timePosition + lastAction.duration));
         }
     }
 
-    private void ChooseAction(float _timePos)
+    private void ChooseActionPattern(float _timePos)
     {
         if (m_target == null || m_target.isDead) SelectTarget();
-        AddActions(GetRandomAction(), _timePos);
+        AddActions(GetRandomPattern(), _timePos);
     }
-    private ActionPatternData GetRandomAction()
+    private ActionPatternData GetRandomPattern()
     {
         m_waiting = 0.1f;
         float totalWeight = 0f;
@@ -139,20 +139,9 @@ using Random = UnityEngine.Random;
                 return action;
             }
         }
-
         return m_data.patterns[0];
     }
-    private float GetWeight(ActionData _action)
-    {
-        switch (_action.actionType)
-        {
-            case ActionType.GUARD :
-                return 1.0f;
-            case ActionType.ATTACK :
-                return 3.0f;
-            default : return 0.0f;
-        }
-    }
+    
     public override void Dead()
     {
         base.Dead();
@@ -161,6 +150,12 @@ using Random = UnityEngine.Random;
     
     private void AddActions(ActionPatternData _pattern, float _timePos)
     {
-        
+        float currentPos = _timePos;
+        foreach (var action in _pattern.actions)
+        {
+            m_timeline.AddAction(action, currentPos);
+            spriteEvent.NewActionReceived(action.actionType);
+            currentPos += action.duration;
+        }
     }
 }
