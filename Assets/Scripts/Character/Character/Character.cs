@@ -1,6 +1,8 @@
 using System;
+using System.Text.RegularExpressions;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 [Serializable] public abstract class Character
@@ -163,6 +165,7 @@ using Random = UnityEngine.Random;
     {
         float timePos = timeline.GetCellForTimePos(_timePos/* + 1.0f/timeline.cellsPerUnit*/);
         CharacterActionData data = m_data.GetActionData(_type);
+        if (!data) return;
         m_timeline.AddAction(data, timePos);
         spriteEvent.NewActionReceived(data.actionType);
     }
@@ -305,4 +308,31 @@ using Random = UnityEngine.Random;
     {
         m_sprite.PlayActionStep(_step, _duration);
     }
+    public string GetHoverActionDescription()
+    {
+        if (isMouseInTimeline(out float desiredTimePos))
+        {
+            if(m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, true))
+            {
+                return m_data.ReplaceDescriptionValues(other.description);
+            }
+        }
+
+        return "";
+    }
+    
+    protected bool isMouseInTimeline(out float _desiredTimePos)
+    {
+        _desiredTimePos = 0.0f;
+        if (!isDead)
+        {
+            if (m_timeline.IsPointOnTimeLine(Mouse.current.position.ReadValue(), out _desiredTimePos))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

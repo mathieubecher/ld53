@@ -234,12 +234,12 @@ public class TimeLine : MonoBehaviour
         
     }
 
-    public bool TryCombineAction(float _desiredTimePos, out TimeLineAction _other)
+    public bool GetHoverAction(float _desiredTimePos, out TimeLineAction _other, bool _ignorePlayed)
     {
         _other = null;
         foreach (TimeLineAction other in m_actions)
         {
-            if (!other.played && _desiredTimePos >= other.timePosition && _desiredTimePos <= other.timePosition + other.duration - 0.2f)
+            if ((!other.played || _ignorePlayed) && _desiredTimePos >= other.timePosition && _desiredTimePos <= other.timePosition + other.duration - 0.2f)
             {
                 _other = other;
                 return true;
@@ -248,7 +248,7 @@ public class TimeLine : MonoBehaviour
 
         return false;
     }
-    
+
     public bool TryAddAction(float _duration, float _desiredTimePos, out float _timePos)
     {
         _timePos = GetCellForTimePos(_desiredTimePos);

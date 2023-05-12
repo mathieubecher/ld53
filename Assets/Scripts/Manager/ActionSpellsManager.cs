@@ -38,15 +38,28 @@ public class ActionSpellsManager : MonoBehaviour
     public delegate void HoverEvent(bool _isHover);
     public static event HoverEvent OnHover;
 
-    private void OnEnable()
+    
+    public string GetDescription()
     {
-        //ControlsManager.OnSpellInput += OnSpellInput;
-    }
+        foreach (var button in m_buttons)
+        {
+            if (button && button.IsSelected())
+            {
+                return GameManager.instance.GetSelectedSpellDescription(button.actionSpell);
+            }
+        }
+        
+        foreach (var button in m_buttons)
+        {
+            if (button && button.IsHover())
+            {
+                return button.actionSpell.description;
+            }
+        }
 
-    private void OnDisable()
-    {
-        //ControlsManager.OnSpellInput -= OnSpellInput;
+        return "";
     }
+    
     public void SartFight()
     {
         m_start = true;
@@ -222,5 +235,6 @@ public class ActionSpellsManager : MonoBehaviour
     {
         m_timeWarp += m_timeWarpDuration;
     }
+
 }
 

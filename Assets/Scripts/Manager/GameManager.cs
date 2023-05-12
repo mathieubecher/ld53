@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -68,6 +70,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<CharacterData> m_NPCToSpawn;
     [SerializeField] private List<CombineType> m_combineTypes;
     [SerializeField] private Transform m_arrow;
+    [SerializeField] private TextMeshProUGUI m_descriptionText;
     [SerializeField] private GameObject m_overlayPrefab;
 
     public Player player => m_player;
@@ -157,6 +160,36 @@ public class GameManager : MonoBehaviour
             m_currentOverlay.gameObject.SetActive(false);
             m_arrow.gameObject.SetActive(false);
         }
+        Vector2 localPoint;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                m_descriptionText.transform.parent.parent as RectTransform, Mouse.current.position.value, FindObjectOfType<Canvas>().worldCamera, out localPoint))
+        {
+            var parent = m_descriptionText.transform.parent;
+            
+            parent.localPosition = localPoint;
+            string description = "";
+
+            description = m_actionSpellsManager.GetDescription();
+            if (description == "")
+            {
+                foreach (var npc in m_npcs)
+                {
+                    description = npc.GetHoverActionDescription();
+                    if (description != "") break;
+                }
+            }
+
+            if (description == "")
+            {
+                description = m_player.GetHoverActionDescription();
+            }
+            m_descriptionText.text = description;
+            parent.gameObject.SetActive(description != "");
+
+            m_descriptionText.ForceMeshUpdate();
+            float textHeight = m_descriptionText.textBounds.size.y;
+            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight + 20.0f);
+        }
     }
     
     private void OnPlayerDead()
@@ -199,6 +232,17 @@ public class GameManager : MonoBehaviour
         }
         m_currentOverlay.gameObject.SetActive(false);
         m_arrow.gameObject.SetActive(false);
+    }
+    
+    public string GetSelectedSpellDescription(ActionSpell _actionSpell)
+    {
+        foreach (var npc in m_npcs)
+        {
+            string description = npc.GetSelectedSpellDescription(_actionSpell);
+            if (description != "") return description;
+        }
+
+        return "";
     }
 
     public void HealFaction(string _faction, float _value)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -79,5 +80,43 @@ public class CharacterData : ScriptableObject
         }
 
         return ActionType.ATTACK;
+    }
+    
+    
+    public string ReplaceDescriptionValues(string _description)
+    {
+        string description = _description;
+        Regex regex = new Regex(@"\[(.*?)\]");
+
+        MatchCollection matches = regex.Matches(description);
+        foreach (Match match in matches)
+        {
+            string key = match.Groups[1].Value;
+
+            string value = GetValueForKey(key);
+            
+            string replacement = "[" + key + "]";
+            description = description.Replace(replacement, value);
+        }
+
+        return description;
+    }
+
+    private string GetValueForKey(string key)
+    {
+        switch (key.ToLower())
+        {
+            case "strength" :
+                return strength.ToString();
+            case "magica" :
+                return magica.ToString();
+            case "guard" :
+                return guardValue.ToString();
+            case "atkbuffduration" :
+                return actionSets.attackBuffDuration.ToString();
+            case "invulnerabilityduration" :
+                return actionSets.invulnerabilityDuration.ToString();
+        }
+        return "ERROR";
     }
 }

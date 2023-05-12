@@ -161,4 +161,8 @@ public class ActionSpellButton : MonoBehaviour
         return isMouseOnButton(out _);
     }
 
+    public bool IsSelected()
+    {
+        return m_isSelected;
+    }
 }

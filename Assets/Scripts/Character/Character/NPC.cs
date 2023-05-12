@@ -29,7 +29,7 @@ using UnityEngine.InputSystem;
         if (isMouseInTimeline( out desiredTimePos))
         {
             float timePos;
-            if (m_timeline.TryCombineAction(desiredTimePos,out TimeLineAction other) 
+            if (m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, false) 
                 && GameManager.CanCombine(other.type, actionSpell.actionSpell.type) )
             {
                 Combine(other, actionSpell.actionSpell.type);
@@ -37,7 +37,9 @@ using UnityEngine.InputSystem;
             }
             else
             {
-                float duration = m_data.GetActionData(actionSpell.actionSpell.type).duration;
+                var actionData = m_data.GetActionData(actionSpell.actionSpell.type);
+                if (!actionData) return;
+                float duration = actionData.duration;
                 if(m_timeline.TryAddAction(duration, desiredTimePos, out timePos))
                 {
                     AddAction(actionSpell.actionSpell.type, timePos);
@@ -51,24 +53,25 @@ using UnityEngine.InputSystem;
     {
         ActionType type = GameManager.GetCombinedType(_action.type, _otherType);
 
-        var data = m_data.GetActionData(type);
-        if (data != null)
+        var actionData = m_data.GetActionData(type);
+        if (actionData)
         {
-            _action.SetActionData(data);
-            _action.SetColor(data.color);
-            _action.SetIcone(data.icone);
+            _action.SetActionData(actionData);
+            _action.SetColor(actionData.color);
+            _action.SetIcone(actionData.icone);
         }
     }
 
     public bool TryDrawAction(ActionType _type, Transform _arrow, RectTransform _overlay)
     {
-        float duration = m_data.GetActionData(_type).duration;
+        var actionData = m_data.GetActionData(_type);
+        if (!actionData) return false;
+        float duration = actionData.duration;
         
-        float desiredTimePos;
-        if (isMouseInTimeline(out desiredTimePos))
+        if (isMouseInTimeline(out float desiredTimePos))
         {
             float timePos;
-            if (m_timeline.TryCombineAction(desiredTimePos,out TimeLineAction other) && GameManager.CanCombine(other.type, _type) )
+            if (m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, false) && GameManager.CanCombine(other.type, _type) )
             {
                 m_timeline.DrawActionOverlay(other.duration, _overlay, other.timePosition);
                 _arrow.position = m_sprite.transform.position;
@@ -84,18 +87,25 @@ using UnityEngine.InputSystem;
 
         return false;
     }
-
-    private bool isMouseInTimeline(out float _desiredTimePos)
+    public string GetSelectedSpellDescription(ActionSpell _spell)
     {
-        _desiredTimePos = 0.0f;
-        if (!isDead)
+        var actionData = m_data.GetActionData(_spell.type);
+        if (!actionData) return "";
+        if (isMouseInTimeline(out float desiredTimePos))
         {
-            if (m_timeline.IsPointOnTimeLine(Mouse.current.position.ReadValue(), out _desiredTimePos))
+            if (m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, true) && GameManager.CanCombine(other.type, _spell.type) )
             {
-                return true;
+                ActionType type = GameManager.GetCombinedType(other.type, _spell.type);
+                actionData = m_data.GetActionData(type);
+                if (actionData) return m_data.ReplaceDescriptionValues(actionData.description);
+            }
+            if (m_timeline.TryAddAction(actionData.duration, desiredTimePos, out float _))
+            {
+                return m_data.ReplaceDescriptionValues(actionData.description);
             }
         }
-        return false;
+
+        return "";
     }
 
     public override void StartFight()

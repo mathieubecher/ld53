@@ -6,11 +6,13 @@ using UnityEngine;
 public class ActionSpell : ScriptableObject
 {
     
+    [SerializeField] private string m_description;
     [SerializeField] private ActionType m_type = ActionType.NULL;
     [SerializeField] private float m_cooldown = 10.0f;
     [SerializeField] private GameObject m_buttonPrefab;
 
     public ActionType type => m_type;
+    public string description => m_description;
     public float cooldown => m_cooldown;
     public GameObject buttonPrefab => m_buttonPrefab;
     

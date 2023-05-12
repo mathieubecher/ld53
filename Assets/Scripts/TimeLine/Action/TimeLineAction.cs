@@ -13,6 +13,7 @@ public class TimeLineAction : MonoBehaviour
     private float m_timePosition;
     private float m_duration;
     private TimeLine m_parent;
+    private string m_description;
     [HideInInspector] public bool played = false;
     [HideInInspector] public bool stop = false;
 
@@ -22,11 +23,14 @@ public class TimeLineAction : MonoBehaviour
     public float timePosition => m_timePosition;
     public float duration => m_duration;
 
+    public string description => m_description;
+
     private int m_currentStep = -1;
 
     public void SetActionData(CharacterActionData _data)
     {
         m_actionType = _data.actionType;
+        m_description = _data.description;
         if (_data.actions.Count == 0) return;
         m_data = _data;
         
