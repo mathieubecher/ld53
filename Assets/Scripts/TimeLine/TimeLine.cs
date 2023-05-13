@@ -329,7 +329,7 @@ public class TimeLine : MonoBehaviour
     
     public void AddAura(float _timePosition, float _duration, float _attackMultiplier, bool _taunt, bool _invulnerability)
     {
-        AuraEffect effect = new AuraEffect(_attackMultiplier, _taunt, _invulnerability);
+        AuraEffect effect = new AuraEffect(_attackMultiplier > 1.0f? _attackMultiplier : 1.0f, 1.0f, _taunt, _invulnerability);
         foreach (Aura otherAura in m_auras)
         {
             if (otherAura && otherAura.effect != effect) continue;
@@ -351,18 +351,22 @@ public class TimeLine : MonoBehaviour
 
     public AuraEffect GetCurrentAura()
     {
-        AuraEffect currentAuraEffect = new AuraEffect();
+        return GetAuraAtTimePos(elapsedTime);
+    }
+    
+    public AuraEffect GetAuraAtTimePos(float _timePos)
+    {
+        AuraEffect auraEffect = new AuraEffect();
         foreach (var aura in m_auras)
         {
-            if (elapsedTime >= aura.timePosition && aura.timePosition + aura.duration >= elapsedTime)
+            if (_timePos >= aura.timePosition && aura.timePosition + aura.duration >= _timePos)
             {
-                currentAuraEffect += aura.effect;
+                auraEffect += aura.effect;
             }
         }
 
-        return currentAuraEffect;
+        return auraEffect;
     }
-    
     public void InvertCursor()
     {
         m_cursor.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);

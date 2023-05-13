@@ -59,17 +59,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.34901962}
-  m_RaycastTarget: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f973416465c6a64448f0486555e16e5e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 1163126583, guid: 02adaf8ee7dfcdd44b770591eff84ff0, type: 3}
+  m_Type: 2
   m_PreserveAspect: 0
-  m_FillCenter: 0
+  m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   duration: 0
   effect:
     attackMultiplier: 1
-    defenceMultiplier: 1
+    taunt: 0
     invulnerability: 0
   played: 0
   stop: 0
