@@ -284,9 +284,11 @@ public class GameManager : MonoBehaviour
             m_descriptionText.text = description;
             
             float timePos;
+            bool isOnTimeline = false;
             if (m_player.isMouseInTimeline(out timePos))
             {
                 ManageAuraDescription(m_player, description == "" ? -20.0f : 5.0f, timePos);
+                isOnTimeline = true;
             }
             else
             {
@@ -295,11 +297,20 @@ public class GameManager : MonoBehaviour
                     if (character.isMouseInTimeline(out timePos))
                     {
                         ManageAuraDescription(character, description == "" ? -20.0f : 5.0f, timePos);
+                        isOnTimeline = true;
                         break;
                     }
                 }
             }
-            
+
+            if (!isOnTimeline)
+            {
+                foreach (var auraDescrion in m_auraEffectIcones)
+                {
+                    auraDescrion.gameObject.SetActive(false);
+                }
+            }
+                
             m_descriptionText.ForceMeshUpdate();
             float textWidth =  30.0f + description.Length > 10 ? 220 : 60;
             float textHeight = description == "" ? 0f : m_descriptionText.textBounds.size.y + 30.0f;

@@ -186,6 +186,7 @@ public class TimeLine : MonoBehaviour
             float actionTime = aura.timePosition - _elapsedTime + 1.0f + m_cursorTimeOffset;
             Vector2 barRelativePos = Vector2.down * (actionTime * m_barSize);
             aura.transform.localPosition = _zeroPos + barRelativePos;
+            aura.gameObject.SetActive(true);
         }
     }
     public bool IsPointOnTimeLine(Vector2 _mousePos, out float _timePos)
@@ -346,6 +347,7 @@ public class TimeLine : MonoBehaviour
         Aura aura = actionObject.GetComponent<Aura>();
         aura.SetAura(_timePosition, _duration, _attackMultiplier, _taunt, _invulnerability);
         aura.SetSize(_duration * m_barSize);
+        aura.gameObject.SetActive(false);
         m_auras.Add(aura);
     }
 
