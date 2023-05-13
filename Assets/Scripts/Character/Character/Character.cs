@@ -29,8 +29,10 @@ using Random = UnityEngine.Random;
 
         public void Hit(float _damage)
         {
+            float previousLife = m_currentLife;
             m_currentLife -= _damage;
             m_currentLife = math.clamp(m_currentLife, 0.0f, m_maxLife);
+            Debug.Log(previousLife + " " + m_currentLife + " " + _damage);
         }
     }
     [SerializeField] protected Life m_life;
@@ -78,6 +80,7 @@ using Random = UnityEngine.Random;
     {
         spriteEvent.Healed();
         m_life.Hit(-_heal);
+        m_sprite.Hit(m_life.lifeRatio, -_heal);
     }
     
     public virtual bool TryHit(Character _attacker, float _damage)
@@ -214,7 +217,7 @@ using Random = UnityEngine.Random;
     {
         if (isDead) return;
 
-        var aura = _target.m_timeline.GetCurrentAura();
+        var aura = m_timeline.GetCurrentAura();
         // Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
         switch (_effect)
         {
@@ -227,7 +230,7 @@ using Random = UnityEngine.Random;
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
                         // Debug.Log("Is invulnerable.");
-                        m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true));
+                        m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true);
                     }
                     if (_target.TryHit(this, strength))
                     {
@@ -278,8 +281,7 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.BUFF:
                 
-                m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration,
-                    1.0f, 1.0f, true));
+                m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration, 2.0f, 1.0f, true);
                 break;
             case ActionEffect.POTION:
                 if (m_currentActionPlayed)

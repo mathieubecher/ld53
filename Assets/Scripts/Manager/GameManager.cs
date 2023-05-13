@@ -216,7 +216,6 @@ public class GameManager : MonoBehaviour
         }
         foreach (var npc in m_npcs)
         {
-            Debug.Log(npc.faction + " "+_faction + " " + _value);
             if (npc.faction == _faction)
             {
                 npc.Heal(_value);
@@ -228,13 +227,13 @@ public class GameManager : MonoBehaviour
     {
         if (m_player.faction == _faction)
         {
-            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false);   
         }
         foreach (var npc in m_npcs)
         {
             if (npc.faction == _faction)
             {
-                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false);  
             }   
         }
     }
@@ -243,13 +242,13 @@ public class GameManager : MonoBehaviour
     {
         if (m_player.faction != _otherFaction)
         {
-            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false);   
         }
         foreach (var npc in m_npcs)
         {
             if (npc.faction != _otherFaction)
             {
-                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false);  
             }   
         }
     }
