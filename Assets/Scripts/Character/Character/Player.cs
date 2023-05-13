@@ -80,7 +80,7 @@ using Random = UnityEngine.Random;
     {
         foreach (var target in m_targets)
         {
-            if (target.target.HasTaunt())
+            if (target.target.HasTaunt() && !target.target.isDead)
             {
                 m_target = target.target;
                 m_sprite.SetTarget(m_target);
