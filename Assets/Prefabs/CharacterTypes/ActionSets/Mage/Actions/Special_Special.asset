@@ -15,7 +15,7 @@ MonoBehaviour:
   actionType: 9
   description: Speed up action spell cooldown by 2 during [timeWarpDuration] units.
   color: {r: 0.53333336, g: 0.90196085, b: 0.9333334, a: 1}
-  icone: {fileID: -71647028, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  icone: {fileID: 1751818261, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1
   actions:
   - steps: 5

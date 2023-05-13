@@ -339,12 +339,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_NPCToSpawn.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_NPCToSpawn.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 1924e20a6be9a304c8565aeb7a64bcec, type: 2}
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_NPCToSpawn.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: d284fe1bb6a8bf84f889f7af399d1f14, type: 2}
     - target: {fileID: 2167017090646954845, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_RootOrder
       value: 2
