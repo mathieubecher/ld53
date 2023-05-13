@@ -95,7 +95,8 @@ public class GameManager : MonoBehaviour
             NPC npc = new NPC(NPCData);
             m_npcs.Add(npc);
         }
-        
+
+        m_timelineManager.SpawnVersus();
         m_player = new Player(m_playerToSpawn);
         
         m_actionSpellsManager.Init(-5.0f);

@@ -102,9 +102,11 @@ MonoBehaviour:
   m_genericAction: {fileID: 4388841509119564361, guid: 9505ad517d7c09e40be12b2c16821474, type: 3}
   m_timelinePrefab: {fileID: 4528226277256636141, guid: 736453a8aa9278344804b174b34fcf0c, type: 3}
   m_timelineParent: {fileID: 0}
+  m_versus: {fileID: 0}
   m_timelineScale: 0.33
   m_cellPerUnit: 4
   m_offset: 10
+  m_cursorTimeOffset: 2
   m_timeLines: []
 --- !u!114 &6008026967275968890
 MonoBehaviour:
@@ -142,13 +144,13 @@ MonoBehaviour:
   m_garbage: {fileID: 0}
   m_cooldownText: {fileID: 0}
   m_buttonHeight: 55
+  m_width: 55
   m_margin: -5
   m_animSpeed: 2
   m_nbActions: 6
   m_spellCooldown: 1
   m_timeWarpScale: 1.5
   m_timeWarpDuration: 5
-  m_width: 55
   m_actionSpells:
   - type: 1
     spell: {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}

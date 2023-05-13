@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
     public static event NPCDeadEvent OnNPCDead;
     public NPC(CharacterData _data) : base(_data, true)
     {
+        m_timeline.InvertCursor();
         ControlsManager.OnRelease += OnRelease;
     }
 

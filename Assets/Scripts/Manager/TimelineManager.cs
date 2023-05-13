@@ -27,9 +27,11 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] private GameObject m_genericAction;
     [SerializeField] private GameObject m_timelinePrefab;
     [SerializeField] private Transform m_timelineParent;
+    [SerializeField] private Transform m_versus;
     [SerializeField] private float m_timelineScale = 0.5f;
     [SerializeField] private int m_cellPerUnit = 4;
     [SerializeField] private float m_offset = 10.0f;
+    [SerializeField, Range(0,10)] private float m_cursorTimeOffset = 0.0f;
     
     [SerializeField] private List<TimeLine> m_timeLines;
     private float m_width = 0.0f;
@@ -64,6 +66,7 @@ public class TimelineManager : MonoBehaviour
         GameObject timelineInstance = Instantiate(m_timelinePrefab, m_timelineParent);
         TimeLine timeline = timelineInstance.GetComponentInChildren<TimeLine>();
         timeline.SetTimeScale(m_timelineScale);
+        timeline.SetCursorTimeOffset(m_cursorTimeOffset);
         timeline.SetCellsPerUnit(m_cellPerUnit);
         timeline.SetHeader(_header);
         //timeline.StartTimer();
@@ -73,6 +76,13 @@ public class TimelineManager : MonoBehaviour
         m_timeLines.Add(timeline);
         
         return timeline;
+    }
+    
+    public void SpawnVersus()
+    {
+        m_versus.localPosition = new Vector2(- m_width - 7.5f + 5.0f, 
+            ((RectTransform)m_versus.parent).rect.height/2.0f - (m_cursorTimeOffset) * 60.0f);
+        m_width += 15f;
     }
 
     public void RemoveTimeLine(TimeLine _timeline)

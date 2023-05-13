@@ -58,7 +58,6 @@ public class TimeLine : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private RectTransform m_cursor;
     [SerializeField] private Animator m_cursorAnimator;
-    [SerializeField, Range(0,10)] private float m_cursorTimeOffset = 0.0f;
     [Header("Prefab")]
     [SerializeField] private GameObject m_barPrefab;
     [SerializeField] private float m_barSize = 60.0f;
@@ -68,6 +67,7 @@ public class TimeLine : MonoBehaviour
     private List<TimeLineAction> m_actions;
     [SerializeField] private List<Aura> m_auras;
     private int m_cellsPerUnit;
+    private float m_cursorTimeOffset = 0.0f;
     
     public RectTransform parent => m_parent;
     public float elapsedTime => m_timer.elapsedTime;
@@ -356,6 +356,15 @@ public class TimeLine : MonoBehaviour
         return currentAuraEffect;
     }
     
+    public void InvertCursor()
+    {
+        m_cursor.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+    }
+
+    public void SetCursorTimeOffset(float _cursorTimeOffset)
+    {
+        m_cursorTimeOffset = _cursorTimeOffset;
+    }
     
     
 
@@ -399,5 +408,4 @@ public class TimeLine : MonoBehaviour
         float r = x % m;
         return r < 0.0f ? r + m : r;
     }
-
 }
