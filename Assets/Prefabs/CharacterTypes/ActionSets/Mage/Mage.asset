@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cfd390ee8a6e744801b17e4c6a200b, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: 
+  m_invulnerabilityDuration: 1.5
+  m_attackBuffDuration: 10
+  m_attackPotionBuffDuration: 10
+  m_guardPotionBuffDuration: 10
+  m_healPotionBuffValue: 10
+  m_actions:
+  - {fileID: 11400000, guid: 9bb566694e5520d459049c82ba7a9324, type: 2}
+  - {fileID: 11400000, guid: 81545d334a087724489bf2d3bbf648cc, type: 2}
+  - {fileID: 11400000, guid: eacee43a77b866149a8a2db7a1c70cf5, type: 2}
+  - {fileID: 11400000, guid: 8b43c43780573e74887aa2c5451f9f06, type: 2}
+  - {fileID: 11400000, guid: 9a1a3ef1ba38a27448d245ea5f197619, type: 2}
+  - {fileID: 11400000, guid: 824bb52cc264f4349a0c11abcb37c715, type: 2}
+  - {fileID: 11400000, guid: 096fe73bbc4fa674e9ad19e47156ded8, type: 2}
+  - {fileID: 11400000, guid: d75a4587060f88842974a39371be3ae4, type: 2}
+  - {fileID: 11400000, guid: ed973d3c45260e04ca6c8bdaf5c92564, type: 2}
+  - {fileID: 11400000, guid: 8d8736d507999a34f9924d80ab07ca0b, type: 2}

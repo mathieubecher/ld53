@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2edf675a41ee3c43951071d65fe6e40, type: 3}
-  m_Name: Attack
+  m_Name: Special
   m_EditorClassIdentifier: 
-  actionType: 1
-  description: Deals <color=#FF4A4A>[strength] damages</color> to target.
-  color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
-  icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  duration: 1.5
+  actionType: 3
+  description: Heals the rest of the group.
+  color: {r: 0.8962264, g: 0.20351835, b: 0.13105197, a: 1}
+  icone: {fileID: 1982415928, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  duration: 0.5
   actions:
-  - steps: 3
-    numberOfCells: 4
-  - steps: 0
+  - steps: 5
     numberOfCells: 1
-  - steps: 4
+  - steps: 1
     numberOfCells: 1

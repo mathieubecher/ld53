@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2edf675a41ee3c43951071d65fe6e40, type: 3}
+  m_Name: MagicAttack
+  m_EditorClassIdentifier: 
+  actionType: 1
+  description: Deals <color=#FF4A4A>[strength] damages</color> to target that bypass
+    protections but taunts the target.
+  color: {r: 0.7647059, g: 0.21960783, b: 0.6612451, a: 1}
+  icone: {fileID: -1228987505, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  duration: 1
+  actions:
+  - steps: 3
+    numberOfCells: 4
+  - steps: 0
+    numberOfCells: 1
+  - steps: 4
+    numberOfCells: 1
