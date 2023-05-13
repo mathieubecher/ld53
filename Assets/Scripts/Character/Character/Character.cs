@@ -215,45 +215,45 @@ using Random = UnityEngine.Random;
         if (isDead) return;
 
         var aura = _target.m_timeline.GetCurrentAura();
-        Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
+        // Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
         switch (_effect)
         {
             case ActionEffect.ATTACK:
-                Debug.Log("Try attack: " + m_currentActionPlayed.type);
+                // Debug.Log("Try attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
                     float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
 
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
-                        Debug.Log("Is invulnerable.");
+                        // Debug.Log("Is invulnerable.");
                         m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true));
                     }
                     if (_target.TryHit(this, strength))
                     {
-                        Debug.Log("Attack done " + strength + ".");
+                        // Debug.Log("Attack done " + strength + ".");
                         spriteEvent.DamageInflicted();
                     }
                     else
                     {
-                        Debug.Log("Attack blocked.");
+                        // Debug.Log("Attack blocked.");
                         spriteEvent.Blocked();
                     }
                 }
                 break;
             case ActionEffect.ATTACK_MAGIC:
-                Debug.Log("Try attack: " + m_currentActionPlayed.type);
+                // Debug.Log("Try magic attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
                     float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
                     if(_target.TryHitMagic(strength))
                     {
-                        Debug.Log("Magic attack done " + strength + ".");
+                        // Debug.Log("Magic attack done " + strength + ".");
                         spriteEvent.MagicDamageInflicted();
                     }
                     else
                     {
-                        Debug.Log("Magic attack blocked.");
+                        // Debug.Log("Magic attack blocked.");
                         spriteEvent.MagicBlocked();
                     }
                 }
@@ -267,11 +267,11 @@ using Random = UnityEngine.Random;
             case ActionEffect.START_GUARD:
                 m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
                 
-                Debug.Log("Guard start " + m_guardValue + ".");
+                // Debug.Log("Guard start " + m_guardValue + ".");
                 break;
             case ActionEffect.STOP_GUARD:
                 m_guardValue = 0.0f;
-                Debug.Log("Guard stop.");
+                // Debug.Log("Guard stop.");
                 break;
             case ActionEffect.INTERRUPT:
                 _target.Staggered();
@@ -280,9 +280,6 @@ using Random = UnityEngine.Random;
                 
                 m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration,
                     1.0f, 1.0f, true));
-                break;
-            case ActionEffect.TIME_WARP:
-                GameManager.actionSpellsManager.TimeWarp(m_data.actionSets.timeWarpDuration);
                 break;
             case ActionEffect.POTION:
                 if (m_currentActionPlayed)
@@ -294,6 +291,9 @@ using Random = UnityEngine.Random;
                             break;
                         case ActionType.SPECIAL_GUARD :
                             GameManager.instance.AttackDeBuffFaction(faction, 0.5f, m_data.actionSets.attackPotionDebuffDuration);
+                            break;
+                        case ActionType.SPECIAL_SPECIAL :
+                            GameManager.actionSpellsManager.TimeWarp(m_data.actionSets.timeWarpDuration);
                             break;
                         default :
                             GameManager.instance.HealFaction(faction, m_data.actionSets.healPotionBuffValue);

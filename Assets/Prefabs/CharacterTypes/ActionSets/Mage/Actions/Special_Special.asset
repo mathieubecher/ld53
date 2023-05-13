@@ -20,5 +20,5 @@ MonoBehaviour:
   actions:
   - steps: 5
     numberOfCells: 3
-  - steps: 10
+  - steps: 1
     numberOfCells: 1

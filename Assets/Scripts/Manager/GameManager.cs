@@ -216,6 +216,7 @@ public class GameManager : MonoBehaviour
         }
         foreach (var npc in m_npcs)
         {
+            Debug.Log(npc.faction + " "+_faction + " " + _value);
             if (npc.faction == _faction)
             {
                 npc.Heal(_value);
