@@ -227,13 +227,13 @@ public class GameManager : MonoBehaviour
     {
         if (m_player.faction == _faction)
         {
-            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false);   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);   
         }
         foreach (var npc in m_npcs)
         {
             if (npc.faction == _faction)
             {
-                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false);  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);  
             }   
         }
     }
@@ -242,13 +242,13 @@ public class GameManager : MonoBehaviour
     {
         if (m_player.faction != _otherFaction)
         {
-            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false);   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);   
         }
         foreach (var npc in m_npcs)
         {
             if (npc.faction != _otherFaction)
             {
-                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false);  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);  
             }   
         }
     }
