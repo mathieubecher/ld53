@@ -15,7 +15,7 @@ MonoBehaviour:
   actionType: 3
   description: Increase damages by 2 for [ATKBuffDuration] units.
   color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
-  icone: {fileID: -256505060, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  icone: {fileID: 187948289, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1
   actions:
   - steps: 5

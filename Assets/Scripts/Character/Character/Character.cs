@@ -282,7 +282,7 @@ using Random = UnityEngine.Random;
                     1.0f, 1.0f, true));
                 break;
             case ActionEffect.TIME_WARP:
-                GameManager.actionSpellsManager.TimeWarp();
+                GameManager.actionSpellsManager.TimeWarp(m_data.actionSets.timeWarpDuration);
                 break;
             case ActionEffect.POTION:
                 if (m_currentActionPlayed)
@@ -293,7 +293,7 @@ using Random = UnityEngine.Random;
                             GameManager.instance.AttackBuffFaction(faction, 2.0f, m_data.actionSets.attackPotionBuffDuration);
                             break;
                         case ActionType.SPECIAL_GUARD :
-                            GameManager.instance.AttackDeBuffFaction(faction, 0.5f, m_data.actionSets.guardPotionBuffDuration);
+                            GameManager.instance.AttackDeBuffFaction(faction, 0.5f, m_data.actionSets.attackPotionDebuffDuration);
                             break;
                         default :
                             GameManager.instance.HealFaction(faction, m_data.actionSets.healPotionBuffValue);

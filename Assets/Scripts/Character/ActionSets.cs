@@ -19,14 +19,16 @@ public class ActionSets : ScriptableObject
     [SerializeField] private float m_invulnerabilityDuration;
     [SerializeField] private float m_attackBuffDuration;
     [SerializeField] private float m_attackPotionBuffDuration;
-    [SerializeField] private float m_guardPotionBuffDuration;
+    [SerializeField] private float m_attackPotionDebuffDuration;
     [SerializeField] private float m_healPotionBuffValue;
+    [SerializeField] private float m_timeWarpDuration;
     [SerializeField] private List<CharacterActionData> m_actions;
     public List<CharacterActionData> actions => m_actions;
     public float invulnerabilityDuration => m_invulnerabilityDuration;
     public float attackBuffDuration => m_attackBuffDuration;
     
     public float attackPotionBuffDuration => m_attackPotionBuffDuration;
-    public float guardPotionBuffDuration => m_guardPotionBuffDuration;
+    public float attackPotionDebuffDuration => m_attackPotionDebuffDuration;
     public float healPotionBuffValue => m_healPotionBuffValue;
+    public float timeWarpDuration => m_timeWarpDuration;
 }

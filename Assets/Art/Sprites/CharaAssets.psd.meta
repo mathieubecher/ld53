@@ -488,7 +488,7 @@ TextureImporter:
         width: 164
         height: 217
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -496,6 +496,48 @@ TextureImporter:
       bones: []
       spriteID: 83fbab4d3bf5f314681028b039d33e1f
       internalID: 667812166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharaAssets_16
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 332
+        width: 171
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81eccdf07b98124397627532a034e60
+      internalID: 480995222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharaAssets_17
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 333
+        width: 66
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0a90a41654d3d4990de9962919cd0f
+      internalID: -1082287189
       vertices: []
       indices: 
       edges: []
@@ -519,6 +561,8 @@ TextureImporter:
       CharaAssets_13: -1180205958
       CharaAssets_14: 727729666
       CharaAssets_15: 667812166
+      CharaAssets_16: 480995222
+      CharaAssets_17: -1082287189
       CharaAssets_2: 208836547
       CharaAssets_3: -1545074414
       CharaAssets_4: -924871734

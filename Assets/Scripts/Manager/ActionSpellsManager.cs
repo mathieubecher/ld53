@@ -246,9 +246,9 @@ public class ActionSpellsManager : MonoBehaviour
         
     }
 
-    public void TimeWarp()
+    public void TimeWarp(float _duration)
     {
-        m_timeWarp += m_timeWarpDuration;
+        m_timeWarp += _duration;
     }
 
 }

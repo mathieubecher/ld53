@@ -15,7 +15,7 @@ MonoBehaviour:
   actionType: 9
   description: Interrupt target.
   color: {r: 0.53333336, g: 0.90196085, b: 0.9333334, a: 1}
-  icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
+  icone: {fileID: 2067799188, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1
   actions:
   - steps: 5

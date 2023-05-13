@@ -49,7 +49,6 @@ public class CharacterData : ScriptableObject
     public float strength => m_strength;
     public float magica => m_magica;
     public float guardValue => m_guardValue;
-    
     public ActionSets actionSets => m_actionSets;
     public List<CharacterActionData> actionDatas => m_actionSets.actions;
     public List<ActionPatternData> patterns => m_patterns;
@@ -114,8 +113,14 @@ public class CharacterData : ScriptableObject
                 return guardValue.ToString();
             case "atkbuffduration" :
                 return actionSets.attackBuffDuration.ToString();
+            case "atkdebuffduration" :
+                return actionSets.attackPotionBuffDuration.ToString();
             case "invulnerabilityduration" :
                 return actionSets.invulnerabilityDuration.ToString();
+            case "heal" :
+                return actionSets.healPotionBuffValue.ToString();
+            case "timeWarpDuration" :
+                return actionSets.timeWarpDuration.ToString();
         }
         return "ERROR";
     }

@@ -15,8 +15,9 @@ MonoBehaviour:
   m_invulnerabilityDuration: 1
   m_attackBuffDuration: 6
   m_attackPotionBuffDuration: 6
-  m_guardPotionBuffDuration: 6
+  m_attackPotionDebuffDuration: 6
   m_healPotionBuffValue: 5
+  m_timeWarpDuration: 0
   m_actions:
   - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
   - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
