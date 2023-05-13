@@ -16,9 +16,9 @@ MonoBehaviour:
   description: Taunt target and takes aggro.
   color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
   icone: {fileID: -406841167, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  duration: 0.5
+  duration: 0.75
   actions:
   - steps: 5
-    numberOfCells: 1
+    numberOfCells: 2
   - steps: 1
     numberOfCells: 1
