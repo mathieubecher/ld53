@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
+  m_Name: NPCChest
+  m_EditorClassIdentifier: 
+  m_characterName: Random Chest
+  m_faction: NPC
+  m_timeLineHeader: {fileID: 558537514, guid: d98898ffe1f7b244d996f8493165d3a1, type: 3}
+  m_spritePrefab: {fileID: 4522466753895615754, guid: 69c1be888253a0a4f86e3e59841f2ff4, type: 3}
+  m_actionSets: {fileID: 0}
+  m_life: 8
+  m_strength: 0
+  m_magica: 0
+  m_guardValue: 0
+  m_randomActions: []
+  m_hitAction: {fileID: 11400000, guid: 02edba9945054e642afb91af82a18730, type: 2}
+  m_patterns: []
