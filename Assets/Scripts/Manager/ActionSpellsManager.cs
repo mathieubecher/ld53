@@ -18,6 +18,7 @@ public class ActionSpellsManager : MonoBehaviour
     [SerializeField] private Transform m_garbage;
     [SerializeField] private TextMeshProUGUI m_cooldownText;
     [SerializeField] private float m_buttonHeight = 80.0f;
+    [SerializeField] private float m_width = 50.0f;
     [SerializeField] private float m_margin = 10.0f;
     [SerializeField] private float m_animSpeed = 2.0f;
     [SerializeField] private int m_nbActions = 5;
@@ -34,6 +35,10 @@ public class ActionSpellsManager : MonoBehaviour
     private bool m_isHover;
     private bool m_start;
     private int m_nextSpellNumber;
+    private float m_spellPosTimer = 0.0f;
+    private int m_upIndex = 0;
+
+    public float width => m_width;
     
     public delegate void HoverEvent(bool _isHover);
     public static event HoverEvent OnHover;
@@ -58,6 +63,18 @@ public class ActionSpellsManager : MonoBehaviour
         }
 
         return "";
+    }
+    public bool IsSelected()
+    {
+        foreach (var button in m_buttons)
+        {
+            if (button && button.IsSelected())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     
     public void SartFight()
@@ -102,8 +119,6 @@ public class ActionSpellsManager : MonoBehaviour
         return actionSpellButton;
     }
 
-    private float m_spellPosTimer = 0.0f;
-    private int m_upIndex = 0;
     private void Update()
     {            
         ManageSpellButtons();

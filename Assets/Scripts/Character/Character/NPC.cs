@@ -93,7 +93,7 @@ using UnityEngine.InputSystem;
         if (!actionData) return "";
         if (isMouseInTimeline(out float desiredTimePos))
         {
-            if (m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, true) && GameManager.CanCombine(other.type, _spell.type) )
+            if (m_timeline.GetHoverAction(desiredTimePos,out TimeLineAction other, false) && GameManager.CanCombine(other.type, _spell.type) )
             {
                 ActionType type = GameManager.GetCombinedType(other.type, _spell.type);
                 actionData = m_data.GetActionData(type);

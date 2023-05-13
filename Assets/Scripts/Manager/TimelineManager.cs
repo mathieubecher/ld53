@@ -82,9 +82,9 @@ public class TimelineManager : MonoBehaviour
             Destroy(_timeline.parent.gameObject);
     }
 
-    public void ResetWidth()
+    public void ResetWidth(float _resetWidth)
     {
-        m_width = 0.0f;
+        m_width = _resetWidth;
     }
 
 }

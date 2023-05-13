@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98cdb3eb60d5cd34fb175107d97f1514, type: 3}
   m_Name: Guard
   m_EditorClassIdentifier: 
-  m_description: Guard
+  m_description: GUARD
   m_type: 2
   m_cooldown: 1
   m_buttonPrefab: {fileID: 5620750856206099137, guid: eb46221e3940fc84081e6184f5b78459, type: 3}

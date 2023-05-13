@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   actionType: 1
-  description: Deals [strength] damages to target.
+  description: Deals <color=#FF4A4A>[strength] damages</color> to target.
   color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
   icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1

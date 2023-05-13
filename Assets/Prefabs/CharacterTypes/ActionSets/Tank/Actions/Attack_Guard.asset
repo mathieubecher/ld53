@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Attack_Guard
   m_EditorClassIdentifier: 
   actionType: 8
-  description: Deals [strength] damages to target and then becomes invulnerable for
-    [InvulnerabilityDuration] unit.
+  description: Deals <color=#FF4A4A>[strength] damages</color> to target and then
+    becomes invulnerable for [InvulnerabilityDuration] unit.
   color: {r: 0.76470596, g: 0.21960786, b: 0.21960786, a: 1}
   icone: {fileID: -1359350132, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1.5

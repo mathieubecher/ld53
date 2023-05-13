@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void OnEnable()
     {
-        m_timelineManager.ResetWidth();
+        m_timelineManager.ResetWidth(m_actionSpellsManager.width);
 
         foreach (var NPCData in m_NPCToSpawn)
         {
@@ -97,7 +97,8 @@ public class GameManager : MonoBehaviour
         }
         
         m_player = new Player(m_playerToSpawn);
-        m_actionSpellsManager.Init(m_timelineManager.width - 5.0f);
+        
+        m_actionSpellsManager.Init(-5.0f);
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
@@ -160,38 +161,10 @@ public class GameManager : MonoBehaviour
             m_currentOverlay.gameObject.SetActive(false);
             m_arrow.gameObject.SetActive(false);
         }
-        Vector2 localPoint;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                m_descriptionText.transform.parent.parent as RectTransform, Mouse.current.position.value, FindObjectOfType<Canvas>().worldCamera, out localPoint))
-        {
-            var parent = m_descriptionText.transform.parent;
-            
-            parent.localPosition = localPoint;
-            string description = "";
-
-            description = m_actionSpellsManager.GetDescription();
-            if (description == "")
-            {
-                foreach (var npc in m_npcs)
-                {
-                    description = npc.GetHoverActionDescription();
-                    if (description != "") break;
-                }
-            }
-
-            if (description == "")
-            {
-                description = m_player.GetHoverActionDescription();
-            }
-            m_descriptionText.text = description;
-            parent.gameObject.SetActive(description != "");
-
-            m_descriptionText.ForceMeshUpdate();
-            float textHeight = m_descriptionText.textBounds.size.y;
-            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight + 20.0f);
-        }
+        
+        ManageDescription();
     }
-    
+
     private void OnPlayerDead()
     {
         OnWin?.Invoke();
@@ -234,17 +207,6 @@ public class GameManager : MonoBehaviour
         m_arrow.gameObject.SetActive(false);
     }
     
-    public string GetSelectedSpellDescription(ActionSpell _actionSpell)
-    {
-        foreach (var npc in m_npcs)
-        {
-            string description = npc.GetSelectedSpellDescription(_actionSpell);
-            if (description != "") return description;
-        }
-
-        return "";
-    }
-
     public void HealFaction(string _faction, float _value)
     {
         if (m_player.faction == _faction)
@@ -289,4 +251,56 @@ public class GameManager : MonoBehaviour
             }   
         }
     }
+    
+    
+    
+    private void ManageDescription()
+    {
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                m_descriptionText.transform.parent.parent as RectTransform, Mouse.current.position.value,
+                FindObjectOfType<Canvas>().worldCamera, out Vector2 localPoint))
+        {
+            var parent = m_descriptionText.transform.parent;
+            Vector2 offset = Vector2.left * 20.0f;
+            parent.localPosition = localPoint + offset;
+            string description = "";
+
+            description = m_actionSpellsManager.GetDescription();
+            if (description == "" && !m_actionSpellsManager.IsSelected())
+            {
+                foreach (var npc in m_npcs)
+                {
+                    description = npc.GetHoverActionDescription();
+                    if (description != "") break;
+                }
+            }
+
+            if (description == "" && !m_actionSpellsManager.IsSelected())
+            {
+                description = m_player.GetHoverActionDescription();
+            }
+
+            m_descriptionText.text = description;
+            parent.gameObject.SetActive(description != "");
+
+            m_descriptionText.ForceMeshUpdate();
+            float textWidth = description.Length > 10 ? 220 : 60;
+            float textHeight = m_descriptionText.textBounds.size.y;
+            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
+                textHeight + 30.0f);
+            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
+                textWidth + 30.0f);
+        }
+    }
+    public string GetSelectedSpellDescription(ActionSpell _actionSpell)
+    {
+        foreach (var npc in m_npcs)
+        {
+            string description = npc.GetSelectedSpellDescription(_actionSpell);
+            if (description != "") return description;
+        }
+
+        return "";
+    }
+
 }

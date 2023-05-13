@@ -263,6 +263,7 @@ public class TimeLine : MonoBehaviour
 
         foreach (TimeLineAction other in m_actions)
         {
+            if (!other) continue;
             float otherDuration = ((RectTransform)other.transform).rect.height / m_barSize;
             if (_timePos >= other.timePosition && _timePos < other.timePosition + otherDuration)
             {
