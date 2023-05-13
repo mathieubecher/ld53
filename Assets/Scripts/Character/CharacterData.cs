@@ -121,6 +121,8 @@ public class CharacterData : ScriptableObject
                 return actionSets.healPotionBuffValue.ToString();
             case "timeWarpDuration" :
                 return actionSets.timeWarpDuration.ToString();
+            case "tauntDuration" :
+                return actionSets.tauntDuration.ToString();
         }
         return "ERROR";
     }

@@ -4,6 +4,37 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+[Serializable] public class AuraEffect
+{
+    public float attackMultiplier = 1.0f;
+    public bool taunt = false;
+    public bool invulnerability = false;
+    public AuraEffect(){}
+
+    public AuraEffect(float _attackMultiplier, bool _taunt, bool _invulnerability)
+    {
+        attackMultiplier = _attackMultiplier;
+        taunt = _taunt;
+        invulnerability = _invulnerability;
+    }
+        
+    public static AuraEffect operator +(AuraEffect a, AuraEffect b)
+    {
+        AuraEffect result = new AuraEffect();
+        result.attackMultiplier =  math.max(a.attackMultiplier, b.attackMultiplier);
+        result.invulnerability = a.invulnerability || b.invulnerability;
+        result.taunt = a.taunt || b.taunt;
+        return result;
+    }
+    public static bool operator ==(AuraEffect a, AuraEffect b)
+    {
+        return a.invulnerability == b.invulnerability && a.taunt == b.taunt && Math.Abs(a.attackMultiplier - b.attackMultiplier) < 0.001f;
+    }
+    public static bool operator !=(AuraEffect a, AuraEffect b)
+    {
+        return a.invulnerability != b.invulnerability || a.taunt != b.taunt || Math.Abs(a.attackMultiplier - b.attackMultiplier) >= 0.001f;
+    }
+}
 public class Aura : MonoBehaviour
 {
     public float timePosition = 0.0f;
@@ -12,34 +43,12 @@ public class Aura : MonoBehaviour
     [HideInInspector] public bool played = false;
     [HideInInspector] public bool stop = false;
 
-    [Serializable] public class AuraEffect
-    {
-        public float attackMultiplier = 1.0f;
-        public float defenceMultiplier = 1.0f;
-        public bool invulnerability = false;
-        public AuraEffect(){}
-
-        public AuraEffect(float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
-        {
-            attackMultiplier = _attackMultiplier;
-            defenceMultiplier = _defenceMultiplier;
-            invulnerability = _invulnerability;
-        }
-        
-        public static AuraEffect operator +(AuraEffect a, AuraEffect b)
-        {
-            AuraEffect result = new AuraEffect();
-            result.attackMultiplier =  math.max(a.attackMultiplier, b.attackMultiplier);
-            result.defenceMultiplier = math.max(a.defenceMultiplier, b.defenceMultiplier);
-            result.invulnerability = a.invulnerability || b.invulnerability;
-            return result;
-        }
-    }
-    public void SetAura(float _timePosition, float _duration, float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
+    
+    public void SetAura(float _timePosition, float _duration, float _attackMultiplier, bool _taunt, bool _invulnerability)
     {
         timePosition = _timePosition;
         duration = _duration;
-        effect = new AuraEffect(_attackMultiplier, _defenceMultiplier, _invulnerability);
+        effect = new AuraEffect(_attackMultiplier, _taunt, _invulnerability);
     }
     public void SetSize(float _size)
     {

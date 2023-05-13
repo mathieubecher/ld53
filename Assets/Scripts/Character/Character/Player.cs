@@ -41,8 +41,7 @@ using Random = UnityEngine.Random;
             m_targets.Add(new NPCTarget(character, 0));
         }
 
-        m_waiting = 30.0f;
-
+        m_waiting = 3.0f;
         SelectTarget();
     }
 
@@ -51,6 +50,12 @@ using Random = UnityEngine.Random;
         base.Taunt(_attacker, _aggro);
         var attackerTarget = m_targets.Find(x => x.target == _attacker);
         attackerTarget.aggro += _aggro;
+        SelectTarget();
+    }
+
+    protected override void OnEndAction(TimeLineAction _action)
+    {
+        base.OnEndAction(_action);
         SelectTarget();
     }
 
@@ -64,11 +69,7 @@ using Random = UnityEngine.Random;
             var attackerTarget = m_targets.Find(x => x.target == _attacker);
             if (hitSuccess)
             {
-                attackerTarget.aggro += _damage;
-            }
-            else
-            {
-                attackerTarget.aggro = math.max(attackerTarget.aggro - 0.2f, 1.0f);
+                attackerTarget.aggro += 1.0f;
             }
             SelectTarget();
         }
@@ -77,6 +78,16 @@ using Random = UnityEngine.Random;
 
     private void SelectTarget()
     {
+        foreach (var target in m_targets)
+        {
+            if (target.target.HasTaunt() && !target.target.isDead)
+            {
+                m_target = target.target;
+                m_sprite.SetTarget(m_target);
+                return;
+            }   
+        }
+        
         m_target = m_targets.OrderByDescending(x => x.aggro * (x.target.isDead ? 0.0f : 1.0f) + (x.target.isDead ? 0.0f : 1.0f)).ToList()[0].target;
         m_sprite.SetTarget(m_target);
     }
@@ -117,7 +128,6 @@ using Random = UnityEngine.Random;
 
     private void ChooseActionPattern(float _timePos)
     {
-        if (m_target == null || m_target.isDead) SelectTarget();
         AddActions(GetRandomPattern(), _timePos);
     }
     private ActionPatternData GetRandomPattern()

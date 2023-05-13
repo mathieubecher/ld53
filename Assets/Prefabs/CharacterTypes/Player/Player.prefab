@@ -819,6 +819,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LifeBar
       objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.b
+      value: 0.25490198
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21568628
+      objectReference: {fileID: 0}
     - target: {fileID: 5726774596157194808, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
       propertyPath: m_RootOrder
       value: 4

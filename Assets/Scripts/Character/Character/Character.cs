@@ -201,7 +201,7 @@ using Random = UnityEngine.Random;
         spriteEvent.ActionStart(_action.type);
         //m_sprite.PlayAction(m_target, _action);
     }
-    private void OnEndAction(TimeLineAction _action)
+    protected virtual void OnEndAction(TimeLineAction _action)
     {
         m_guardValue = 0.0f;
         spriteEvent.ActionEnd(_action.type);
@@ -230,7 +230,7 @@ using Random = UnityEngine.Random;
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
                         // Debug.Log("Is invulnerable.");
-                        m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true);
+                        m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, false, true);
                     }
                     if (_target.TryHit(this, strength))
                     {
@@ -264,11 +264,12 @@ using Random = UnityEngine.Random;
             case ActionEffect.TAUNT :
                 if (_target != null)
                 {
-                    _target.Taunt(this, 5.0f * m_data.strength);
+                    m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.tauntDuration, 1.0f, true, false);
+                    _target.Taunt(this, 0.0f);
                 }
                 break;
             case ActionEffect.START_GUARD:
-                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
+                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f);
                 
                 // Debug.Log("Guard start " + m_guardValue + ".");
                 break;
@@ -281,7 +282,7 @@ using Random = UnityEngine.Random;
                 break;
             case ActionEffect.BUFF:
                 
-                m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration, 2.0f, 1.0f, true);
+                m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration, 2.0f, false, false);
                 break;
             case ActionEffect.POTION:
                 if (m_currentActionPlayed)

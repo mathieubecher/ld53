@@ -327,18 +327,31 @@ public class TimeLine : MonoBehaviour
     }
 
     
-    public void AddAura(float _timePosition, float _duration, float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
+    public void AddAura(float _timePosition, float _duration, float _attackMultiplier, bool _taunt, bool _invulnerability)
     {
+        AuraEffect effect = new AuraEffect(_attackMultiplier, _taunt, _invulnerability);
+        foreach (Aura otherAura in m_auras)
+        {
+            if (otherAura && otherAura.effect != effect) continue;
+            if (_timePosition >= otherAura.timePosition && _timePosition <= otherAura.timePosition + otherAura.duration)
+            {
+                if (_timePosition + _duration <= otherAura.timePosition + otherAura.duration) return;
+                otherAura.duration += _timePosition + _duration - otherAura.timePosition - otherAura.duration;
+                otherAura.SetSize(otherAura.duration * m_barSize);
+                return;
+            }
+        }
+        
         GameObject actionObject = Instantiate(m_auraPrefab, m_auraParent);
         Aura aura = actionObject.GetComponent<Aura>();
-        aura.SetAura(_timePosition, _duration, _attackMultiplier, _defenceMultiplier, _invulnerability);
+        aura.SetAura(_timePosition, _duration, _attackMultiplier, _taunt, _invulnerability);
         aura.SetSize(_duration * m_barSize);
         m_auras.Add(aura);
     }
 
-    public Aura.AuraEffect GetCurrentAura()
+    public AuraEffect GetCurrentAura()
     {
-        Aura.AuraEffect currentAuraEffect = new Aura.AuraEffect();
+        AuraEffect currentAuraEffect = new AuraEffect();
         foreach (var aura in m_auras)
         {
             if (elapsedTime >= aura.timePosition && aura.timePosition + aura.duration >= elapsedTime)
