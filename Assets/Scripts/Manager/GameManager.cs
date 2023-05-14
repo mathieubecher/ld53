@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private TimelineManager m_timelineManager;
     private CharacterSpriteManager m_characterSpriteManager;
     private ActionSpellsManager m_actionSpellsManager;
+    private bool m_isPause;
     public static GameManager instance
     {
         get
@@ -104,12 +105,12 @@ public class GameManager : MonoBehaviour
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
+        ControlsManager.OnEscape += PauseGame;
         
         CreateOverlay();
 
         if(m_startFightAtStart) StartFight();
     }
-
 
     public void OnDisable()
     {
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
         
         NPC.OnNPCDead -= OnNPCDead;
         Player.OnPlayerDead -= OnPlayerDead;
+        ControlsManager.OnEscape -= PauseGame;
         
         DestroyOverlay();
         
@@ -145,6 +147,21 @@ public class GameManager : MonoBehaviour
     private void StopFight()
     {
         m_startFight = false;
+        if (!m_isPause)
+        {
+            foreach (NPC npc in m_npcs)
+            {
+                npc.StopFight();
+            }
+
+            m_player.StopFight();
+        
+            m_actionSpellsManager.StopFight();
+        }
+    }
+    
+    private void PauseFight()
+    {
         foreach (NPC npc in m_npcs)
         {
             npc.StopFight();
@@ -153,6 +170,17 @@ public class GameManager : MonoBehaviour
         m_player.StopFight();
         
         m_actionSpellsManager.StopFight();
+    }
+    private void ResumeFight()
+    {
+        foreach (NPC npc in m_npcs)
+        {
+            npc.ResumeFight();
+        }
+
+        m_player.ResumeFight();
+        
+        m_actionSpellsManager.ResumeFight();
     }
 
     public void Update()
@@ -366,4 +394,19 @@ public class GameManager : MonoBehaviour
         return "";
     }
 
+    private void PauseGame()
+    {
+        if (!m_startFight) return;
+        
+        if (m_isPause)
+        {
+            ResumeFight();
+            m_isPause = false;
+        }
+        else
+        {
+            PauseFight();
+            m_isPause = true;
+        }
+    }
 }

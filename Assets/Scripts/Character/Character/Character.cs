@@ -43,6 +43,8 @@ using Random = UnityEngine.Random;
 
     [SerializeField] private float m_guardValue = 0.0f;
     [SerializeField] private bool m_guardBreaked = false;
+    
+    protected bool m_isPaused = false;
     public CharacterSprite sprite => m_sprite;
     public CharacterSpriteEvent spriteEvent => m_sprite.spriteEvent;
     public bool isDead => m_life.isDead;
@@ -180,11 +182,22 @@ using Random = UnityEngine.Random;
 
     public virtual void StartFight()
     {
+        m_isPaused = false;
+        m_sprite.ResumeAnim();
         m_timeline.StartTimer();
     }
     public void StopFight()
     {
+        m_isPaused = true;
+        m_sprite.PauseAnim();
         m_timeline.StopTimer();
+    }
+
+    public void ResumeFight()
+    {
+        m_isPaused = false;
+        m_sprite.ResumeAnim();
+        m_timeline.ResumeTimer();
     }
 
     private TimeLineAction m_currentActionPlayed;

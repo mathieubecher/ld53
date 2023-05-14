@@ -46,45 +46,9 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""One"",
+                    ""name"": ""Escape"",
                     ""type"": ""Button"",
-                    ""id"": ""926f7410-086e-4dd2-b125-5075f4fe039a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Two"",
-                    ""type"": ""Button"",
-                    ""id"": ""c5e47840-11f8-44f5-9347-1094e9bcb37d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Three"",
-                    ""type"": ""Button"",
-                    ""id"": ""4268560f-54b8-41bf-b9bc-5ea915a019a7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Four"",
-                    ""type"": ""Button"",
-                    ""id"": ""884e49c8-8141-4e77-9a7e-db5fcdf1e323"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Five"",
-                    ""type"": ""Button"",
-                    ""id"": ""6864d05e-12f0-4e1e-bfe9-50bf7675e217"",
+                    ""id"": ""f1d92538-e29e-4f39-a193-fa3f4fb426ce"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -93,7 +57,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""AccelTime"",
                     ""type"": ""Button"",
-                    ""id"": ""f1bc9251-35aa-49b5-86a3-ef631ab25b7a"",
+                    ""id"": ""5a9ebe57-3cc7-462b-8160-703f04dca931"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -125,62 +89,18 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""79e43cab-bd3f-484b-ae9b-c3413920a4d2"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""c2f6144d-3ebf-477f-96f8-ff6227d4dd11"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""One"",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""415738b2-6bb0-4bc6-9ef1-9bbe6b5e97b3"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Two"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1b0928b3-9f07-4454-8a2a-25e8a482bcab"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Three"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3b5f04b5-72f5-4bc2-b1b9-2b611f9feaed"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Four"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c859da61-0e0e-4761-ab21-dc8f62bb2139"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Five"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""74eccc37-504d-46e4-b82b-162f7b074fd2"",
+                    ""id"": ""8006684f-7bbc-4a5c-a327-eaecad86b220"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -198,11 +118,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_Click = m_InGame.FindAction("Click", throwIfNotFound: true);
         m_InGame_RightClick = m_InGame.FindAction("RightClick", throwIfNotFound: true);
-        m_InGame_One = m_InGame.FindAction("One", throwIfNotFound: true);
-        m_InGame_Two = m_InGame.FindAction("Two", throwIfNotFound: true);
-        m_InGame_Three = m_InGame.FindAction("Three", throwIfNotFound: true);
-        m_InGame_Four = m_InGame.FindAction("Four", throwIfNotFound: true);
-        m_InGame_Five = m_InGame.FindAction("Five", throwIfNotFound: true);
+        m_InGame_Escape = m_InGame.FindAction("Escape", throwIfNotFound: true);
         m_InGame_AccelTime = m_InGame.FindAction("AccelTime", throwIfNotFound: true);
     }
 
@@ -267,11 +183,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
     private List<IInGameActions> m_InGameActionsCallbackInterfaces = new List<IInGameActions>();
     private readonly InputAction m_InGame_Click;
     private readonly InputAction m_InGame_RightClick;
-    private readonly InputAction m_InGame_One;
-    private readonly InputAction m_InGame_Two;
-    private readonly InputAction m_InGame_Three;
-    private readonly InputAction m_InGame_Four;
-    private readonly InputAction m_InGame_Five;
+    private readonly InputAction m_InGame_Escape;
     private readonly InputAction m_InGame_AccelTime;
     public struct InGameActions
     {
@@ -279,11 +191,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
         public InGameActions(@InputsManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_InGame_Click;
         public InputAction @RightClick => m_Wrapper.m_InGame_RightClick;
-        public InputAction @One => m_Wrapper.m_InGame_One;
-        public InputAction @Two => m_Wrapper.m_InGame_Two;
-        public InputAction @Three => m_Wrapper.m_InGame_Three;
-        public InputAction @Four => m_Wrapper.m_InGame_Four;
-        public InputAction @Five => m_Wrapper.m_InGame_Five;
+        public InputAction @Escape => m_Wrapper.m_InGame_Escape;
         public InputAction @AccelTime => m_Wrapper.m_InGame_AccelTime;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
@@ -300,21 +208,9 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
             @RightClick.started += instance.OnRightClick;
             @RightClick.performed += instance.OnRightClick;
             @RightClick.canceled += instance.OnRightClick;
-            @One.started += instance.OnOne;
-            @One.performed += instance.OnOne;
-            @One.canceled += instance.OnOne;
-            @Two.started += instance.OnTwo;
-            @Two.performed += instance.OnTwo;
-            @Two.canceled += instance.OnTwo;
-            @Three.started += instance.OnThree;
-            @Three.performed += instance.OnThree;
-            @Three.canceled += instance.OnThree;
-            @Four.started += instance.OnFour;
-            @Four.performed += instance.OnFour;
-            @Four.canceled += instance.OnFour;
-            @Five.started += instance.OnFive;
-            @Five.performed += instance.OnFive;
-            @Five.canceled += instance.OnFive;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
             @AccelTime.started += instance.OnAccelTime;
             @AccelTime.performed += instance.OnAccelTime;
             @AccelTime.canceled += instance.OnAccelTime;
@@ -328,21 +224,9 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
             @RightClick.started -= instance.OnRightClick;
             @RightClick.performed -= instance.OnRightClick;
             @RightClick.canceled -= instance.OnRightClick;
-            @One.started -= instance.OnOne;
-            @One.performed -= instance.OnOne;
-            @One.canceled -= instance.OnOne;
-            @Two.started -= instance.OnTwo;
-            @Two.performed -= instance.OnTwo;
-            @Two.canceled -= instance.OnTwo;
-            @Three.started -= instance.OnThree;
-            @Three.performed -= instance.OnThree;
-            @Three.canceled -= instance.OnThree;
-            @Four.started -= instance.OnFour;
-            @Four.performed -= instance.OnFour;
-            @Four.canceled -= instance.OnFour;
-            @Five.started -= instance.OnFive;
-            @Five.performed -= instance.OnFive;
-            @Five.canceled -= instance.OnFive;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
             @AccelTime.started -= instance.OnAccelTime;
             @AccelTime.performed -= instance.OnAccelTime;
             @AccelTime.canceled -= instance.OnAccelTime;
@@ -367,11 +251,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
     {
         void OnClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
-        void OnOne(InputAction.CallbackContext context);
-        void OnTwo(InputAction.CallbackContext context);
-        void OnThree(InputAction.CallbackContext context);
-        void OnFour(InputAction.CallbackContext context);
-        void OnFive(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
         void OnAccelTime(InputAction.CallbackContext context);
     }
 }
