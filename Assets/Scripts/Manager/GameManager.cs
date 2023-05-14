@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
 
     public void StartFight()
     {
+        ChapterManager.StartFight();
         m_startFight = true;
         foreach (NPC npc in m_npcs)
         {

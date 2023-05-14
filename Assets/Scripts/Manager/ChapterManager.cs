@@ -142,6 +142,19 @@ public class ChapterManager : MonoBehaviour
             }
         }
     }
+    
+    public delegate void SimpleEvent();
+    public static event SimpleEvent OnFightStart;
+    public static event SimpleEvent OnSkipMeanwhile;
+    public static void StartFight()
+    {
+        OnFightStart?.Invoke();
+    }
+    public static void SkipMeanWhile()
+    {
+        OnSkipMeanwhile?.Invoke();
+    }
+    
     private static void DecomposeText(string _text, out string _name, out int _number)
     {
         string[] splitString = _text.Split(' ');
@@ -155,21 +168,6 @@ public class ChapterManager : MonoBehaviour
 
         _name = splitString[0];
         int.TryParse(splitString[1], out _number);
-        
-        /*
-        Regex regex = new Regex(@"([a-zA-Z]+)(\d+)");
-        Match match = regex.Match(_text);
-
-        if (match.Success)
-        {
-            _name = match.Groups[1].Value;
-            _number = int.Parse(match.Groups[2].Value);
-        }
-        else
-        {
-            _name = "";
-            _number = 0;
-        }
-        */
     }
+
 }
