@@ -312,6 +312,7 @@ MonoBehaviour:
   - SNK_Char_Foleys
   - SNK_Char_Sfx
   - SNK_Char_Voices
+  - SNK_Music
   - SNK_Narra
   - SNK_Test
   - SNK_UI_Spells
