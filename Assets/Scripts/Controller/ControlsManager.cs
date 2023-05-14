@@ -72,6 +72,8 @@ public class ControlsManager : MonoBehaviour
     public static event SimpleEvent OnEscape;
     public static event SimpleEvent OnRightClick;
     public static event SimpleEvent OnRightRelease;
+    public static event SimpleEvent OnPressSkip;
+    public static event SimpleEvent OnReleaseSkip;
 
     public static event SimpleEvent OnAccelTime;
     public static event SimpleEvent OnDecelTime;
@@ -119,15 +121,15 @@ public class ControlsManager : MonoBehaviour
             OnEscape?.Invoke();
     }
     
-    public void AccelTime(InputAction.CallbackContext _context)
+    public void Skip(InputAction.CallbackContext _context)
     {
         if (_context.performed)
         {
-            OnAccelTime?.Invoke();
+            OnPressSkip?.Invoke();
         }
         else if (_context.canceled)
         {
-            OnDecelTime?.Invoke();
+            OnReleaseSkip?.Invoke();
         }
     }
 }

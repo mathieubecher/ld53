@@ -18,50 +18,43 @@ MonoBehaviour:
   m_spritePrefab: {fileID: 1600728368570027554, guid: 6302640a53fa3b541a1492fa60174d66, type: 3}
   m_actionSets: {fileID: 11400000, guid: 87b204c11eb4cf0459d8f4837f2090f5, type: 2}
   m_life: 24
-  m_strength: 2
+  m_strength: 2.5
   m_magica: 1
   m_guardValue: 2
   m_randomActions: []
   m_hitAction: {fileID: 11400000, guid: c90506cd1fa694743aa29daaaaa5adda, type: 2}
   m_patterns:
-  - weight: 0.25
+  - weight: 0.23
     actions:
     - {fileID: 11400000, guid: 3e9d26717892847459602d317d0915d9, type: 2}
-    - {fileID: 11400000, guid: 3d1ac201a24acfc439b51c5f05dc65c8, type: 2}
+    - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
     - {fileID: 11400000, guid: 939f5242b1b844042a8c9f899ace1f46, type: 2}
     - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: 49f74389622319744b2f2ae47dfc333d, type: 2}
-  - weight: 0.25
+  - weight: 0.22
     actions:
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: 3e9d26717892847459602d317d0915d9, type: 2}
     - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
     - {fileID: 11400000, guid: bc3cc649685ca9f498120b00116b008b, type: 2}
     - {fileID: 11400000, guid: 3e9d26717892847459602d317d0915d9, type: 2}
-  - weight: 0.25
+  - weight: 0.22
     actions:
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: bc3cc649685ca9f498120b00116b008b, type: 2}
     - {fileID: 11400000, guid: 49f74389622319744b2f2ae47dfc333d, type: 2}
-    - {fileID: 11400000, guid: 49f74389622319744b2f2ae47dfc333d, type: 2}
-    - {fileID: 11400000, guid: f2db1b9f57af0784fa13c0ae5b7e9029, type: 2}
     - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-  - weight: 0.25
+  - weight: 0.3
     actions:
     - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
     - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
-    - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
+    - {fileID: 11400000, guid: b7e5f66acad649849a7f9866af93cf65, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,14 +32,14 @@ public class ChapterManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        ControlsManager.OnAccelTime += OnAccelTime;
-        ControlsManager.OnDecelTime += OnDecelTime;
+        //ControlsManager.OnAccelTime += OnAccelTime;
+        //ControlsManager.OnDecelTime += OnDecelTime;
     }
 
     private void OnDestroy()
     {
-        ControlsManager.OnAccelTime -= OnAccelTime;
-        ControlsManager.OnDecelTime -= OnDecelTime;
+        //ControlsManager.OnAccelTime -= OnAccelTime;
+        //ControlsManager.OnDecelTime -= OnDecelTime;
     }
 
     public void NextScene()
@@ -63,7 +64,7 @@ public class ChapterManager : MonoBehaviour
     {
         currentChapter.FailChapter();
     }
-
+/*
     private bool m_accelTime = false;
     private void OnDecelTime()
     {
@@ -74,10 +75,10 @@ public class ChapterManager : MonoBehaviour
     {
         m_accelTime = true;
     }
-
+*/
     private void Update()
     {
-        Time.timeScale = m_accelTime ? 10.0f : 1.0f;
+        //Time.timeScale = m_accelTime ? 10.0f : 1.0f;
     }
     
     [Serializable] public struct Chapter
@@ -88,12 +89,14 @@ public class ChapterManager : MonoBehaviour
         public bool isLastScene => currentScene >= chapterScenes.Count;
         public void RestartChapter()
         {
+            ChapterManager.InformLoadingScene(chapterScenes[0]);
             SceneManager.LoadScene(chapterScenes[0]);
             currentScene = 0;
         }
 
         public void FailChapter()
         {
+            ChapterManager.InformLoadingScene(failScene);
             SceneManager.LoadScene(failScene);
             currentScene = 0;
         }
@@ -102,10 +105,74 @@ public class ChapterManager : MonoBehaviour
         {
             ++currentScene;
             if (currentScene >= chapterScenes.Count) return;
-                
+
+            ChapterManager.InformLoadingScene(chapterScenes[currentScene]);
             SceneManager.LoadScene(chapterScenes[currentScene]);
         }
     }
 
+    public delegate void LoadSceneEvent(int _index);
+    public static event LoadSceneEvent OnChapterTitleScreen;
+    public static event LoadSceneEvent OnChapterIntro;
+    public static event LoadSceneEvent OnChapterMeanwhile;
+    public static event LoadSceneEvent OnChapterWin;
+    public static event LoadSceneEvent OnChapterDefeat;
+    private static void InformLoadingScene(string _chapterScene)
+    {
+        DecomposeText(_chapterScene, out string name, out int number);
+        {
+            Debug.Log(_chapterScene + " " + name + " " + number);
+            switch (name.Replace(" ", ""))
+            {
+                case "Intro" :
+                    Debug.Log("Intro " + number);
+                    OnChapterIntro?.Invoke(number);
+                    break;
+                case "Level" :
+                    Debug.Log("Level " + number);
+                    OnChapterMeanwhile?.Invoke(number);
+                    break;
+                case "Success" :
+                    Debug.Log("Success " + number);
+                    OnChapterWin?.Invoke(number);
+                    break;
+                case "Fail" :
+                    Debug.Log("Fail " + number);
+                    OnChapterDefeat?.Invoke(number);
+                    break;
+                case "StartMenu" :
+                    Debug.Log("StartMenu " + number);
+                    OnChapterTitleScreen?.Invoke(number);
+                    break;
+            }
+        }
+    }
+    
+    public delegate void SimpleEvent();
+    public static event SimpleEvent OnFightStart;
+    public static event SimpleEvent OnSkipMeanwhile;
+    public static void StartFight()
+    {
+        OnFightStart?.Invoke();
+    }
+    public static void SkipMeanWhile()
+    {
+        OnSkipMeanwhile?.Invoke();
+    }
+    
+    private static void DecomposeText(string _text, out string _name, out int _number)
+    {
+        string[] splitString = _text.Split(' ');
+
+        _name = "";
+        _number = 0;
+        if (splitString.Length != 2) return;
+
+        for (int i = 0; i < splitString.Length - 1; ++i)
+        {
+            _name += splitString[i];
+        }
+        int.TryParse(splitString[^1], out _number);
+    }
 
 }

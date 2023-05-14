@@ -62,6 +62,15 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""68e49553-1e9e-42f8-a6fd-9b24a6bd1b6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,39 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
                     ""action"": ""AccelTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f6b1f2d-4b3e-4f55-9b17-d600970d1288"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8520c167-9459-4c54-9d90-fc318f45e774"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdb989bd-75b9-40db-8ec0-a1dcb777821b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +162,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
         m_InGame_RightClick = m_InGame.FindAction("RightClick", throwIfNotFound: true);
         m_InGame_Escape = m_InGame.FindAction("Escape", throwIfNotFound: true);
         m_InGame_AccelTime = m_InGame.FindAction("AccelTime", throwIfNotFound: true);
+        m_InGame_Skip = m_InGame.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +228,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_RightClick;
     private readonly InputAction m_InGame_Escape;
     private readonly InputAction m_InGame_AccelTime;
+    private readonly InputAction m_InGame_Skip;
     public struct InGameActions
     {
         private @InputsManager m_Wrapper;
@@ -193,6 +237,7 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_InGame_RightClick;
         public InputAction @Escape => m_Wrapper.m_InGame_Escape;
         public InputAction @AccelTime => m_Wrapper.m_InGame_AccelTime;
+        public InputAction @Skip => m_Wrapper.m_InGame_Skip;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +259,9 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
             @AccelTime.started += instance.OnAccelTime;
             @AccelTime.performed += instance.OnAccelTime;
             @AccelTime.canceled += instance.OnAccelTime;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -230,6 +278,9 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
             @AccelTime.started -= instance.OnAccelTime;
             @AccelTime.performed -= instance.OnAccelTime;
             @AccelTime.canceled -= instance.OnAccelTime;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -253,5 +304,6 @@ public partial class @InputsManager: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnAccelTime(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

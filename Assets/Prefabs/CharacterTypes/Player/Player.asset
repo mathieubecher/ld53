@@ -17,23 +17,27 @@ MonoBehaviour:
   m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: 71d40886a24424e48b228e533d8e280d, type: 3}
   m_actionSets: {fileID: 11400000, guid: a0dcf3b9a35b47d4fb283eb823c5fb9d, type: 2}
-  m_life: 10
-  m_strength: 1
+  m_life: 18
+  m_strength: 1.5
   m_magica: 0
-  m_guardValue: 1
+  m_guardValue: 1.5
   m_randomActions: []
   m_hitAction: {fileID: 11400000, guid: c90506cd1fa694743aa29daaaaa5adda, type: 2}
   m_patterns:
-  - weight: 2
+  - weight: 1
     actions:
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
     - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
     - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
     - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
   - weight: 1
     actions:
     - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
-    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 42b14c3d3592e4e449fc92ea2b9806e8, type: 2}
+    - {fileID: 11400000, guid: 3593d9edf8d1d764799a8557fe18d770, type: 2}
+    - {fileID: 11400000, guid: cc1cff5443579f144afc45a92e8df3fb, type: 2}
+    - {fileID: 11400000, guid: 1285a3b5df5ee0044a87921ee73c22d2, type: 2}
+    - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}

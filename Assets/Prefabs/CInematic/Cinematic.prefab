@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cinematicDuration: 10
+  m_exitOffset: 1.5
 --- !u!222 &7274064057633588044
 CanvasRenderer:
   m_ObjectHideFlags: 0
