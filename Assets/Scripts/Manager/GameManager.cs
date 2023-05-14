@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     private TimelineManager m_timelineManager;
     private CharacterSpriteManager m_characterSpriteManager;
     private ActionSpellsManager m_actionSpellsManager;
-    private bool m_isPause;
     public static GameManager instance
     {
         get
@@ -79,7 +78,10 @@ public class GameManager : MonoBehaviour
     public List<NPC> npcs => m_npcs;
 
     private bool m_startFight = false;
+    private bool m_isPause = false;
     private Transform m_currentOverlay;
+    
+    public bool isPlaying => m_startFight;
     public void Awake()
     {
         m_timelineManager = GetComponent<TimelineManager>();
@@ -105,12 +107,12 @@ public class GameManager : MonoBehaviour
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
-        ControlsManager.OnEscape += PauseGame;
         
         CreateOverlay();
 
         if(m_startFightAtStart) StartFight();
     }
+
 
     public void OnDisable()
     {
@@ -123,7 +125,6 @@ public class GameManager : MonoBehaviour
         
         NPC.OnNPCDead -= OnNPCDead;
         Player.OnPlayerDead -= OnPlayerDead;
-        ControlsManager.OnEscape -= PauseGame;
         
         DestroyOverlay();
         
@@ -394,19 +395,24 @@ public class GameManager : MonoBehaviour
         return "";
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         if (!m_startFight) return;
-        
+        if (!m_isPause)
+        {
+            PauseFight();
+            m_isPause = true;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (!m_startFight) return;
+
         if (m_isPause)
         {
             ResumeFight();
             m_isPause = false;
-        }
-        else
-        {
-            PauseFight();
-            m_isPause = true;
         }
     }
 }
