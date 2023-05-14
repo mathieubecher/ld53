@@ -202,6 +202,7 @@
 		<relationship name="effects">
 			<destination>{9226e96a-c39f-41a4-8a28-37e8c2f9e355}</destination>
 			<destination>{f91ebb38-e138-442b-bc81-02103d9ecbb3}</destination>
+			<destination>{30b1f663-e1b9-4aa1-bbb1-0474a5886d7d}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8b2fcae5-fe9b-4e8e-b20a-3bca56acdbf4}" />
@@ -227,7 +228,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{eeebc6d1-2df2-4034-8ccf-ff3181e2f8f8}" />
 	<object class="MixerBusFader" id="{9226e96a-c39f-41a4-8a28-37e8c2f9e355}" />
-	<object class="SpatialiserEffect" id="{f91ebb38-e138-442b-bc81-02103d9ecbb3}" />
+	<object class="SpatialiserEffect" id="{f91ebb38-e138-442b-bc81-02103d9ecbb3}">
+		<property name="distanceRolloffType">
+			<value>4</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="minimumExtent">
+			<value>130</value>
+		</property>
+	</object>
+	<object class="GainEffect" id="{30b1f663-e1b9-4aa1-bbb1-0474a5886d7d}">
+		<property name="gain">
+			<value>-6</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7aea7e7d-ce0c-4e14-9b42-cc9d48540ead}" />
 	<object class="AutomationCurve" id="{4fb14356-547e-425a-af49-b701a933e1dd}">
 		<relationship name="parameter">

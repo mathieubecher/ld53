@@ -37,6 +37,8 @@ public class AudioManager : MonoBehaviour
 
     private int m_curChapIndex;
 
+    public bool startFightMusic;
+
     private void Awake()
     {
         if (m_instance)
@@ -68,6 +70,12 @@ public class AudioManager : MonoBehaviour
         ChapterManager.OnFightStart -= OnFightStart;
         ChapterManager.OnChapterWin -= OnVictory;
         ChapterManager.OnChapterDefeat -= OnDefeat;
+    }
+
+    private void Start()
+    {
+        if (startFightMusic)
+            m_soundComponent.PlaySound(fightMusic);
     }
 
     private void OnChapterIntro(int _index)
