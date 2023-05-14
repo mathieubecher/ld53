@@ -16,10 +16,10 @@ MonoBehaviour:
   description: The hero is about to attack you. Eventually.
   color: {r: 0.67058825, g: 0.20211928, b: 0.1882353, a: 1}
   icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
-  duration: 5
+  duration: 4
   actions:
   - steps: 3
-    numberOfCells: 16
+    numberOfCells: 12
   - steps: 0
     numberOfCells: 2
   - steps: 4
