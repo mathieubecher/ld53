@@ -32,14 +32,14 @@ public class ChapterManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        ControlsManager.OnAccelTime += OnAccelTime;
-        ControlsManager.OnDecelTime += OnDecelTime;
+        //ControlsManager.OnAccelTime += OnAccelTime;
+        //ControlsManager.OnDecelTime += OnDecelTime;
     }
 
     private void OnDestroy()
     {
-        ControlsManager.OnAccelTime -= OnAccelTime;
-        ControlsManager.OnDecelTime -= OnDecelTime;
+        //ControlsManager.OnAccelTime -= OnAccelTime;
+        //ControlsManager.OnDecelTime -= OnDecelTime;
     }
 
     public void NextScene()
@@ -64,7 +64,7 @@ public class ChapterManager : MonoBehaviour
     {
         currentChapter.FailChapter();
     }
-
+/*
     private bool m_accelTime = false;
     private void OnDecelTime()
     {
@@ -75,10 +75,10 @@ public class ChapterManager : MonoBehaviour
     {
         m_accelTime = true;
     }
-
+*/
     private void Update()
     {
-        Time.timeScale = m_accelTime ? 10.0f : 1.0f;
+        //Time.timeScale = m_accelTime ? 10.0f : 1.0f;
     }
     
     [Serializable] public struct Chapter
@@ -112,6 +112,7 @@ public class ChapterManager : MonoBehaviour
     }
 
     public delegate void LoadSceneEvent(int _index);
+    public static event LoadSceneEvent OnChapterTitleScreen;
     public static event LoadSceneEvent OnChapterIntro;
     public static event LoadSceneEvent OnChapterMeanwhile;
     public static event LoadSceneEvent OnChapterWin;
@@ -139,6 +140,10 @@ public class ChapterManager : MonoBehaviour
                     Debug.Log("Fail " + number);
                     OnChapterDefeat?.Invoke(number);
                     break;
+                case "StartMenu" :
+                    Debug.Log("StartMenu " + number);
+                    OnChapterTitleScreen?.Invoke(number);
+                    break;
             }
         }
     }
@@ -159,15 +164,15 @@ public class ChapterManager : MonoBehaviour
     {
         string[] splitString = _text.Split(' ');
 
-        if (splitString.Length != 2)
-        {
-            _name = "";
-            _number = 0;
-            return;
-        }
+        _name = "";
+        _number = 0;
+        if (splitString.Length != 2) return;
 
-        _name = splitString[0];
-        int.TryParse(splitString[1], out _number);
+        for (int i = 0; i < splitString.Length - 1; ++i)
+        {
+            _name += splitString[i];
+        }
+        int.TryParse(splitString[^1], out _number);
     }
 
 }
