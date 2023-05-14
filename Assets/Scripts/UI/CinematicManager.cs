@@ -41,6 +41,7 @@ public class CinematicManager : MonoBehaviour
         }
         i = m_scenes.Count - 1;
         m_scenes[i].Play(this);
+        ChapterManager.SkipMeanWhile();
         
     }
 }
