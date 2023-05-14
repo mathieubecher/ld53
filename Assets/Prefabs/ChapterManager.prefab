@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_chapters:
   - chapterScenes:
-    - Start Menu
+    - Start Menu 0
     failScene: 
     currentScene: 0
   - chapterScenes:

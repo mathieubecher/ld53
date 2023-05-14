@@ -42,4 +42,14 @@ public class EscapeMenu : MonoBehaviour
         GameManager.instance.ResumeGame();
         m_isOpen = false;
     }
+
+    public void OnResume()
+    {
+        ResumeGame();
+    }
+
+    public void OnRestart()
+    {
+        ChapterManager.instance.RestartChapter();
+    }
 }
