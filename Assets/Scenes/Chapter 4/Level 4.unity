@@ -1303,6 +1303,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].failScene
+      value: Fail 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].failScene
+      value: Fail 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[0]
+      value: Intro 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[1]
+      value: Level 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[2]
+      value: Success 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[0]
+      value: Intro 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[1]
+      value: Level 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[2]
+      value: Success 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612077, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_Name
       value: ChapterManager
@@ -1323,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_playerToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: b9c0beaf6f4508c499b936fe9ae3ef51, type: 2}
+      objectReference: {fileID: 11400000, guid: a9429395e79cda640a3c6373c1c4d12c, type: 2}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_NPCToSpawn.Array.size
       value: 3
@@ -1333,9 +1365,13 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
-      propertyPath: m_NPCToSpawn.Array.data[2]
+      propertyPath: m_NPCToSpawn.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 1924e20a6be9a304c8565aeb7a64bcec, type: 2}
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_NPCToSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d284fe1bb6a8bf84f889f7af399d1f14, type: 2}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_actionSpells.Array.data[1]
       value: 

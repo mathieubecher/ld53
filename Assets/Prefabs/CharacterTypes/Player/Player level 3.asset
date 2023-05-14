@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterName: "G\xE4ndd\xE2lf"
   m_faction: Player
-  m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
+  m_timeLineHeader: {fileID: -976897, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: 3632e20b1fb67424aa598dae73e0bbe9, type: 3}
   m_actionSets: {fileID: 11400000, guid: a0dcf3b9a35b47d4fb283eb823c5fb9d, type: 2}
-  m_life: 25
+  m_life: 17
   m_strength: 1
   m_magica: 1
   m_guardValue: 1
   m_randomActions: []
   m_hitAction: {fileID: 11400000, guid: c90506cd1fa694743aa29daaaaa5adda, type: 2}
   m_patterns:
-  - weight: 0.25
+  - weight: 1
     actions:
     - {fileID: 11400000, guid: 32b7ac2c5fa7333459849e8729826891, type: 2}
     - {fileID: 11400000, guid: 32b7ac2c5fa7333459849e8729826891, type: 2}
     - {fileID: 11400000, guid: 32b7ac2c5fa7333459849e8729826891, type: 2}
-    - {fileID: 11400000, guid: c49198ebb2090ae419dd6ec47cbebeea, type: 2}
+    - {fileID: 11400000, guid: 04b44766c5803634b9e176c3b5037aa2, type: 2}
+  - weight: 0.5
+    actions:
+    - {fileID: 11400000, guid: d68cb14881b82aa44a010a66f9aeb6ce, type: 2}
+    - {fileID: 11400000, guid: d68cb14881b82aa44a010a66f9aeb6ce, type: 2}
+    - {fileID: 11400000, guid: 32b7ac2c5fa7333459849e8729826891, type: 2}
+    - {fileID: 11400000, guid: d68cb14881b82aa44a010a66f9aeb6ce, type: 2}

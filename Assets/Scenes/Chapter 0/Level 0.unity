@@ -960,6 +960,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].failScene
+      value: Fail 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].failScene
+      value: Fail 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[0]
+      value: Intro 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[1]
+      value: Level 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[2]
+      value: Success 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[0]
+      value: Intro 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[1]
+      value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[2]
+      value: Success 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612077, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_Name
       value: ChapterManager
@@ -1070,6 +1102,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_playerToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: fd042bf6c2072c942b0fdf244c1bfd8e, type: 2}
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_NPCToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_NPCToSpawn.Array.data[1]
       value: 

@@ -23,4 +23,34 @@ MonoBehaviour:
   m_guardValue: 1
   m_randomActions: []
   m_hitAction: {fileID: 11400000, guid: c90506cd1fa694743aa29daaaaa5adda, type: 2}
-  m_patterns: []
+  m_patterns:
+  - weight: 0.33
+    actions:
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 939f5242b1b844042a8c9f899ace1f46, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 3d1ac201a24acfc439b51c5f05dc65c8, type: 2}
+    - {fileID: 11400000, guid: 4da1fd48dddf26647ae85cd810dd1d84, type: 2}
+    - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
+  - weight: 0.33
+    actions:
+    - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 3d1ac201a24acfc439b51c5f05dc65c8, type: 2}
+    - {fileID: 11400000, guid: 4da1fd48dddf26647ae85cd810dd1d84, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 39de19374b805b047a4b9e50d5cae630, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+  - weight: 0.34
+    actions:
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: bc3cc649685ca9f498120b00116b008b, type: 2}
+    - {fileID: 11400000, guid: f2db1b9f57af0784fa13c0ae5b7e9029, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: 4da1fd48dddf26647ae85cd810dd1d84, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
+    - {fileID: 11400000, guid: a0ba9e93f3babe94c9b45660217e46b9, type: 2}

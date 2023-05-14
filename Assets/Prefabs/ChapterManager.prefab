@@ -51,6 +51,16 @@ MonoBehaviour:
     failScene: 
     currentScene: 0
   - chapterScenes:
+    - Intro 0
+    - Level 0
+    - Success 0
+    failScene: Fail 0
+    currentScene: 0
+  - chapterScenes:
+    - Start Menu 1
+    failScene: 
+    currentScene: 0
+  - chapterScenes:
     - Intro 1
     - Level 1
     - Success 1
@@ -65,6 +75,26 @@ MonoBehaviour:
     - Level 2
     - Success 2
     failScene: Fail 2
+    currentScene: 0
+  - chapterScenes:
+    - Start Menu 3
+    failScene: 
+    currentScene: 0
+  - chapterScenes:
+    - Intro 3
+    - Level 3
+    - Success 3
+    failScene: Fail 3
+    currentScene: 0
+  - chapterScenes:
+    - Start Menu 4
+    failScene: 
+    currentScene: 0
+  - chapterScenes:
+    - Intro 4
+    - Level 4
+    - Success 4
+    failScene: 
     currentScene: 0
   - chapterScenes:
     - Credits

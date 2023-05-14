@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cfd390ee8a6e744801b17e4c6a200b, type: 3}
+  m_Name: PlayerDumb
+  m_EditorClassIdentifier: 
+  m_invulnerabilityDuration: 1
+  m_tauntDuration: 10
+  m_attackBuffDuration: 6
+  m_attackPotionBuffDuration: 6
+  m_attackPotionDebuffDuration: 6
+  m_healPotionBuffValue: 5
+  m_timeWarpDuration: 0
+  m_actions:
+  - {fileID: 11400000, guid: 40f5e2ba7bd48854b8c8dda6581d015c, type: 2}
+  - {fileID: 11400000, guid: 55540a2bb4aa16f499e47933fe2bf029, type: 2}
+  - {fileID: 11400000, guid: 3e9d26717892847459602d317d0915d9, type: 2}
+  - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
+  - {fileID: 11400000, guid: f2db1b9f57af0784fa13c0ae5b7e9029, type: 2}
+  - {fileID: 11400000, guid: 50e37f5fab0967a41bfb8f7590a7b3b2, type: 2}
+  - {fileID: 11400000, guid: 79f6b3d5a2c500f4bab2632cfd889241, type: 2}
+  - {fileID: 11400000, guid: a0d5fd8026ec4c74cbeeb04450570f48, type: 2}
+  - {fileID: 11400000, guid: 90d4087aa3f4a2c44a0191e1a2a73cf3, type: 2}
+  - {fileID: 11400000, guid: 09407ec2cb0917640b7734332bd605e4, type: 2}
