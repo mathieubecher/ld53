@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{db597857-0921-42ce-8df7-12efe188f0f0}">
+		<property name="name">
+			<value>Mute</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c371e199-ad5d-4680-8e3b-c7bb7df6b45c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{10b8055a-983f-4dbe-8bd0-5fe4aaea0ba3}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{10b8055a-983f-4dbe-8bd0-5fe4aaea0ba3}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
