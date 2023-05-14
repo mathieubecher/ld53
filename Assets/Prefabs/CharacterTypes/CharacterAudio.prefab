@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charEvents: {fileID: 0}
+  isPlayer: 0
   attackSfx:
     Guid:
       Data1: 843746815
@@ -172,8 +173,15 @@ MonoBehaviour:
     Path: event:/Characters/Vo/Actions/Char_Vo_Action_Buff
   actionReceivedVo:
     Guid:
-      Data1: -1076599409
-      Data2: 1080534787
-      Data3: 1357069235
-      Data4: 889652148
+      Data1: -1596301293
+      Data2: 1200526304
+      Data3: 1957911231
+      Data4: -191050842
     Path: event:/Characters/Vo/Actions/Char_Vo_Action_Receive
+  specialVo:
+    Guid:
+      Data1: 1187484102
+      Data2: 1182588273
+      Data3: -2112227667
+      Data4: 319038872
+    Path: event:/Characters/Vo/Actions/Char_Vo_Action_Special

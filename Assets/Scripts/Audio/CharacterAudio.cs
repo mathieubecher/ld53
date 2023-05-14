@@ -30,6 +30,7 @@ public class CharacterAudio : MonoBehaviour
     public EventReference guardVo;
     public EventReference buffVo;
     public EventReference actionReceivedVo;
+    public EventReference specialVo;
 
     // Start is called before the first frame update
     void OnEnable()
