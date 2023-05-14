@@ -32,7 +32,6 @@ using Random = UnityEngine.Random;
             float previousLife = m_currentLife;
             m_currentLife -= _damage;
             m_currentLife = math.clamp(m_currentLife, 0.0f, m_maxLife);
-            Debug.Log(previousLife + " " + m_currentLife + " " + _damage);
         }
     }
     [SerializeField] protected Life m_life;
@@ -225,7 +224,7 @@ using Random = UnityEngine.Random;
                 // Debug.Log("Try attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier * aura.attackDeMultiplier;
 
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
@@ -248,7 +247,7 @@ using Random = UnityEngine.Random;
                 // Debug.Log("Try magic attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier * aura.attackDeMultiplier;
                     if(_target.TryHitMagic(strength))
                     {
                         // Debug.Log("Magic attack done " + strength + ".");
@@ -324,7 +323,7 @@ using Random = UnityEngine.Random;
         return "";
     }
     
-    protected bool isMouseInTimeline(out float _desiredTimePos)
+    public bool isMouseInTimeline(out float _desiredTimePos)
     {
         _desiredTimePos = 0.0f;
         if (!isDead)

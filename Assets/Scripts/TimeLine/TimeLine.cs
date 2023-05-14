@@ -186,6 +186,7 @@ public class TimeLine : MonoBehaviour
             float actionTime = aura.timePosition - _elapsedTime + 1.0f + m_cursorTimeOffset;
             Vector2 barRelativePos = Vector2.down * (actionTime * m_barSize);
             aura.transform.localPosition = _zeroPos + barRelativePos;
+            aura.gameObject.SetActive(true);
         }
     }
     public bool IsPointOnTimeLine(Vector2 _mousePos, out float _timePos)
@@ -329,7 +330,7 @@ public class TimeLine : MonoBehaviour
     
     public void AddAura(float _timePosition, float _duration, float _attackMultiplier, bool _taunt, bool _invulnerability)
     {
-        AuraEffect effect = new AuraEffect(_attackMultiplier, _taunt, _invulnerability);
+        AuraEffect effect = new AuraEffect(_attackMultiplier > 1.0f? _attackMultiplier : 1.0f, 1.0f, _taunt, _invulnerability);
         foreach (Aura otherAura in m_auras)
         {
             if (otherAura && otherAura.effect != effect) continue;
@@ -346,23 +347,28 @@ public class TimeLine : MonoBehaviour
         Aura aura = actionObject.GetComponent<Aura>();
         aura.SetAura(_timePosition, _duration, _attackMultiplier, _taunt, _invulnerability);
         aura.SetSize(_duration * m_barSize);
+        aura.gameObject.SetActive(false);
         m_auras.Add(aura);
     }
 
     public AuraEffect GetCurrentAura()
     {
-        AuraEffect currentAuraEffect = new AuraEffect();
+        return GetAuraAtTimePos(elapsedTime);
+    }
+    
+    public AuraEffect GetAuraAtTimePos(float _timePos)
+    {
+        AuraEffect auraEffect = new AuraEffect();
         foreach (var aura in m_auras)
         {
-            if (elapsedTime >= aura.timePosition && aura.timePosition + aura.duration >= elapsedTime)
+            if (_timePos >= aura.timePosition && aura.timePosition + aura.duration >= _timePos)
             {
-                currentAuraEffect += aura.effect;
+                auraEffect += aura.effect;
             }
         }
 
-        return currentAuraEffect;
+        return auraEffect;
     }
-    
     public void InvertCursor()
     {
         m_cursor.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);

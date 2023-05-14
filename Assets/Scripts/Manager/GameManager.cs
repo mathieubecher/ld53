@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<CombineType> m_combineTypes;
     [SerializeField] private Transform m_arrow;
     [SerializeField] private TextMeshProUGUI m_descriptionText;
+    [SerializeField] private List<Transform> m_auraEffectIcones;
     [SerializeField] private GameObject m_overlayPrefab;
 
     public Player player => m_player;
@@ -262,8 +263,7 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<Canvas>().worldCamera, out Vector2 localPoint))
         {
             var parent = m_descriptionText.transform.parent;
-            Vector2 offset = Vector2.left * 20.0f;
-            parent.localPosition = localPoint + offset;
+            parent.localPosition = localPoint + Vector2.left * 20.0f;
             string description = "";
 
             description = m_actionSpellsManager.GetDescription();
@@ -282,16 +282,78 @@ public class GameManager : MonoBehaviour
             }
 
             m_descriptionText.text = description;
-            parent.gameObject.SetActive(description != "");
+            
+            float timePos;
+            bool isOnTimeline = false;
+            if (m_player.isMouseInTimeline(out timePos))
+            {
+                ManageAuraDescription(m_player, description == "" ? -20.0f : 5.0f, timePos);
+                isOnTimeline = true;
+            }
+            else
+            {
+                foreach (var character in m_npcs)
+                {
+                    if (character.isMouseInTimeline(out timePos))
+                    {
+                        ManageAuraDescription(character, description == "" ? -20.0f : 5.0f, timePos);
+                        isOnTimeline = true;
+                        break;
+                    }
+                }
+            }
 
+            if (!isOnTimeline)
+            {
+                foreach (var auraDescrion in m_auraEffectIcones)
+                {
+                    auraDescrion.gameObject.SetActive(false);
+                }
+            }
+                
             m_descriptionText.ForceMeshUpdate();
-            float textWidth = description.Length > 10 ? 220 : 60;
-            float textHeight = m_descriptionText.textBounds.size.y;
-            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
-                textHeight + 30.0f);
-            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
-                textWidth + 30.0f);
+            float textWidth =  30.0f + description.Length > 10 ? 220 : 60;
+            float textHeight = description == "" ? 0f : m_descriptionText.textBounds.size.y + 30.0f;
+            
+            ((RectTransform)parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+            ((RectTransform)parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
         }
+    }
+
+    private void ManageAuraDescription(Character _character, float _offset, float _timePos)
+    {
+        AuraEffect effect = _character.timeline.GetAuraAtTimePos(_timePos);
+        float auraOffset = _offset;
+        if (effect.attackMultiplier > 1.0f)
+        {
+            m_auraEffectIcones[0].gameObject.SetActive(true);
+            m_auraEffectIcones[0].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[0].gameObject.SetActive(false);
+        
+        if (effect.attackDeMultiplier < 1.0f)
+        {
+            m_auraEffectIcones[1].gameObject.SetActive(true);
+            m_auraEffectIcones[1].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[1].gameObject.SetActive(false);
+
+        if (effect.taunt)
+        {
+            m_auraEffectIcones[2].gameObject.SetActive(true);
+            m_auraEffectIcones[2].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[2].gameObject.SetActive(false);
+
+        if (effect.invulnerability)
+        {
+            m_auraEffectIcones[3].gameObject.SetActive(true);
+            m_auraEffectIcones[3].localPosition = Vector3.up * auraOffset;
+        }
+        else m_auraEffectIcones[3].gameObject.SetActive(false);
     }
     public string GetSelectedSpellDescription(ActionSpell _actionSpell)
     {

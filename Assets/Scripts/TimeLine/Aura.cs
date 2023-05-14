@@ -7,13 +7,15 @@ using UnityEngine;
 [Serializable] public class AuraEffect
 {
     public float attackMultiplier = 1.0f;
+    public float attackDeMultiplier = 1.0f;
     public bool taunt = false;
     public bool invulnerability = false;
     public AuraEffect(){}
 
-    public AuraEffect(float _attackMultiplier, bool _taunt, bool _invulnerability)
+    public AuraEffect(float _attackMultiplier, float _attackDeMultiplier, bool _taunt, bool _invulnerability)
     {
         attackMultiplier = _attackMultiplier;
+        attackDeMultiplier = _attackDeMultiplier;
         taunt = _taunt;
         invulnerability = _invulnerability;
     }
@@ -22,13 +24,14 @@ using UnityEngine;
     {
         AuraEffect result = new AuraEffect();
         result.attackMultiplier =  math.max(a.attackMultiplier, b.attackMultiplier);
+        result.attackDeMultiplier =  math.min(a.attackDeMultiplier, b.attackDeMultiplier);
         result.invulnerability = a.invulnerability || b.invulnerability;
         result.taunt = a.taunt || b.taunt;
         return result;
     }
     public static bool operator ==(AuraEffect a, AuraEffect b)
     {
-        return a.invulnerability == b.invulnerability && a.taunt == b.taunt && Math.Abs(a.attackMultiplier - b.attackMultiplier) < 0.001f;
+        return a.invulnerability == b.invulnerability && a.taunt == b.taunt && Math.Abs(a.attackMultiplier - b.attackMultiplier) < 0.001f && Math.Abs(a.attackDeMultiplier - b.attackDeMultiplier) < 0.001f;
     }
     public static bool operator !=(AuraEffect a, AuraEffect b)
     {
@@ -48,7 +51,7 @@ public class Aura : MonoBehaviour
     {
         timePosition = _timePosition;
         duration = _duration;
-        effect = new AuraEffect(_attackMultiplier, _taunt, _invulnerability);
+        effect = new AuraEffect(_attackMultiplier > 1.0f? _attackMultiplier : 1.0f, _attackMultiplier < 1.0f? _attackMultiplier : 1.0f, _taunt, _invulnerability);
     }
     public void SetSize(float _size)
     {

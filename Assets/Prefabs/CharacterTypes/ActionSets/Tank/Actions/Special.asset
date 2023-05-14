@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Special
   m_EditorClassIdentifier: 
   actionType: 3
-  description: Taunt target and takes aggro for [aggroDuration] units.
+  description: Taunt target and takes aggro for [tauntDuration] units.
   color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
   icone: {fileID: -406841167, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 0.75
