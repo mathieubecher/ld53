@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 [Serializable] public class NPC : Character
 {
+
     public delegate void NPCDeadEvent();
 
     public static event NPCDeadEvent OnNPCDead;
@@ -88,6 +89,7 @@ using UnityEngine.InputSystem;
 
         return false;
     }
+    
     public string GetSelectedSpellDescription(ActionSpell _spell)
     {
         var actionData = m_data.GetActionData(_spell.type);
@@ -120,6 +122,12 @@ using UnityEngine.InputSystem;
     {
         base.Dead();
         OnNPCDead?.Invoke();
+    }
+
+
+    public bool HasTaunt()
+    {
+        return m_timeline.GetCurrentAura().taunt;
     }
 
     public ActionType SelectActionSpell()

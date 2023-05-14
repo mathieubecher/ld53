@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5775156138937038213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3555556, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -359,7 +359,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1003648337, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
+  m_Sprite: {fileID: 605182198, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -475,7 +475,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -720531298, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
+  m_Sprite: {fileID: -1545074414, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -559,7 +559,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 667812166, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
+  m_Sprite: {fileID: 255134231, guid: e63c865565c9dfe4e8ca2d8d0e16896c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -748,6 +748,18 @@ PrefabInstance:
     - target: {fileID: 1901880897016635644, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
       propertyPath: m_Name
       value: LifeBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2554063
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777767513419134855, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21568628
       objectReference: {fileID: 0}
     - target: {fileID: 5726774596157194808, guid: 378483abbdaf5074a855fc2d7adefb12, type: 3}
       propertyPath: m_RootOrder

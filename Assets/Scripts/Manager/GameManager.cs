@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private TimelineManager m_timelineManager;
     private CharacterSpriteManager m_characterSpriteManager;
     private ActionSpellsManager m_actionSpellsManager;
+    private bool m_isPause;
     public static GameManager instance
     {
         get
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<CombineType> m_combineTypes;
     [SerializeField] private Transform m_arrow;
     [SerializeField] private TextMeshProUGUI m_descriptionText;
+    [SerializeField] private List<Transform> m_auraEffectIcones;
     [SerializeField] private GameObject m_overlayPrefab;
 
     public Player player => m_player;
@@ -103,12 +105,12 @@ public class GameManager : MonoBehaviour
 
         NPC.OnNPCDead += OnNPCDead;
         Player.OnPlayerDead += OnPlayerDead;
+        ControlsManager.OnEscape += PauseGame;
         
         CreateOverlay();
 
         if(m_startFightAtStart) StartFight();
     }
-
 
     public void OnDisable()
     {
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
         
         NPC.OnNPCDead -= OnNPCDead;
         Player.OnPlayerDead -= OnPlayerDead;
+        ControlsManager.OnEscape -= PauseGame;
         
         DestroyOverlay();
         
@@ -144,6 +147,21 @@ public class GameManager : MonoBehaviour
     private void StopFight()
     {
         m_startFight = false;
+        if (!m_isPause)
+        {
+            foreach (NPC npc in m_npcs)
+            {
+                npc.StopFight();
+            }
+
+            m_player.StopFight();
+        
+            m_actionSpellsManager.StopFight();
+        }
+    }
+    
+    private void PauseFight()
+    {
         foreach (NPC npc in m_npcs)
         {
             npc.StopFight();
@@ -152,6 +170,17 @@ public class GameManager : MonoBehaviour
         m_player.StopFight();
         
         m_actionSpellsManager.StopFight();
+    }
+    private void ResumeFight()
+    {
+        foreach (NPC npc in m_npcs)
+        {
+            npc.ResumeFight();
+        }
+
+        m_player.ResumeFight();
+        
+        m_actionSpellsManager.ResumeFight();
     }
 
     public void Update()
@@ -225,15 +254,15 @@ public class GameManager : MonoBehaviour
 
     public void AttackBuffFaction(string _faction, float _value, float _duration)
     {
-        if (m_player.faction == _faction)
+        if (m_player.faction == _faction && !m_player.isDead)
         {
-            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);   
         }
         foreach (var npc in m_npcs)
         {
-            if (npc.faction == _faction)
+            if (npc.faction == _faction && !m_player.isDead)
             {
-                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, _value, 1.0f, false));  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);  
             }   
         }
     }
@@ -242,13 +271,13 @@ public class GameManager : MonoBehaviour
     {
         if (m_player.faction != _otherFaction)
         {
-            m_player.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));   
+            m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);   
         }
         foreach (var npc in m_npcs)
         {
             if (npc.faction != _otherFaction)
             {
-                npc.timeline.AddAura(new Aura(m_player.timeline.elapsedTime, _duration, 1.0f, _value, false));  
+                npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);  
             }   
         }
     }
@@ -262,8 +291,7 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<Canvas>().worldCamera, out Vector2 localPoint))
         {
             var parent = m_descriptionText.transform.parent;
-            Vector2 offset = Vector2.left * 20.0f;
-            parent.localPosition = localPoint + offset;
+            parent.localPosition = localPoint + Vector2.left * 20.0f;
             string description = "";
 
             description = m_actionSpellsManager.GetDescription();
@@ -282,16 +310,78 @@ public class GameManager : MonoBehaviour
             }
 
             m_descriptionText.text = description;
-            parent.gameObject.SetActive(description != "");
+            
+            float timePos;
+            bool isOnTimeline = false;
+            if (m_player.isMouseInTimeline(out timePos))
+            {
+                ManageAuraDescription(m_player, description == "" ? -20.0f : 5.0f, timePos);
+                isOnTimeline = true;
+            }
+            else
+            {
+                foreach (var character in m_npcs)
+                {
+                    if (character.isMouseInTimeline(out timePos))
+                    {
+                        ManageAuraDescription(character, description == "" ? -20.0f : 5.0f, timePos);
+                        isOnTimeline = true;
+                        break;
+                    }
+                }
+            }
 
+            if (!isOnTimeline)
+            {
+                foreach (var auraDescrion in m_auraEffectIcones)
+                {
+                    auraDescrion.gameObject.SetActive(false);
+                }
+            }
+                
             m_descriptionText.ForceMeshUpdate();
-            float textWidth = description.Length > 10 ? 220 : 60;
-            float textHeight = m_descriptionText.textBounds.size.y;
-            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
-                textHeight + 30.0f);
-            ((RectTransform)m_descriptionText.transform.parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
-                textWidth + 30.0f);
+            float textWidth =  30.0f + description.Length > 10 ? 220 : 60;
+            float textHeight = description == "" ? 0f : m_descriptionText.textBounds.size.y + 30.0f;
+            
+            ((RectTransform)parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+            ((RectTransform)parent).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, textWidth);
         }
+    }
+
+    private void ManageAuraDescription(Character _character, float _offset, float _timePos)
+    {
+        AuraEffect effect = _character.timeline.GetAuraAtTimePos(_timePos);
+        float auraOffset = _offset;
+        if (effect.attackMultiplier > 1.0f)
+        {
+            m_auraEffectIcones[0].gameObject.SetActive(true);
+            m_auraEffectIcones[0].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[0].gameObject.SetActive(false);
+        
+        if (effect.attackDeMultiplier < 1.0f)
+        {
+            m_auraEffectIcones[1].gameObject.SetActive(true);
+            m_auraEffectIcones[1].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[1].gameObject.SetActive(false);
+
+        if (effect.taunt)
+        {
+            m_auraEffectIcones[2].gameObject.SetActive(true);
+            m_auraEffectIcones[2].localPosition = Vector3.up * auraOffset;
+            auraOffset += 35f;
+        }
+        else m_auraEffectIcones[2].gameObject.SetActive(false);
+
+        if (effect.invulnerability)
+        {
+            m_auraEffectIcones[3].gameObject.SetActive(true);
+            m_auraEffectIcones[3].localPosition = Vector3.up * auraOffset;
+        }
+        else m_auraEffectIcones[3].gameObject.SetActive(false);
     }
     public string GetSelectedSpellDescription(ActionSpell _actionSpell)
     {
@@ -304,4 +394,19 @@ public class GameManager : MonoBehaviour
         return "";
     }
 
+    private void PauseGame()
+    {
+        if (!m_startFight) return;
+        
+        if (m_isPause)
+        {
+            ResumeFight();
+            m_isPause = false;
+        }
+        else
+        {
+            PauseFight();
+            m_isPause = true;
+        }
+    }
 }

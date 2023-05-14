@@ -14,6 +14,7 @@ public abstract class CharacterSprite : MonoBehaviour
     [SerializeField] private bool m_returnToPosition = false;
     [SerializeField] private float m_displacementTime = 0.0f;
     protected CharacterSpriteEvent m_spriteEvent;
+    protected bool m_isPaused;
 
     public CharacterSpriteEvent spriteEvent => m_spriteEvent;
     
@@ -29,6 +30,7 @@ public abstract class CharacterSprite : MonoBehaviour
 
     void Update()
     {
+        if (m_isPaused) return;
         if (m_returnToPosition)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, m_displacementTime >= Time.deltaTime ? Time.deltaTime / m_displacementTime : 1.0f);
@@ -186,5 +188,16 @@ public abstract class CharacterSprite : MonoBehaviour
     public void PlayFootstep()
     {
         spriteEvent.Footstep();
+    }
+
+    public void PauseAnim()
+    {
+        m_isPaused = true;
+        m_animator.speed = 0.0f;
+    }
+    public void ResumeAnim()
+    {
+        m_animator.speed = GameManager.timelineManager.timelineScale;
+        m_isPaused = false;
     }
 }

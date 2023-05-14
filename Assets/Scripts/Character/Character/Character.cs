@@ -29,6 +29,7 @@ using Random = UnityEngine.Random;
 
         public void Hit(float _damage)
         {
+            float previousLife = m_currentLife;
             m_currentLife -= _damage;
             m_currentLife = math.clamp(m_currentLife, 0.0f, m_maxLife);
         }
@@ -42,6 +43,8 @@ using Random = UnityEngine.Random;
 
     [SerializeField] private float m_guardValue = 0.0f;
     [SerializeField] private bool m_guardBreaked = false;
+    
+    protected bool m_isPaused = false;
     public CharacterSprite sprite => m_sprite;
     public CharacterSpriteEvent spriteEvent => m_sprite.spriteEvent;
     public bool isDead => m_life.isDead;
@@ -78,6 +81,7 @@ using Random = UnityEngine.Random;
     {
         spriteEvent.Healed();
         m_life.Hit(-_heal);
+        m_sprite.Hit(m_life.lifeRatio, -_heal);
     }
     
     public virtual bool TryHit(Character _attacker, float _damage)
@@ -178,11 +182,22 @@ using Random = UnityEngine.Random;
 
     public virtual void StartFight()
     {
+        m_isPaused = false;
+        m_sprite.ResumeAnim();
         m_timeline.StartTimer();
     }
     public void StopFight()
     {
+        m_isPaused = true;
+        m_sprite.PauseAnim();
         m_timeline.StopTimer();
+    }
+
+    public void ResumeFight()
+    {
+        m_isPaused = false;
+        m_sprite.ResumeAnim();
+        m_timeline.ResumeTimer();
     }
 
     private TimeLineAction m_currentActionPlayed;
@@ -198,7 +213,7 @@ using Random = UnityEngine.Random;
         spriteEvent.ActionStart(_action.type);
         //m_sprite.PlayAction(m_target, _action);
     }
-    private void OnEndAction(TimeLineAction _action)
+    protected virtual void OnEndAction(TimeLineAction _action)
     {
         m_guardValue = 0.0f;
         spriteEvent.ActionEnd(_action.type);
@@ -214,46 +229,46 @@ using Random = UnityEngine.Random;
     {
         if (isDead) return;
 
-        var aura = _target.m_timeline.GetCurrentAura();
-        Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
+        var aura = m_timeline.GetCurrentAura();
+        // Debug.Log(_target.name + " " + aura.invulnerability + " " + aura.attackMultiplier + " " + aura.defenceMultiplier);
         switch (_effect)
         {
             case ActionEffect.ATTACK:
-                Debug.Log("Try attack: " + m_currentActionPlayed.type);
+                // Debug.Log("Try attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    float strength = m_data.strength * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier * aura.attackDeMultiplier;
 
                     if (m_currentActionPlayed.type == ActionType.ATTACK_GUARD)
                     {
-                        Debug.Log("Is invulnerable.");
-                        m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, 1.0f, true));
+                        // Debug.Log("Is invulnerable.");
+                        m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.invulnerabilityDuration, 1.0f, false, true);
                     }
                     if (_target.TryHit(this, strength))
                     {
-                        Debug.Log("Attack done " + strength + ".");
+                        // Debug.Log("Attack done " + strength + ".");
                         spriteEvent.DamageInflicted();
                     }
                     else
                     {
-                        Debug.Log("Attack blocked.");
+                        // Debug.Log("Attack blocked.");
                         spriteEvent.Blocked();
                     }
                 }
                 break;
             case ActionEffect.ATTACK_MAGIC:
-                Debug.Log("Try attack: " + m_currentActionPlayed.type);
+                // Debug.Log("Try magic attack: " + m_currentActionPlayed.type);
                 if (_target != null && !_target.timeline.GetCurrentAura().invulnerability)
                 {
-                    float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier;
+                    float strength = m_data.magica * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.ATTACK_ATTACK? 2.0f : 1.0f) * aura.attackMultiplier * aura.attackDeMultiplier;
                     if(_target.TryHitMagic(strength))
                     {
-                        Debug.Log("Magic attack done " + strength + ".");
+                        // Debug.Log("Magic attack done " + strength + ".");
                         spriteEvent.MagicDamageInflicted();
                     }
                     else
                     {
-                        Debug.Log("Magic attack blocked.");
+                        // Debug.Log("Magic attack blocked.");
                         spriteEvent.MagicBlocked();
                     }
                 }
@@ -261,28 +276,25 @@ using Random = UnityEngine.Random;
             case ActionEffect.TAUNT :
                 if (_target != null)
                 {
-                    _target.Taunt(this, 5.0f * m_data.strength);
+                    m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.tauntDuration, 1.0f, true, false);
+                    _target.Taunt(this, 0.0f);
                 }
                 break;
             case ActionEffect.START_GUARD:
-                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f) * aura.defenceMultiplier;
+                m_guardValue = m_data.guardValue * (m_currentActionPlayed && m_currentActionPlayed.type == ActionType.GUARD_GUARD || m_currentActionPlayed.type == ActionType.SPECIAL_GUARD? 2.0f : 1.0f);
                 
-                Debug.Log("Guard start " + m_guardValue + ".");
+                // Debug.Log("Guard start " + m_guardValue + ".");
                 break;
             case ActionEffect.STOP_GUARD:
                 m_guardValue = 0.0f;
-                Debug.Log("Guard stop.");
+                // Debug.Log("Guard stop.");
                 break;
             case ActionEffect.INTERRUPT:
                 _target.Staggered();
                 break;
             case ActionEffect.BUFF:
                 
-                m_timeline.AddAura(new Aura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration,
-                    1.0f, 1.0f, true));
-                break;
-            case ActionEffect.TIME_WARP:
-                GameManager.actionSpellsManager.TimeWarp(m_data.actionSets.timeWarpDuration);
+                m_timeline.AddAura(timeline.elapsedTime, m_data.actionSets.attackBuffDuration, 2.0f, false, false);
                 break;
             case ActionEffect.POTION:
                 if (m_currentActionPlayed)
@@ -294,6 +306,9 @@ using Random = UnityEngine.Random;
                             break;
                         case ActionType.SPECIAL_GUARD :
                             GameManager.instance.AttackDeBuffFaction(faction, 0.5f, m_data.actionSets.attackPotionDebuffDuration);
+                            break;
+                        case ActionType.SPECIAL_SPECIAL :
+                            GameManager.actionSpellsManager.TimeWarp(m_data.actionSets.timeWarpDuration);
                             break;
                         default :
                             GameManager.instance.HealFaction(faction, m_data.actionSets.healPotionBuffValue);
@@ -321,7 +336,7 @@ using Random = UnityEngine.Random;
         return "";
     }
     
-    protected bool isMouseInTimeline(out float _desiredTimePos)
+    public bool isMouseInTimeline(out float _desiredTimePos)
     {
         _desiredTimePos = 0.0f;
         if (!isDead)

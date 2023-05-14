@@ -69,10 +69,9 @@ public class ControlsManager : MonoBehaviour
     public static event ClickEvent OnRelease;
     
     public delegate void SimpleEvent();
+    public static event SimpleEvent OnEscape;
     public static event SimpleEvent OnRightClick;
     public static event SimpleEvent OnRightRelease;
-    public delegate void SpellInputEvent(int _number);
-    public static event SpellInputEvent OnSpellInput;
 
     public static event SimpleEvent OnAccelTime;
     public static event SimpleEvent OnDecelTime;
@@ -114,31 +113,12 @@ public class ControlsManager : MonoBehaviour
             OnRightRelease?.Invoke();
     }
     
-    public void One(InputAction.CallbackContext _context)
+    public void Escape(InputAction.CallbackContext _context)
     {
         if (_context.performed)
-            OnSpellInput?.Invoke(1);
+            OnEscape?.Invoke();
     }
-    public void Two(InputAction.CallbackContext _context)
-    {
-        if (_context.performed)
-            OnSpellInput?.Invoke(2);
-    }
-    public void Three(InputAction.CallbackContext _context)
-    {
-        if (_context.performed)
-            OnSpellInput?.Invoke(3);
-    }
-    public void Four(InputAction.CallbackContext _context)
-    {
-        if (_context.performed)
-            OnSpellInput?.Invoke(4);
-    }
-    public void Five(InputAction.CallbackContext _context)
-    {
-        if (_context.performed)
-            OnSpellInput?.Invoke(5);
-    }
+    
     public void AccelTime(InputAction.CallbackContext _context)
     {
         if (_context.performed)

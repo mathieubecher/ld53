@@ -23,10 +23,10 @@ MonoBehaviour:
   m_guardValue: 1
   m_randomActions:
   - actionType: 1
-    weight: 0.25
+    weight: 0.4
   - actionType: 2
-    weight: 0.15
+    weight: 0.4
   - actionType: 3
-    weight: 0.5
+    weight: 0.6
   m_hitAction: {fileID: 11400000, guid: 02edba9945054e642afb91af82a18730, type: 2}
   m_patterns: []

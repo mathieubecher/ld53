@@ -109,7 +109,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3788749933934942866}
         m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
-        m_MethodName: One
+        m_MethodName: Escape
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -119,72 +119,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 926f7410-086e-4dd2-b125-5075f4fe039a
-    m_ActionName: InGame/One[/Keyboard/1]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3788749933934942866}
-        m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
-        m_MethodName: Two
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c5e47840-11f8-44f5-9347-1094e9bcb37d
-    m_ActionName: InGame/Two[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3788749933934942866}
-        m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
-        m_MethodName: Three
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4268560f-54b8-41bf-b9bc-5ea915a019a7
-    m_ActionName: InGame/Three[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3788749933934942866}
-        m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
-        m_MethodName: Four
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 884e49c8-8141-4e77-9a7e-db5fcdf1e323
-    m_ActionName: InGame/Four[/Keyboard/4]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3788749933934942866}
-        m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
-        m_MethodName: Five
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6864d05e-12f0-4e1e-bfe9-50bf7675e217
-    m_ActionName: InGame/Five[/Keyboard/5]
+    m_ActionId: f1d92538-e29e-4f39-a193-fa3f4fb426ce
+    m_ActionName: InGame/Escape[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3788749933934942866}
@@ -199,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: f1bc9251-35aa-49b5-86a3-ef631ab25b7a
+    m_ActionId: 5a9ebe57-3cc7-462b-8160-703f04dca931
     m_ActionName: InGame/AccelTime[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   m_invulnerabilityDuration: 1
+  m_tauntDuration: 10
   m_attackBuffDuration: 6
   m_attackPotionBuffDuration: 6
   m_attackPotionDebuffDuration: 6

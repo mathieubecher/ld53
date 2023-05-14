@@ -87,6 +87,11 @@ public class ActionSpellsManager : MonoBehaviour
         m_start = false;
     }
 
+    public void ResumeFight()
+    {
+        m_start = true;
+    }
+    
     public void Init(float _offset)
     {
         m_buttons = new List<ActionSpellButton>();

@@ -5,44 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[Serializable] public class Aura
-{
-    public float timePosition = 0.0f;
-    public float duration = 0.0f;
-    public AuraEffect effect;
-
-    [Serializable] public class AuraEffect
-    {
-        public float attackMultiplier = 1.0f;
-        public float defenceMultiplier = 1.0f;
-        public bool invulnerability = false;
-        public AuraEffect(){}
-
-        public AuraEffect(float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
-        {
-            attackMultiplier = _attackMultiplier;
-            defenceMultiplier = _defenceMultiplier;
-            invulnerability = _invulnerability;
-        }
-        
-        public static AuraEffect operator +(AuraEffect a, AuraEffect b)
-        {
-            AuraEffect result = new AuraEffect();
-            result.attackMultiplier = a.attackMultiplier * b.attackMultiplier;
-            result.defenceMultiplier = a.defenceMultiplier * b.defenceMultiplier;
-            result.invulnerability = a.invulnerability || b.invulnerability;
-            return result;
-        }
-    }
-    public Aura(){}
-    public Aura(float _timePosition, float _duration, float _attackMultiplier, float _defenceMultiplier, bool _invulnerability)
-    {
-        timePosition = _timePosition;
-        duration = _duration;
-        effect = new AuraEffect(_attackMultiplier, _defenceMultiplier, _invulnerability);
-    }
-
-}
 
 public class TimeLine : MonoBehaviour
 {
@@ -55,16 +17,21 @@ public class TimeLine : MonoBehaviour
     [SerializeField] private RectTransform m_barrier;
     [SerializeField] private RectTransform m_actionsParent;
     [SerializeField] private RectTransform m_overlayParent;
+    
+    [SerializeField] private RectTransform m_auraParentLeft;
+    [SerializeField] private RectTransform m_auraParentRight;
     [Header("Cursor")]
     [SerializeField] private RectTransform m_cursor;
     [SerializeField] private Animator m_cursorAnimator;
     [Header("Prefab")]
     [SerializeField] private GameObject m_barPrefab;
+    [SerializeField] private GameObject m_auraPrefab;
     [SerializeField] private float m_barSize = 60.0f;
 
     private GameTimer m_timer;
     private List<TimeLineBar> m_bars;
     private List<TimeLineAction> m_actions;
+    private RectTransform m_auraParent;
     [SerializeField] private List<Aura> m_auras;
     private int m_cellsPerUnit;
     private float m_cursorTimeOffset = 0.0f;
@@ -100,6 +67,8 @@ public class TimeLine : MonoBehaviour
         m_actions = new List<TimeLineAction>();
         m_auras = new List<Aura>();
         InstantiateBar();
+        
+        m_auraParent = m_auraParentRight;
     }
     private void InstantiateBar()
     {
@@ -148,6 +117,7 @@ public class TimeLine : MonoBehaviour
         ManageCursor(zeroPos);
         ManageBars(elapsedTime, zeroPos);
         ManageActions(elapsedTime, dt, zeroPos);
+        ManageAuras(elapsedTime, dt, zeroPos);
     }
 
     private void ManageCursor(Vector2 _zeroPos)
@@ -172,7 +142,7 @@ public class TimeLine : MonoBehaviour
 
     private void ManageActions(float _elapsedTime, float _dt, Vector2 _zeroPos)
     {
-        m_actions.RemoveAll(x => x == null);
+        m_actions.RemoveAll(x => !x);
         if (!m_timer.isStarted) return;
         foreach (TimeLineAction action in m_actions)
         {
@@ -198,6 +168,32 @@ public class TimeLine : MonoBehaviour
         }
     }
 
+    private void ManageAuras(float _elapsedTime, float _dt, Vector2 _zeroPos)
+    {
+        m_auras.RemoveAll(x => !x);
+        if (!m_timer.isStarted) return;
+        foreach (Aura aura in m_auras)
+        {
+            if (!aura.played && aura.timePosition <= _elapsedTime + _dt)
+            {
+                aura.played = true;
+            }
+            else if (!aura.stop && aura.timePosition + aura.duration <= elapsedTime + _dt)
+            {
+                aura.stop = true;
+            }
+            else if (_elapsedTime - 10.0f > aura.timePosition)
+            {
+                Destroy(aura.gameObject);
+                continue;
+            }
+
+            float actionTime = aura.timePosition - _elapsedTime + 1.0f + m_cursorTimeOffset;
+            Vector2 barRelativePos = Vector2.down * (actionTime * m_barSize);
+            aura.transform.localPosition = _zeroPos + barRelativePos;
+            aura.gameObject.SetActive(true);
+        }
+    }
     public bool IsPointOnTimeLine(Vector2 _mousePos, out float _timePos)
     {
         _timePos = 0.0f;
@@ -337,28 +333,51 @@ public class TimeLine : MonoBehaviour
     }
 
     
-    public void AddAura(Aura _aura)
+    public void AddAura(float _timePosition, float _duration, float _attackMultiplier, bool _taunt, bool _invulnerability)
     {
-        m_auras.Add(_aura);
+        AuraEffect effect = new AuraEffect(_attackMultiplier > 1.0f? _attackMultiplier : 1.0f, 1.0f, _taunt, _invulnerability);
+        foreach (Aura otherAura in m_auras)
+        {
+            if (otherAura && otherAura.effect != effect) continue;
+            if (_timePosition >= otherAura.timePosition && _timePosition <= otherAura.timePosition + otherAura.duration)
+            {
+                if (_timePosition + _duration <= otherAura.timePosition + otherAura.duration) return;
+                otherAura.duration += _timePosition + _duration - otherAura.timePosition - otherAura.duration;
+                otherAura.SetSize(otherAura.duration * m_barSize);
+                return;
+            }
+        }
+        
+        GameObject actionObject = Instantiate(m_auraPrefab, m_auraParent);
+        Aura aura = actionObject.GetComponent<Aura>();
+        aura.SetAura(_timePosition, _duration, _attackMultiplier, _taunt, _invulnerability);
+        aura.SetSize(_duration * m_barSize);
+        aura.gameObject.SetActive(false);
+        m_auras.Add(aura);
     }
 
-    public Aura.AuraEffect GetCurrentAura()
+    public AuraEffect GetCurrentAura()
     {
-        Aura.AuraEffect currentAuraEffect = new Aura.AuraEffect();
+        return GetAuraAtTimePos(elapsedTime);
+    }
+    
+    public AuraEffect GetAuraAtTimePos(float _timePos)
+    {
+        AuraEffect auraEffect = new AuraEffect();
         foreach (var aura in m_auras)
         {
-            if (elapsedTime >= aura.timePosition && aura.timePosition + aura.duration >= elapsedTime)
+            if (_timePos >= aura.timePosition && aura.timePosition + aura.duration >= _timePos)
             {
-                currentAuraEffect += aura.effect;
+                auraEffect += aura.effect;
             }
         }
 
-        return currentAuraEffect;
+        return auraEffect;
     }
-    
     public void InvertCursor()
     {
         m_cursor.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        m_auraParent = m_auraParentLeft;
     }
 
     public void SetCursorTimeOffset(float _cursorTimeOffset)
