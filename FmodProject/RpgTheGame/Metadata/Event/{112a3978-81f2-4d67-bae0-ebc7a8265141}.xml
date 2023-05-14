@@ -100,6 +100,7 @@
 		<relationship name="effects">
 			<destination>{934b8a55-b080-46ae-be5a-d6989db5a7ad}</destination>
 			<destination>{34d13479-f9b0-4fdb-9d67-d93198b901f5}</destination>
+			<destination>{6db9ed70-93cc-4f08-b000-166606200413}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{55a30cba-4cf1-4d5f-abce-3e68e60d1511}" />
@@ -110,7 +111,22 @@
 	</object>
 	<object class="MixerBusFader" id="{f847182f-6f9f-4eb4-b421-7e5a77491b0a}" />
 	<object class="MixerBusFader" id="{934b8a55-b080-46ae-be5a-d6989db5a7ad}" />
-	<object class="SpatialiserEffect" id="{34d13479-f9b0-4fdb-9d67-d93198b901f5}" />
+	<object class="SpatialiserEffect" id="{34d13479-f9b0-4fdb-9d67-d93198b901f5}">
+		<property name="distanceRolloffType">
+			<value>4</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="minimumExtent">
+			<value>130</value>
+		</property>
+	</object>
+	<object class="GainEffect" id="{6db9ed70-93cc-4f08-b000-166606200413}">
+		<property name="gain">
+			<value>-6</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{f4eb60e0-195e-414c-834d-3f442a9f4799}">
 		<relationship name="audioFile">
 			<destination>{544948c2-5f04-4040-a947-a094cb0e8dfc}</destination>

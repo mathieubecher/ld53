@@ -388,6 +388,7 @@ MonoBehaviour:
       Data3: 876210826
       Data4: -1608820385
     Path: event:/Music/Music_Combat
+  startFightMusic: 1
 --- !u!4 &447838511
 Transform:
   m_ObjectHideFlags: 0
