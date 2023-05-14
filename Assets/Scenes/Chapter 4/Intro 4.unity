@@ -1229,10 +1229,6 @@ PrefabInstance:
       propertyPath: m_cinematicDuration
       value: 8.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7274064057633588035, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7274064057633588046, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
