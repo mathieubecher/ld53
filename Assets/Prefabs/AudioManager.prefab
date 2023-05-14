@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8376438264847622371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8376438264847622369}
+  - component: {fileID: 8376438264847622368}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8376438264847622369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376438264847622371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8376438264847622368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376438264847622371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad96fbd27e5b1fa4687817da065edd03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chapterIntro1:
+    Guid:
+      Data1: -256842396
+      Data2: 1220869638
+      Data3: 297325441
+      Data4: -2003108287
+    Path: event:/Narra/RpgTheGame_Narra_Chapter1_Intro
+  chapterMeanwhile1:
+    Guid:
+      Data1: -1331744743
+      Data2: 1238422446
+      Data3: 1295860901
+      Data4: -2141526013
+    Path: 'event:/Narra/RpgTheGame_Narra_Chapter1_Meanwhile '
+  victory1:
+    Guid:
+      Data1: -1686510711
+      Data2: 1268349122
+      Data3: -2104708191
+      Data4: -897051868
+    Path: event:/Narra/RpgTheGame_Narra_VictoryChapter1
+  defeat1:
+    Guid:
+      Data1: 222453908
+      Data2: 1095725729
+      Data3: 1249507225
+      Data4: -1872315856
+    Path: event:/Narra/RpgTheGame_Narra_DefeatChapter1
+  chapterIntro2:
+    Guid:
+      Data1: 1225354945
+      Data2: 1161539278
+      Data3: -1814823800
+      Data4: -86156407
+    Path: event:/Narra/RpgTheGame_Narra_Chapter2_Intro
+  chapterMeanwhile2:
+    Guid:
+      Data1: -349098030
+      Data2: 1185347065
+      Data3: 911156101
+      Data4: -927135219
+    Path: event:/Narra/RpgTheGame_Narra_Chapter2_Meanwhile
+  victory2:
+    Guid:
+      Data1: 1881056065
+      Data2: 1335213175
+      Data3: 2031625097
+      Data4: -226567552
+    Path: event:/Narra/RpgTheGame_Narra_VictoryChapter2
+  defeat2:
+    Guid:
+      Data1: 741560095
+      Data2: 1142409672
+      Data3: 1236986778
+      Data4: -1203707023
+    Path: event:/Narra/RpgTheGame_Narra_DefeatChapter2
+  chapterIntro3:
+    Guid:
+      Data1: 712630181
+      Data2: 1338425118
+      Data3: -774887240
+      Data4: 1326202579
+    Path: event:/Narra/RpgTheGame_Narra_Chapter3_Intro
+  chapterMeanwhile3:
+    Guid:
+      Data1: -1136648830
+      Data2: 1249366577
+      Data3: -569265247
+      Data4: 1305802982
+    Path: event:/Narra/RpgTheGame_Narra_Chapter3_Meanwhile
+  victory3:
+    Guid:
+      Data1: 615960292
+      Data2: 1202946710
+      Data3: 1603824019
+      Data4: -1405107285
+    Path: event:/Narra/RpgTheGame_Narra_VictoryChapter3
+  defeat3:
+    Guid:
+      Data1: 423538405
+      Data2: 1144781202
+      Data3: 1946461066
+      Data4: -1074570007
+    Path: event:/Narra/RpgTheGame_Narra_DefeatChapter3
+  chapterIntro4:
+    Guid:
+      Data1: 1623399713
+      Data2: 1320133856
+      Data3: 245951397
+      Data4: 2029561666
+    Path: event:/Narra/RpgTheGame_Narra_Chapter4_Intro
+  chapterMeanwhile4:
+    Guid:
+      Data1: -431754182
+      Data2: 1077156322
+      Data3: -1811059303
+      Data4: 110261518
+    Path: event:/Narra/RpgTheGame_Narra_Chapter4_Meanwhile
+  victory4:
+    Guid:
+      Data1: -172883582
+      Data2: 1315568285
+      Data3: -1355691135
+      Data4: -50739230
+    Path: event:/Narra/RpgTheGame_Narra_VictoryChapter4
+  defeat4:
+    Guid:
+      Data1: 496266740
+      Data2: 1256644084
+      Data3: -1744343130
+      Data4: -1648113249
+    Path: event:/Narra/RpgTheGame_Narra_DefeatChapter4
+  chapterIntro5:
+    Guid:
+      Data1: -644563816
+      Data2: 1149593104
+      Data3: 641107090
+      Data4: -1920470035
+    Path: event:/Narra/RpgTheGame_Narra_Chapter5_Intro
+  chapterMeanwhile5:
+    Guid:
+      Data1: -1102255383
+      Data2: 1315927380
+      Data3: 1732848802
+      Data4: 796784193
+    Path: event:/Narra/RpgTheGame_Narra_Chapter5_Meanwhile
+  victory5:
+    Guid:
+      Data1: -1854268532
+      Data2: 1210148398
+      Data3: -2036686945
+      Data4: 910282178
+    Path: event:/Narra/RpgTheGame_Narra_VictoryChapter5
+  defeat5:
+    Guid:
+      Data1: -992844318
+      Data2: 1224488344
+      Data3: -1329777766
+      Data4: -1498576571
+    Path: event:/Narra/RpgTheGame_Narra_DefeatChapter5
+  fightMusic:
+    Guid:
+      Data1: 1492826048
+      Data2: 1168998055
+      Data3: 876210826
+      Data4: -1608820385
+    Path: event:/Music/Music_Combat
