@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4c21dd24-e377-4d38-af82-d6f67741457e}">
+		<property name="assetPath">
+			<value>Voices/RpgTheGame_Vo_Special-005.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.93258333333333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34db6cde-1739-454e-b735-958293805eb1}</destination>
+		</relationship>
+	</object>
+</objects>

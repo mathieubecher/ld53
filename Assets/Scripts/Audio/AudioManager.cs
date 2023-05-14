@@ -52,12 +52,22 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        ChapterManager.OnChapterIntro += OnChapterIntro;
+        ChapterManager.OnChapterMeanwhile += OnChapterMeanwhile;
+        ChapterManager.OnSkipMeanwhile += OnSkipMeanwhile;
+        ChapterManager.OnFightStart += OnFightStart;
+        ChapterManager.OnChapterWin += OnVictory;
+        ChapterManager.OnChapterDefeat += OnDefeat;
     }
 
     private void OnDisable()
     {
-        
+        ChapterManager.OnChapterIntro -= OnChapterIntro;
+        ChapterManager.OnChapterMeanwhile -= OnChapterMeanwhile;
+        ChapterManager.OnSkipMeanwhile -= OnSkipMeanwhile;
+        ChapterManager.OnFightStart -= OnFightStart;
+        ChapterManager.OnChapterWin -= OnVictory;
+        ChapterManager.OnChapterDefeat -= OnDefeat;
     }
 
     private void OnChapterIntro(int _index)
@@ -83,9 +93,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void OnChapterMeanwhile()
+    private void OnChapterMeanwhile(int _index)
     {
-        switch (m_curChapIndex)
+        switch (_index)
         {
             case 0:
                 m_soundComponent.StopSound(chapterIntro1);
@@ -104,7 +114,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
 
-        switch (m_curChapIndex)
+        switch (_index)
         {
             case 0:
                 m_soundComponent.PlaySound(chapterMeanwhile1);
@@ -124,12 +134,34 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void OnSkipMeanwhile()
+    {
+        switch (m_curChapIndex)
+        {
+            case 0:
+                m_soundComponent.StopSound(chapterMeanwhile1);
+                break;
+            case 1:
+                m_soundComponent.StopSound(chapterMeanwhile2);
+                break;
+            case 2:
+                m_soundComponent.StopSound(chapterMeanwhile3);
+                break;
+            case 3:
+                m_soundComponent.StopSound(chapterMeanwhile4);
+                break;
+            case 4:
+                m_soundComponent.StopSound(chapterMeanwhile5);
+                break;
+        }
+    }
+
     private void OnFightStart()
     {
         m_soundComponent.PlaySound(fightMusic);
     }
 
-    private void OnVictory()
+    private void OnVictory(int _index)
     {
         m_soundComponent.StopSound(fightMusic);
 
@@ -153,7 +185,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void OnDefeat()
+    private void OnDefeat(int _index)
     {
         m_soundComponent.StopSound(fightMusic);
 
