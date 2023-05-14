@@ -17,7 +17,9 @@ public class TimeLine : MonoBehaviour
     [SerializeField] private RectTransform m_barrier;
     [SerializeField] private RectTransform m_actionsParent;
     [SerializeField] private RectTransform m_overlayParent;
-    [SerializeField] private RectTransform m_auraParent;
+    
+    [SerializeField] private RectTransform m_auraParentLeft;
+    [SerializeField] private RectTransform m_auraParentRight;
     [Header("Cursor")]
     [SerializeField] private RectTransform m_cursor;
     [SerializeField] private Animator m_cursorAnimator;
@@ -29,6 +31,7 @@ public class TimeLine : MonoBehaviour
     private GameTimer m_timer;
     private List<TimeLineBar> m_bars;
     private List<TimeLineAction> m_actions;
+    private RectTransform m_auraParent;
     [SerializeField] private List<Aura> m_auras;
     private int m_cellsPerUnit;
     private float m_cursorTimeOffset = 0.0f;
@@ -64,6 +67,8 @@ public class TimeLine : MonoBehaviour
         m_actions = new List<TimeLineAction>();
         m_auras = new List<Aura>();
         InstantiateBar();
+        
+        m_auraParent = m_auraParentRight;
     }
     private void InstantiateBar()
     {
@@ -372,6 +377,7 @@ public class TimeLine : MonoBehaviour
     public void InvertCursor()
     {
         m_cursor.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        m_auraParent = m_auraParentLeft;
     }
 
     public void SetCursorTimeOffset(float _cursorTimeOffset)

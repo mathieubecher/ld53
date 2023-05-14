@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable] public class AuraEffect
 {
@@ -40,6 +41,7 @@ using UnityEngine;
 }
 public class Aura : MonoBehaviour
 {
+    [SerializeField] private List<Color> m_colors;
     public float timePosition = 0.0f;
     public float duration = 0.0f;
     public AuraEffect effect;
@@ -52,6 +54,23 @@ public class Aura : MonoBehaviour
         timePosition = _timePosition;
         duration = _duration;
         effect = new AuraEffect(_attackMultiplier > 1.0f? _attackMultiplier : 1.0f, _attackMultiplier < 1.0f? _attackMultiplier : 1.0f, _taunt, _invulnerability);
+
+        if (effect.attackMultiplier > 1.0f)
+        {
+            GetComponent<Image>().color = m_colors[0];
+        }
+        else if (effect.attackDeMultiplier < 1.0f)
+        {
+            GetComponent<Image>().color = m_colors[1];
+        }
+        else if (effect.taunt)
+        {
+            GetComponent<Image>().color = m_colors[2];
+        }
+        else if (effect.invulnerability)
+        {
+            GetComponent<Image>().color = m_colors[3];
+        }
     }
     public void SetSize(float _size)
     {

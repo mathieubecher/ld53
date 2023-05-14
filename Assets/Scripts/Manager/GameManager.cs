@@ -226,13 +226,13 @@ public class GameManager : MonoBehaviour
 
     public void AttackBuffFaction(string _faction, float _value, float _duration)
     {
-        if (m_player.faction == _faction)
+        if (m_player.faction == _faction && !m_player.isDead)
         {
             m_player.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);   
         }
         foreach (var npc in m_npcs)
         {
-            if (npc.faction == _faction)
+            if (npc.faction == _faction && !m_player.isDead)
             {
                 npc.timeline.AddAura(m_player.timeline.elapsedTime, _duration, _value, false, false);  
             }   
