@@ -132,8 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46400429066321e4b9d68985a76a4a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cinematicDuration: 2
+  m_cinematicDuration: 1.6
   m_exitOffset: 0.5
+  m_cooldown: 0
 --- !u!222 &5405062739571084869
 CanvasRenderer:
   m_ObjectHideFlags: 0
