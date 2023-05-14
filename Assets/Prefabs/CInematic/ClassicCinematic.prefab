@@ -430,6 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cinematicDuration: 10
   m_exitOffset: 0.5
+  m_cooldown: 0
 --- !u!225 &141915668
 CanvasGroup:
   m_ObjectHideFlags: 0
