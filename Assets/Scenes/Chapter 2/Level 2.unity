@@ -1355,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_playerToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: b9c0beaf6f4508c499b936fe9ae3ef51, type: 2}
+      objectReference: {fileID: 11400000, guid: 33cf09d357e4b404594147c0d6ff6e59, type: 2}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_NPCToSpawn.Array.size
       value: 3

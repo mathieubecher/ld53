@@ -1102,6 +1102,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_playerToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: b9c0beaf6f4508c499b936fe9ae3ef51, type: 2}
     - target: {fileID: 1080732336219233737, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -66

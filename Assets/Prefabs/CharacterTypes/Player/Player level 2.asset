@@ -17,7 +17,7 @@ MonoBehaviour:
   m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: d48b28be812d62f45aaf2f4deaf3edd1, type: 3}
   m_actionSets: {fileID: 11400000, guid: a0dcf3b9a35b47d4fb283eb823c5fb9d, type: 2}
-  m_life: 20
+  m_life: 16
   m_strength: 2
   m_magica: 0
   m_guardValue: 1
@@ -33,6 +33,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3d1ac201a24acfc439b51c5f05dc65c8, type: 2}
     - {fileID: 11400000, guid: 4da1fd48dddf26647ae85cd810dd1d84, type: 2}
     - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
+    - {fileID: 11400000, guid: b9e2e2168c3d4764893a7305b3f4a5b5, type: 2}
   - weight: 0.33
     actions:
     - {fileID: 11400000, guid: 5fd701fa4f0003242854743122b72d8d, type: 2}
