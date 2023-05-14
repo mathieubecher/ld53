@@ -32,16 +32,27 @@ public class ChapterManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        //ControlsManager.OnAccelTime += OnAccelTime;
-        //ControlsManager.OnDecelTime += OnDecelTime;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
     }
 
     private void OnDestroy()
     {
-        //ControlsManager.OnAccelTime -= OnAccelTime;
-        //ControlsManager.OnDecelTime -= OnDecelTime;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    } 
+
+    // called second
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InformLoadingScene(currentChapter.chapterScenes[currentChapter.currentScene]);
     }
 
+
+    private void Start()
+    {
+        InformLoadingScene(currentChapter.chapterScenes[currentChapter.currentScene]);
+    }
+    
     public void NextScene()
     {
         currentChapter.NextScene();
@@ -64,23 +75,7 @@ public class ChapterManager : MonoBehaviour
     {
         currentChapter.FailChapter();
     }
-/*
-    private bool m_accelTime = false;
-    private void OnDecelTime()
-    {
-        m_accelTime = false;
-    }
 
-    private void OnAccelTime()
-    {
-        m_accelTime = true;
-    }
-*/
-    private void Update()
-    {
-        //Time.timeScale = m_accelTime ? 10.0f : 1.0f;
-    }
-    
     [Serializable] public struct Chapter
     {
         public List<string> chapterScenes;
@@ -89,14 +84,12 @@ public class ChapterManager : MonoBehaviour
         public bool isLastScene => currentScene >= chapterScenes.Count;
         public void RestartChapter()
         {
-            ChapterManager.InformLoadingScene(chapterScenes[0]);
             SceneManager.LoadScene(chapterScenes[0]);
             currentScene = 0;
         }
 
         public void FailChapter()
         {
-            ChapterManager.InformLoadingScene(failScene);
             SceneManager.LoadScene(failScene);
             currentScene = 0;
         }
@@ -105,8 +98,6 @@ public class ChapterManager : MonoBehaviour
         {
             ++currentScene;
             if (currentScene >= chapterScenes.Count) return;
-
-            ChapterManager.InformLoadingScene(chapterScenes[currentScene]);
             SceneManager.LoadScene(chapterScenes[currentScene]);
         }
     }
@@ -121,27 +112,21 @@ public class ChapterManager : MonoBehaviour
     {
         DecomposeText(_chapterScene, out string name, out int number);
         {
-            Debug.Log(_chapterScene + " " + name + " " + number);
             switch (name.Replace(" ", ""))
             {
                 case "Intro" :
-                    Debug.Log("Intro " + number);
                     OnChapterIntro?.Invoke(number);
                     break;
                 case "Level" :
-                    Debug.Log("Level " + number);
                     OnChapterMeanwhile?.Invoke(number);
                     break;
                 case "Success" :
-                    Debug.Log("Success " + number);
                     OnChapterWin?.Invoke(number);
                     break;
                 case "Fail" :
-                    Debug.Log("Fail " + number);
                     OnChapterDefeat?.Invoke(number);
                     break;
                 case "StartMenu" :
-                    Debug.Log("StartMenu " + number);
                     OnChapterTitleScreen?.Invoke(number);
                     break;
             }

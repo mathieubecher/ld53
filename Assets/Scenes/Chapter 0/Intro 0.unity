@@ -280,6 +280,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a892785308f5cc646949aea3b180ef56, type: 3}
+    - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_text
       value: But the Legend says that one day a mighty Hero would travel to the land
@@ -288,6 +296,10 @@ PrefabInstance:
     - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Name
       value: But the hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730637, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Pivot.x
@@ -372,6 +384,10 @@ PrefabInstance:
     - target: {fileID: 7352772531153730637, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352772531153730638, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_cinematicDuration
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
@@ -758,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 57.6}
+  m_AnchoredPosition: {x: 0, y: 57.600006}
   m_SizeDelta: {x: -246.8793, y: -210.3689}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1126377882
@@ -1062,9 +1078,9 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.1509434
       objectReference: {fileID: 0}
-    - target: {fileID: 7274064057633588035, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
-      propertyPath: m_Alpha
-      value: 1
+    - target: {fileID: 7274064057633588034, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
+      propertyPath: m_cinematicDuration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7274064057633588046, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_Pivot.x
@@ -1302,6 +1318,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.1509434
       objectReference: {fileID: 0}
+    - target: {fileID: 4516493405588990726, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
+      propertyPath: m_cinematicDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4516493405588990730, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1528,6 +1548,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 1434572111, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1535,6 +1563,10 @@ PrefabInstance:
     - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Name
       value: The fear of demon lord
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730637, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Pivot.x
@@ -1622,7 +1654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730638, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_cinematicDuration
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
