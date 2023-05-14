@@ -137,6 +137,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5a9ebe57-3cc7-462b-8160-703f04dca931
     m_ActionName: InGame/AccelTime[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3788749933934942866}
+        m_TargetAssemblyTypeName: ControlsManager, Assembly-CSharp
+        m_MethodName: Skip
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 68e49553-1e9e-42f8-a6fd-9b24a6bd1b6f
+    m_ActionName: InGame/Skip[/Keyboard/anyKey]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGame

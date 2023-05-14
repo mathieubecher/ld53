@@ -28,4 +28,19 @@ public class CinematicManager : MonoBehaviour
         }
         else ChapterManager.instance.NextScene();
     }
+
+    public void Skip()
+    {
+        ChapterManager.instance.NextScene();
+    }
+    public void SkipToLastScene()
+    {
+        for (int i = 0; i < m_scenes.Count - 1; ++i)
+        {
+            m_scenes[i].gameObject.SetActive(false);
+        }
+        i = m_scenes.Count - 1;
+        m_scenes[i].Play(this);
+        
+    }
 }
