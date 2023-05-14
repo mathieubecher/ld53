@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e3c081aa-96f7-4092-9cdd-7ae975f4ab6b}">
+		<property name="assetPath">
+			<value>Narra/RpgTheGame_Narra_Chapter4_Meanwhile.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>56.883333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34db6cde-1739-454e-b735-958293805eb1}</destination>
+		</relationship>
+	</object>
+</objects>

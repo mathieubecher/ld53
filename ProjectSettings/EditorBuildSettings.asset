@@ -9,17 +9,32 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Chapter 0/Intro 0.unity
+    guid: 925aa332aca952c44bdd67d12c1a3c16
+  - enabled: 1
+    path: Assets/Scenes/Chapter 0/Level 0.unity
+    guid: f1afdcdf7c40b6c4e9cffd59c2aa41a1
+  - enabled: 1
+    path: Assets/Scenes/Chapter 0/Success 0.unity
+    guid: c7d355d10061cd448b778dbaf5e9c555
+  - enabled: 1
+    path: Assets/Scenes/Chapter 0/Fail 0.unity
+    guid: cfc429417499a094e96f5946d735f433
+  - enabled: 1
+    path: Assets/Scenes/Chapter 1/Start Menu 1.unity
+    guid: 0a766244b3427cb4298a96376736cf06
+  - enabled: 1
     path: Assets/Scenes/Chapter 1/Intro 1.unity
     guid: 40b664d6d64c0304bae65dd707fde5ae
   - enabled: 1
     path: Assets/Scenes/Chapter 1/Level 1.unity
     guid: a0737a37642cc954d9d2850ab4d56346
   - enabled: 1
-    path: Assets/Scenes/Chapter 1/Fail 1.unity
-    guid: da8f9938d43d6814fa939288413a2074
-  - enabled: 1
     path: Assets/Scenes/Chapter 1/Success 1.unity
     guid: 6b69466a8099473458a5f4db3f5c1723
+  - enabled: 1
+    path: Assets/Scenes/Chapter 1/Fail 1.unity
+    guid: da8f9938d43d6814fa939288413a2074
   - enabled: 1
     path: Assets/Scenes/Chapter 2/Start Menu 2.unity
     guid: c60c7a5aeb222d24cb5a8977f172793f
@@ -30,11 +45,41 @@ EditorBuildSettings:
     path: Assets/Scenes/Chapter 2/Level 2.unity
     guid: 75dfd8fb7639c7642b6c8d9c1fb816d8
   - enabled: 1
+    path: Assets/Scenes/Chapter 2/Success 2.unity
+    guid: db85749d031c7a54fb49e936cfbd2d0d
+  - enabled: 1
     path: Assets/Scenes/Chapter 2/Fail 2.unity
     guid: 9bff857c37121314c972b948c3d1d2d0
   - enabled: 1
-    path: Assets/Scenes/Chapter 2/Success 2.unity
-    guid: db85749d031c7a54fb49e936cfbd2d0d
+    path: Assets/Scenes/Chapter 3/Start Menu 3.unity
+    guid: 6f7a41c73acead543bbe2034ca32e8fa
+  - enabled: 1
+    path: Assets/Scenes/Chapter 3/Intro 3.unity
+    guid: 57e8dfd3f457e3f4ea8ec513748e4431
+  - enabled: 1
+    path: Assets/Scenes/Chapter 3/Level 3.unity
+    guid: 14f0c83691c07bd418915d08c56ea4bc
+  - enabled: 1
+    path: Assets/Scenes/Chapter 3/Success 3.unity
+    guid: 6419683cda5e1d041a55df1b8cd4faa9
+  - enabled: 1
+    path: Assets/Scenes/Chapter 3/Fail 3.unity
+    guid: b9c977c55a93bf144bab65b192485c55
+  - enabled: 1
+    path: Assets/Scenes/Chapter 4/Start Menu 4.unity
+    guid: 5ae134103ce511941bcc3f516a1e15ad
+  - enabled: 1
+    path: Assets/Scenes/Chapter 4/Intro 4.unity
+    guid: f746db6820825904da92c67cd0158f02
+  - enabled: 1
+    path: Assets/Scenes/Chapter 4/Level 4.unity
+    guid: 5239b4dc5f976f54aabad3b5f6954d22
+  - enabled: 1
+    path: Assets/Scenes/Chapter 4/Success 4.unity
+    guid: 73755c02d7493b241b6f29768f36318d
+  - enabled: 1
+    path: Assets/Scenes/Chapter 4/Fail 4.unity
+    guid: bbd4ca6c2c8cc0d4a9885bf84f959ae6
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 560c604b47c729e47a2b80eb6601c46a

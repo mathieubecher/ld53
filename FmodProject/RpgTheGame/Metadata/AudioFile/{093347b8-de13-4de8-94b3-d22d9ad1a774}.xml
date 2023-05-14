@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{093347b8-de13-4de8-94b3-d22d9ad1a774}">
+		<property name="assetPath">
+			<value>Music/Combat/Rpg_Music_Combat_TROMBONES.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>27.272729166666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34db6cde-1739-454e-b735-958293805eb1}</destination>
+		</relationship>
+	</object>
+</objects>

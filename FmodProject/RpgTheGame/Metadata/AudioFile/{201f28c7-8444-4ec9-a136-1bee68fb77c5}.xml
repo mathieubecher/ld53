@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{201f28c7-8444-4ec9-a136-1bee68fb77c5}">
+		<property name="assetPath">
+			<value>Narra/RpgTheGame_Narra_DefeatChapter4.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>14.700541666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34db6cde-1739-454e-b735-958293805eb1}</destination>
+		</relationship>
+	</object>
+</objects>
