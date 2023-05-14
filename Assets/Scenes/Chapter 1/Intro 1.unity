@@ -785,11 +785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.size
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[0].failScene
-      value: Fail 0
+      value: Fail 1
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[1].failScene
@@ -797,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[2].failScene
-      value: Fail 1
+      value: Fail 2
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[3].failScene
@@ -805,7 +805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[4].failScene
-      value: Fail 2
+      value: Fail 3
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[5].failScene
@@ -813,11 +813,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[6].failScene
-      value: Fail 3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[7].failScene
-      value: 
+      value: Fail 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[8].failScene
+      value: Fail 4
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[0].currentScene
@@ -857,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[8].chapterScenes.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[9].chapterScenes.Array.size
@@ -865,71 +869,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[0].chapterScenes.Array.data[0]
-      value: Intro 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[0].chapterScenes.Array.data[1]
-      value: Level 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[0].chapterScenes.Array.data[2]
-      value: Success 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[0]
-      value: Start Menu 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[0]
       value: Intro 1
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[1]
+      propertyPath: m_chapters.Array.data[0].chapterScenes.Array.data[1]
       value: Level 1
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[2]
+      propertyPath: m_chapters.Array.data[0].chapterScenes.Array.data[2]
       value: Success 1
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[0]
       value: Start Menu 2
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[1]
+      value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[1].chapterScenes.Array.data[2]
+      value: Success 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[0]
       value: Intro 2
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[1]
+      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[1]
       value: Level 2
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[2]
+      propertyPath: m_chapters.Array.data[2].chapterScenes.Array.data[2]
       value: Success 2
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[5].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[0]
       value: Start Menu 3
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[1]
+      value: Level 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[3].chapterScenes.Array.data[2]
+      value: Success 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[0]
       value: Intro 3
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[1]
+      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[1]
       value: Level 3
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[2]
+      propertyPath: m_chapters.Array.data[4].chapterScenes.Array.data[2]
       value: Success 3
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[7].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[5].chapterScenes.Array.data[0]
       value: Start Menu 4
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
-      propertyPath: m_chapters.Array.data[8].chapterScenes.Array.data[0]
+      propertyPath: m_chapters.Array.data[5].chapterScenes.Array.data[1]
+      value: Level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[5].chapterScenes.Array.data[2]
+      value: Success 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[0]
       value: Intro 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[1]
+      value: Level 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[6].chapterScenes.Array.data[2]
+      value: Success 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[7].chapterScenes.Array.data[0]
+      value: Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[7].chapterScenes.Array.data[1]
+      value: Level 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[7].chapterScenes.Array.data[2]
+      value: Success 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
+      propertyPath: m_chapters.Array.data[8].chapterScenes.Array.data[0]
+      value: Credits
       objectReference: {fileID: 0}
     - target: {fileID: 1729475384456612075, guid: b0c044df3ce6bde45af1f7af2f388e80, type: 3}
       propertyPath: m_chapters.Array.data[8].chapterScenes.Array.data[1]
@@ -1157,7 +1193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2034991110
 Transform:
   m_ObjectHideFlags: 0
@@ -1583,7 +1619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730638, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_cinematicDuration
-      value: 11
+      value: 10.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
