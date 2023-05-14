@@ -23,6 +23,19 @@ public class ChapterManager : MonoBehaviour
             return m_instance;
         }
     }
+    
+    public delegate void LoadSceneEvent(int _index);
+    public static event LoadSceneEvent OnChapterTitleScreen;
+    public static event LoadSceneEvent OnChapterIntro;
+    public static event LoadSceneEvent OnChapterMeanwhile;
+    public static event LoadSceneEvent OnChapterWin;
+    public static event LoadSceneEvent OnChapterDefeat;
+    
+    public delegate void SimpleEvent();
+    public static event SimpleEvent OnFightStart;
+    public static event SimpleEvent OnSkipMeanwhile;
+    public static event SimpleEvent OnLoadComplete;
+    
     private void Awake()
     {
         currentChapter = m_chapters[0];
@@ -42,15 +55,22 @@ public class ChapterManager : MonoBehaviour
     } 
 
     // called second
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        InformLoadingScene(currentChapter.chapterScenes[currentChapter.currentScene]);
+        StartCoroutine(LoadCompleted());
     }
-
 
     private void Start()
     {
+        //StartCoroutine(LoadCompleted());
+    }
+
+    private IEnumerator LoadCompleted()
+    {
+        yield return new WaitForSeconds(0.05f);
+        Debug.Log("Loaded");
         InformLoadingScene(currentChapter.chapterScenes[currentChapter.currentScene]);
+        OnLoadComplete?.Invoke();
     }
     
     public void NextScene()
@@ -102,12 +122,6 @@ public class ChapterManager : MonoBehaviour
         }
     }
 
-    public delegate void LoadSceneEvent(int _index);
-    public static event LoadSceneEvent OnChapterTitleScreen;
-    public static event LoadSceneEvent OnChapterIntro;
-    public static event LoadSceneEvent OnChapterMeanwhile;
-    public static event LoadSceneEvent OnChapterWin;
-    public static event LoadSceneEvent OnChapterDefeat;
     private static void InformLoadingScene(string _chapterScene)
     {
         DecomposeText(_chapterScene, out string name, out int number);
@@ -132,10 +146,6 @@ public class ChapterManager : MonoBehaviour
             }
         }
     }
-    
-    public delegate void SimpleEvent();
-    public static event SimpleEvent OnFightStart;
-    public static event SimpleEvent OnSkipMeanwhile;
     public static void StartFight()
     {
         OnFightStart?.Invoke();

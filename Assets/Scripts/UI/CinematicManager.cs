@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,15 @@ public class CinematicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    private void OnEnable()
+    {
+        ChapterManager.OnLoadComplete += Play;
+    }
+
+    private void Play()
+    {
         if (m_scenes.Count == 0)
         {
             ChapterManager.instance.NextScene();
@@ -18,6 +28,12 @@ public class CinematicManager : MonoBehaviour
         }
         m_scenes[i].Play(this);
     }
+
+    private void OnDisable()
+    {
+        ChapterManager.OnLoadComplete -= Play;
+    }
+
 
     public void PlayNextScene()
     {

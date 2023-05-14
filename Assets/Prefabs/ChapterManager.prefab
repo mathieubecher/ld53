@@ -94,7 +94,7 @@ MonoBehaviour:
     - Intro 4
     - Level 4
     - Success 4
-    failScene: 
+    failScene: Fail 4
     currentScene: 0
   - chapterScenes:
     - Credits
