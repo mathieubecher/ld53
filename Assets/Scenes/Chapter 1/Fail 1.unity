@@ -156,8 +156,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_text
-      value: And so <b>Rox0r420</b> continued on his way, vanquished the Demon Lord
-        and brought peace to the kingdom.
+      value: "And so <b>G\xEAr41T_2_R1vi@</b> continued on his way, vanquished the
+        Demon Lord and brought peace to the kingdom."
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Name
