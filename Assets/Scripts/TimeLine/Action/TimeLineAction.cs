@@ -31,7 +31,11 @@ public class TimeLineAction : MonoBehaviour
     {
         m_actionType = _data.actionType;
         m_description = _data.description;
-        if (_data.actions.Count == 0) return;
+        if (_data.actions.Count == 0)
+        {
+            if(!m_data ) Debug.LogError(_data.actionType + " has no action steps!");
+            return;
+        }
         m_data = _data;
         
     }
@@ -83,7 +87,7 @@ public class TimeLineAction : MonoBehaviour
 
     private void Update()
     {
-        if (m_currentStep >= 0 && m_currentStep < m_data.actions.Count)
+        if (m_data && m_currentStep >= 0 && m_currentStep < m_data.actions.Count)
         {
             float time = m_timePosition;
             for (int i = 0; i <= m_currentStep; ++i)
