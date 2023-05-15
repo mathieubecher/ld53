@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Special_Guard
   m_EditorClassIdentifier: 
   actionType: 11
-  description: Block <color=#FFC558>[guard] damages</color> before breaking and then
-    take x2 damages.
+  description: Blocks <color=#FFC558>[guard] damages</color> before breaking. Unblocked
+    damage is doubled.
   color: {r: 1, g: 0.92549026, b: 0.34509805, a: 1}
   icone: {fileID: -535750769, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1

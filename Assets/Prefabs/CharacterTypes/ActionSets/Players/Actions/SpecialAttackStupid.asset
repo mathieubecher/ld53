@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpecialAttackStupid
   m_EditorClassIdentifier: 
   actionType: 10
-  description: The hero is about to do something heroic!
+  description: The hero tries something heroic! Or not?
   color: {r: 0.8867924, g: 0.48104307, b: 0.7657726, a: 1}
   icone: {fileID: 1521346350, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 4

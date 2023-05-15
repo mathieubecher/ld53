@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Special
   m_EditorClassIdentifier: 
   actionType: 3
-  description: Increase damages by 2 for [ATKBuffDuration] units.
+  description: Increase damages by 2 for [ATKBuffDuration] units of time.
   color: {r: 0.53333336, g: 0.5882353, b: 1, a: 1}
   icone: {fileID: 187948289, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Guard_Attack
   m_EditorClassIdentifier: 
   actionType: 7
-  description: Block <color=#FFC558>[guard] damages</color> before breaking and then
-    take x2 damages. Inflict [strength] opportunity damages.
+  description: Blocks <color=#FFC558>[guard] damages</color>, unblocked damage is
+    doubled. If you block, counter-attack for [strength] damage afterward.
   color: {r: 1, g: 0.7725491, b: 0.34509805, a: 1}
   icone: {fileID: 437392599, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 2
