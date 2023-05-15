@@ -19,6 +19,8 @@ MonoBehaviour:
   duration: 1.75
   actions:
   - steps: 5
-    numberOfCells: 6
+    numberOfCells: 5
   - steps: 0
+    numberOfCells: 1
+  - steps: 4
     numberOfCells: 1

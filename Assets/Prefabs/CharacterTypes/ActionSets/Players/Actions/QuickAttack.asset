@@ -20,8 +20,10 @@ MonoBehaviour:
   actions:
   - steps: 3
     numberOfCells: 2
-  - steps: 2
-    numberOfCells: 2
+  - steps: 7
+    numberOfCells: 1
+  - steps: 8
+    numberOfCells: 1
   - steps: 0
     numberOfCells: 2
   - steps: 4

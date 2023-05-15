@@ -18,5 +18,9 @@ MonoBehaviour:
   icone: {fileID: 437392599, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 0.75
   actions:
+  - steps: 7
+    numberOfCells: 1
   - steps: 2
-    numberOfCells: 3
+    numberOfCells: 1
+  - steps: 8
+    numberOfCells: 1
