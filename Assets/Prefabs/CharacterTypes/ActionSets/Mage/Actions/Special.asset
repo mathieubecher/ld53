@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Special
   m_EditorClassIdentifier: 
   actionType: 3
-  description: Heal <color=#55B94C>[heal] points</color>.
+  description: Heals allies for <color=#55B94C>[heal] points</color>.
   color: {r: 0.3340968, g: 0.7264151, b: 0.29810432, a: 1}
   icone: {fileID: 1982415928, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1

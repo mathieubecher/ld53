@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackQuick
   m_EditorClassIdentifier: 
   actionType: 1
-  description: 'The Player jumps toward the player for a quick attack '
+  description: The Player jumps toward the player for a quick attack!
   color: {r: 0.67058825, g: 0.20674205, b: 0.1882353, a: 1}
   icone: {fileID: -2024962815, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 0.75

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Special_Attack
   m_EditorClassIdentifier: 
   actionType: 10
-  description: Increase allies attack by 2 for [ATKBuffDuration] units.
+  description: Increases allies attack by 2 for [ATKBuffDuration] units of time.
   color: {r: 1, g: 0.5372549, b: 0.41176474, a: 1}
   icone: {fileID: 187948289, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1
