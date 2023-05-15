@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: NPCDPS 2
   m_EditorClassIdentifier: 
-  m_characterName: "Jos\xE9"
+  m_characterName: Robert
   m_faction: NPC
   m_timeLineHeader: {fileID: -1773593991, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 4522466753895615754, guid: bda11c846ec0d854893454aacfed2b70, type: 3}

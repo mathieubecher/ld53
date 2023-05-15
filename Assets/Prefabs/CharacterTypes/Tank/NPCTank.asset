@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: NPCTank
   m_EditorClassIdentifier: 
-  m_characterName: Bob
+  m_characterName: "Jos\xE9"
   m_faction: NPC
   m_timeLineHeader: {fileID: 192297413, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 4522466753895615754, guid: 278947f1f4ca47145bafcdc49e0a7b75, type: 3}

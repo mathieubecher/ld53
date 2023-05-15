@@ -1059,7 +1059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_text
-      value: This is the story of <b>XXX_TheEv1l_XXX</b>
+      value: "This is the story of <b>G\xEAr41T_2_R1vi@\r\n</b>"
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_fontColor.b
@@ -1204,7 +1204,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4516493405588990726, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_cinematicDuration
-      value: 2.5
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4516493405588990730, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_RootOrder

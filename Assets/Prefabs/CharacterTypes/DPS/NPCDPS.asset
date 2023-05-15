@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: NPCDPS
   m_EditorClassIdentifier: 
-  m_characterName: Robert
+  m_characterName: Bob
   m_faction: NPC
   m_timeLineHeader: {fileID: -1777121103, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 4522466753895615754, guid: 1d21419c33bf6684fbfef3081054b63d, type: 3}
