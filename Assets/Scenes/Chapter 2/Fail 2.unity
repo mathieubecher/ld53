@@ -146,6 +146,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7274064057633588034, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
+      propertyPath: m_exitOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274064057633588034, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
+      propertyPath: m_cinematicDuration
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7274064057633588035, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_Interactable
       value: 1
