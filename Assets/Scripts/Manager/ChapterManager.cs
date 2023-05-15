@@ -33,6 +33,7 @@ public class ChapterManager : MonoBehaviour
     
     public delegate void SimpleEvent();
     public static event SimpleEvent OnFightStart;
+    public static event SimpleEvent OnSkipScene;
     public static event SimpleEvent OnSkipMeanwhile;
     public static event SimpleEvent OnLoadComplete;
     
@@ -175,4 +176,8 @@ public class ChapterManager : MonoBehaviour
         int.TryParse(splitString[^1], out _number);
     }
 
+    public static void SkipScene()
+    {
+        OnSkipScene.Invoke();
+    }
 }

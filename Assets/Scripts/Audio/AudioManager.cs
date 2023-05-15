@@ -36,6 +36,7 @@ public class AudioManager : MonoBehaviour
     public EventReference fightMusic;
 
     private int m_curChapIndex;
+    private bool m_prevSceneSkipped;
 
     public bool startFightMusic;
 
@@ -60,6 +61,8 @@ public class AudioManager : MonoBehaviour
         ChapterManager.OnFightStart += OnFightStart;
         ChapterManager.OnChapterWin += OnVictory;
         ChapterManager.OnChapterDefeat += OnDefeat;
+        ChapterManager.OnChapterTitleScreen += OnChapterTitleScreen;
+        ChapterManager.OnSkipScene += OnSkipScene;
     }
 
     private void OnDisable()
@@ -70,6 +73,8 @@ public class AudioManager : MonoBehaviour
         ChapterManager.OnFightStart -= OnFightStart;
         ChapterManager.OnChapterWin -= OnVictory;
         ChapterManager.OnChapterDefeat -= OnDefeat;
+        ChapterManager.OnChapterTitleScreen -= OnChapterTitleScreen;
+        ChapterManager.OnSkipScene -= OnSkipScene;
     }
 
     private void Start()
@@ -103,23 +108,26 @@ public class AudioManager : MonoBehaviour
 
     private void OnChapterMeanwhile(int _index)
     {
-        switch (_index)
+        if (m_prevSceneSkipped)
         {
-            case 0:
-                m_soundComponent.StopSound(chapterIntro1);
-                break;
-            case 1:
-                m_soundComponent.StopSound(chapterIntro2);
-                break;
-            case 2:
-                m_soundComponent.StopSound(chapterIntro3);
-                break;
-            case 3:
-                m_soundComponent.StopSound(chapterIntro4);
-                break;
-            case 4:
-                m_soundComponent.StopSound(chapterIntro5);
-                break;
+            switch (_index)
+            {
+                case 0:
+                    m_soundComponent.StopSound(chapterIntro1);
+                    break;
+                case 1:
+                    m_soundComponent.StopSound(chapterIntro2);
+                    break;
+                case 2:
+                    m_soundComponent.StopSound(chapterIntro3);
+                    break;
+                case 3:
+                    m_soundComponent.StopSound(chapterIntro4);
+                    break;
+                case 4:
+                    m_soundComponent.StopSound(chapterIntro5);
+                    break;
+            }
         }
 
         switch (_index)
@@ -140,6 +148,7 @@ public class AudioManager : MonoBehaviour
                 m_soundComponent.PlaySound(chapterMeanwhile5);
                 break;
         }
+        m_prevSceneSkipped = false;
     }
 
     private void OnSkipMeanwhile()
@@ -162,6 +171,7 @@ public class AudioManager : MonoBehaviour
                 m_soundComponent.StopSound(chapterMeanwhile5);
                 break;
         }
+        m_prevSceneSkipped = false;
     }
 
     private void OnFightStart()
@@ -215,5 +225,51 @@ public class AudioManager : MonoBehaviour
                 m_soundComponent.PlaySound(defeat5);
                 break;
         }
+    }
+
+    private void OnChapterTitleScreen(int _index)
+    {
+        switch (_index)
+        {
+            case 1:
+                m_soundComponent.StopSound(victory1);
+                break;
+            case 2:
+                m_soundComponent.StopSound(victory2);
+                break;
+            case 3:
+                m_soundComponent.StopSound(victory3);
+                break;
+            case 4:
+                m_soundComponent.StopSound(victory4);
+                break;
+            case 0:
+                m_soundComponent.StopSound(victory5);
+                break;
+        }
+
+        switch (_index)
+        {
+            case 1:
+                m_soundComponent.StopSound(defeat1);
+                break;
+            case 2:
+                m_soundComponent.StopSound(defeat2);
+                break;
+            case 3:
+                m_soundComponent.StopSound(defeat3);
+                break;
+            case 4:
+                m_soundComponent.StopSound(defeat4);
+                break;
+            case 0:
+                m_soundComponent.StopSound(defeat5);
+                break;
+        }
+    }
+
+    private void OnSkipScene()
+    {
+        m_prevSceneSkipped = true;
     }
 }

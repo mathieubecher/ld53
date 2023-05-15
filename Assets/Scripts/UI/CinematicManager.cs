@@ -48,6 +48,7 @@ public class CinematicManager : MonoBehaviour
     public void Skip()
     {
         ChapterManager.instance.NextScene();
+        ChapterManager.SkipScene();
     }
     public void SkipToLastScene()
     {
