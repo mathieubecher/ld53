@@ -86,6 +86,7 @@ MonoBehaviour:
     result: 11
   m_arrow: {fileID: 0}
   m_descriptionText: {fileID: 0}
+  m_auraEffectIcones: []
   m_overlayPrefab: {fileID: 5311616371157578801, guid: 5d995dbaf3e99054c9b173f2c0d9eaf8, type: 3}
 --- !u!114 &1935299600206908664
 MonoBehaviour:
@@ -149,8 +150,8 @@ MonoBehaviour:
   m_animSpeed: 2
   m_nbActions: 6
   m_spellCooldown: 1
-  m_timeWarpScale: 1.5
-  m_timeWarpDuration: 5
+  m_timeWarpScale: 6
+  m_timeWarpDuration: 16
   m_actionSpells:
   - type: 1
     spell: {fileID: 11400000, guid: 75c5ce1bd5f376f47a1880e9559abaa1, type: 2}
