@@ -38,6 +38,7 @@ public class Skip : MonoBehaviour
             {
                 m_skipEvent?.Invoke();
                 m_canSkip = false;
+                m_animator.SetTrigger("Exit");
             }
         }
     }
