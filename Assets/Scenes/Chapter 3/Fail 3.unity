@@ -1242,8 +1242,24 @@ PrefabInstance:
       value: "The merry gang of bandits is defeated, \nmarking the end of a beautiful
         camaraderie."
       objectReference: {fileID: 0}
+    - target: {fileID: 7423302666822262824, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
+      propertyPath: m_skipEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423302666822262824, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
+      propertyPath: m_skipEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SkipToLastScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423302666822262824, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
+      propertyPath: m_skipEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CinematicManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8984893593679650264, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984893593679650270, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
+      propertyPath: m_Alpha
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
