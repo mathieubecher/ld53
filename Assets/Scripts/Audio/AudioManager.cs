@@ -103,7 +103,6 @@ public class AudioManager : MonoBehaviour
 
     private void OnChapterMeanwhile(int _index)
     {
-        m_curChapIndex = _index;
         switch (_index)
         {
             case 0:
@@ -174,27 +173,21 @@ public class AudioManager : MonoBehaviour
     {
         m_soundComponent.StopSound(fightMusic);
 
-        m_curChapIndex = _index;
         switch (m_curChapIndex)
         {
             case 0:
-                Debug.Log("Victory 0");
                 m_soundComponent.PlaySound(victory1);
                 break;
             case 1:
-                Debug.Log("Victory 1");
                 m_soundComponent.PlaySound(victory2);
                 break;
             case 2:
-                Debug.Log("Victory 2");
                 m_soundComponent.PlaySound(victory3);
                 break;
             case 3:
-                Debug.Log("Victory 3");
                 m_soundComponent.PlaySound(victory4);
                 break;
             case 4:
-                Debug.Log("Victory 4");
                 m_soundComponent.PlaySound(victory5);
                 break;
         }
@@ -204,7 +197,6 @@ public class AudioManager : MonoBehaviour
     {
         m_soundComponent.StopSound(fightMusic);
 
-        m_curChapIndex = _index;
         switch (m_curChapIndex)
         {
             case 0:
