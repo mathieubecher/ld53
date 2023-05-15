@@ -78,17 +78,22 @@ using Random = UnityEngine.Random;
 
     private void SelectTarget()
     {
+        var tauntTarget = m_targets[0];
+        
         foreach (var target in m_targets)
         {
-            if (target.target.HasTaunt() && !target.target.isDead)
+            if (target.target.isDead) continue;
+            if (target.target.HasTaunt())
             {
                 m_target = target.target;
                 m_sprite.SetTarget(m_target);
                 return;
-            }   
+            }
+
+            if (tauntTarget.target.isDead || tauntTarget.aggro < target.aggro) tauntTarget = target;
         }
         
-        m_target = m_targets.OrderByDescending(x => x.aggro * (x.target.isDead ? 0.0f : 1.0f) + (x.target.isDead ? 0.0f : 1.0f)).ToList()[0].target;
+        m_target = tauntTarget.target;
         m_sprite.SetTarget(m_target);
     }
 

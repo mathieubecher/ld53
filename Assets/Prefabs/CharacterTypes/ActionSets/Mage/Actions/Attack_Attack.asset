@@ -18,4 +18,10 @@ MonoBehaviour:
   color: {r: 0.7647059, g: 0.21960784, b: 0.50980395, a: 1}
   icone: {fileID: -865272509, guid: a639a066dc64fa443bd667fd776b4436, type: 3}
   duration: 1.5
-  actions: []
+  actions:
+  - steps: 3
+    numberOfCells: 4
+  - steps: 0
+    numberOfCells: 1
+  - steps: 4
+    numberOfCells: 1
