@@ -1041,8 +1041,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_text
-      value: "Without <b>Rox0r420</b> in their way, the \nDemon Lord invaded the
-        Kingdom and became the new King."
+      value: "Without <b>G\xEAr41T_2_R1vi@</b> in their way, the \nDemon Lord invaded
+        the Kingdom and became the new King."
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_fontColor.b
