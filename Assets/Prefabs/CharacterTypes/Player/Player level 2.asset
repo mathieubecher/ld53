@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc21e80bedd05a409220ec53ce5c02f, type: 3}
   m_Name: Player level 2
   m_EditorClassIdentifier: 
-  m_characterName: Rox0r420
+  m_characterName: "G\xEAr41T_2_R1vi@"
   m_faction: Player
   m_timeLineHeader: {fileID: 2092383776, guid: 3f2edad01d3393e42a80c92d732fdac3, type: 3}
   m_spritePrefab: {fileID: 1600728368570027554, guid: d48b28be812d62f45aaf2f4deaf3edd1, type: 3}
