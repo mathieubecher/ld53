@@ -45,6 +45,7 @@ public class ChapterManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
         
     }
@@ -57,7 +58,7 @@ public class ChapterManager : MonoBehaviour
     // called second
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(LoadCompleted());
+        StartCoroutine(LoadCompleted(scene.name));
     }
 
     private void Start()
@@ -65,11 +66,10 @@ public class ChapterManager : MonoBehaviour
         //StartCoroutine(LoadCompleted());
     }
 
-    private IEnumerator LoadCompleted()
+    private IEnumerator LoadCompleted(string _name)
     {
         yield return new WaitForSeconds(0.05f);
-        Debug.Log("Loaded");
-        InformLoadingScene(currentChapter.chapterScenes[currentChapter.currentScene]);
+        InformLoadingScene(_name);
         OnLoadComplete?.Invoke();
     }
     
@@ -100,7 +100,7 @@ public class ChapterManager : MonoBehaviour
     {
         public List<string> chapterScenes;
         public string failScene;
-        public int currentScene;
+        public int currentScene; 
         public bool isLastScene => currentScene >= chapterScenes.Count;
         public void RestartChapter()
         {
@@ -129,18 +129,23 @@ public class ChapterManager : MonoBehaviour
             switch (name.Replace(" ", ""))
             {
                 case "Intro" :
+                    Debug.Log("Intro " + number);
                     OnChapterIntro?.Invoke(number);
                     break;
                 case "Level" :
+                    Debug.Log("Level " + number);
                     OnChapterMeanwhile?.Invoke(number);
                     break;
                 case "Success" :
+                    Debug.Log("Success " + number);
                     OnChapterWin?.Invoke(number);
                     break;
                 case "Fail" :
+                    Debug.Log("Fail " + number);
                     OnChapterDefeat?.Invoke(number);
                     break;
                 case "StartMenu" :
+                    Debug.Log("StartMenu " + number);
                     OnChapterTitleScreen?.Invoke(number);
                     break;
             }
@@ -161,7 +166,7 @@ public class ChapterManager : MonoBehaviour
 
         _name = "";
         _number = 0;
-        if (splitString.Length != 2) return;
+        if (splitString.Length < 2) return;
 
         for (int i = 0; i < splitString.Length - 1; ++i)
         {
