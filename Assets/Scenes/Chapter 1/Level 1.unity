@@ -1039,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_text
-      value: "But it seems a hero was told to get rid of them as a quest. Jos\xE9,
+      value: "But it seems a hero was told to get rid of them as a quest. \nJos\xE9,
         their leader, swore they would not go down without a fight."
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993114, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}

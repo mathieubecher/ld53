@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4516493405588990726, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_cinematicDuration
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4516493405588990727, guid: 65ee2986ee49a1e41a2ad2c1929eef7e, type: 3}
       propertyPath: m_Alpha
