@@ -517,7 +517,7 @@ PrefabInstance:
     - target: {fileID: 516493183, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a2227d6c79a298648b18ad4fb8ba8532, type: 3}
+      objectReference: {fileID: 21300000, guid: b2fe207272b48cd4a8f9df1540712d7a, type: 3}
     - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_SizeDelta.x
       value: -135.9049
@@ -532,10 +532,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_text
-      value: 'A small group of joyful bandits were going about their everyday life.
-
-        They
-        were plundering and killing in all friendship and fellowship.'
+      value: "A group of joyful bandits were going about their daily routine. \nPatrolling
+        the rampart of their fortified camp, making plans to ambush the merchant
+        caravans and cooking delicious food for dinner."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_fontSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730636, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Name
@@ -627,7 +634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7352772531153730638, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_cinematicDuration
-      value: 12
+      value: 16.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
@@ -919,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274064057633588034, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_cinematicDuration
-      value: 12
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 7274064057633588046, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_Pivot.x
@@ -1011,8 +1018,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993113, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_text
-      value: But their peaceful daily life was about to be disturbed as a hero stumbled
-        upon their camp.
+      value: "But it seems a hero was told to get rid of them as a quest. Jos\xE9,
+        their leader, swore they would not go down without a fight"
       objectReference: {fileID: 0}
     - target: {fileID: 7274064058660993114, guid: 81962de63844e12439f0fdf511de2cb9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1135,6 +1142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1241822550, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_text
+      value: The fortified bandit camp
+      objectReference: {fileID: 0}
     - target: {fileID: 568285560391260377, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_playerToSpawn
       value: 
@@ -1203,9 +1214,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2600612617730861862, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_text
+      value: Chapter 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2600612618758279228, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_Alpha
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600612618758279229, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
+      propertyPath: m_cinematicDuration
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 4074635377978735115, guid: da300edc75621ea49a6db86991e0d19e, type: 3}
       propertyPath: m_RootOrder
