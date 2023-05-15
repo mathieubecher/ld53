@@ -1012,27 +1012,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 516493182, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 334.1793
+      value: 1032.5172
       objectReference: {fileID: 0}
     - target: {fileID: 516493182, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 339.08
+      value: 580.7909
       objectReference: {fileID: 0}
     - target: {fileID: 516493182, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 196.01886
+      value: 238.04347
       objectReference: {fileID: 0}
     - target: {fileID: 516493182, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.0651
+      value: 13.043484
       objectReference: {fileID: 0}
     - target: {fileID: 516493183, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d23bf190a18bb114c8e5eea5754ad328, type: 3}
+      objectReference: {fileID: 21300000, guid: 5015e562664d6d94ba434fcdbe8574b3, type: 3}
     - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -460.7039
+      value: -337.5546
       objectReference: {fileID: 0}
     - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1040,17 +1040,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -190.08746
+      value: -128.51282
       objectReference: {fileID: 0}
     - target: {fileID: 1126377881, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 57.600006
+      value: 48.91304
       objectReference: {fileID: 0}
     - target: {fileID: 1126377882, guid: e83652a65e847e24dbf2a78645a602c4, type: 3}
       propertyPath: m_text
       value: "That night, Jos\xE9 did not feast with his companions. His thought
         went out to the Demon King. Why was the King oppressing the people? \nBurning
-        villages and killing common folk? Jos\xE9 had enough!\nAfter all, it wasn\u2019t
+        villages and killing common folk? \nJos\xE9 had enough!\nAfter all, it wasn\u2019t
         the king who defeated the hero! Jos\xE9 knew he could oppress the people
         and burn villages just as well as the Demon King! So Jos\xE9 overthrew the
         King and claimed the title for himself."
