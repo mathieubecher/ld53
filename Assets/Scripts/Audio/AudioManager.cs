@@ -39,6 +39,7 @@ public class AudioManager : MonoBehaviour
     private bool m_prevSceneSkipped;
 
     public bool startFightMusic;
+    public float meanwhileTitleDuration;
 
     private void Awake()
     {
@@ -130,24 +131,8 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        switch (_index)
-        {
-            case 0:
-                m_soundComponent.PlaySound(chapterMeanwhile1);
-                break;
-            case 1:
-                m_soundComponent.PlaySound(chapterMeanwhile2);
-                break;
-            case 2:
-                m_soundComponent.PlaySound(chapterMeanwhile3);
-                break;
-            case 3:
-                m_soundComponent.PlaySound(chapterMeanwhile4);
-                break;
-            case 4:
-                m_soundComponent.PlaySound(chapterMeanwhile5);
-                break;
-        }
+        StartCoroutine(StartMeanwhile(_index));
+        
         m_prevSceneSkipped = false;
     }
 
@@ -271,5 +256,28 @@ public class AudioManager : MonoBehaviour
     private void OnSkipScene()
     {
         m_prevSceneSkipped = true;
+    }
+
+    private IEnumerator StartMeanwhile(int _index)
+    {
+        yield return new WaitForSeconds(meanwhileTitleDuration);
+        switch (_index)
+        {
+            case 0:
+                m_soundComponent.PlaySound(chapterMeanwhile1);
+                break;
+            case 1:
+                m_soundComponent.PlaySound(chapterMeanwhile2);
+                break;
+            case 2:
+                m_soundComponent.PlaySound(chapterMeanwhile3);
+                break;
+            case 3:
+                m_soundComponent.PlaySound(chapterMeanwhile4);
+                break;
+            case 4:
+                m_soundComponent.PlaySound(chapterMeanwhile5);
+                break;
+        }
     }
 }
