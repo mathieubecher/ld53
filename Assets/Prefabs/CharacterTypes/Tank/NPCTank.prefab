@@ -762,6 +762,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 7318875709710694917, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: dummyBool
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318875709710694917, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
+      propertyPath: eventScript
+      value: 
+      objectReference: {fileID: 300259592577348738}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 377160dd544a0f040a4957bfce50848c, type: 3}
 --- !u!4 &2239029564998463218 stripped

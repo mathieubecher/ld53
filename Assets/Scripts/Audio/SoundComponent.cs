@@ -6,6 +6,9 @@ using FMOD.Studio;
 
 public class SoundComponent : MonoBehaviour
 {
+    public MonoBehaviour eventScript;
+    public bool dummyBool;
+
     private Dictionary<EventReference, List<EventInstance>> m_refInstanceDict = new Dictionary<EventReference, List<EventInstance>>();
 
     public void PlaySound(EventReference _eventToPlay)
